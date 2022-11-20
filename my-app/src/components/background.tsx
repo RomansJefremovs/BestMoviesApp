@@ -1,8 +1,7 @@
 import { Container, Box, Typography, CardMedia, Grid } from "@mui/material";
+import backgroundVideo from "../videos/BestMovies.webm";
 
 function Background() {
-  const backgroundVideo = require("../videos/BestMovies.webm");
-
   return (
     <Container
       className="background"
@@ -10,7 +9,7 @@ function Background() {
         display: { xs: "block" },
       }}
     >
-      <Grid container>s
+      <Grid container>
         <Box>
           <CardMedia
             component="video"

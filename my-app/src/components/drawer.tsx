@@ -7,10 +7,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
+import logo from "../images/logo.png";
 
 function CustomDrawer() {
-  const logo = require("../images/logo.png");
-
   // Small screens
   const [mobileOpen, setMobileOpen] = useState(false);
 
