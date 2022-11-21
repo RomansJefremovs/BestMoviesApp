@@ -30,7 +30,7 @@ function App() {
             <>
                 <Header />
                 <Background />
-                <HomeContent movies={initialMovies}/> : <CircularProgress/>
+                <HomeContent movies={initialMovies}/>
                 <Footer />
             </>
         )
