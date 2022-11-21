@@ -1,24 +1,27 @@
 export interface Movie {
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  Awards: string;
-  Poster: string;
-  Metascore: number;
-  imdbRating: number;
-  imdbVotes: number;
-  imdbID: string;
-  Response: string;
-  Images: string[];
+  adult: boolean,
+  backdrop_path: string,
+  genre_ids: number[],
+  id: number,
+  original_language: string,
+  original_title: string,
+  overview: string,
+  popularity: number,
+  poster_path: string,
+  release_date: string,
+  title: string,
+  video: boolean,
+  vote_average: number,
+  vote_count: number,
   }
-  
-  export type Movies = Movies[];
+
+export interface MovieBox {
+  id: number,
+  poster_path: string,
+  title: string,
+  vote_average: number,
+}
+
+export interface Movies {
+  movies:Movie[]
+}
