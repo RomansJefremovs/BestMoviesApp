@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import {Movie, Movies} from "../models/movies";
 import MoviePosterBox from "./box";
+import MoviesList from "./moviesList";
 
 function HomeContent({movies}:Movies) {
 
@@ -58,16 +59,7 @@ function HomeContent({movies}:Movies) {
           }}
           gap={3}
         >
-          {movies.map((movie: Movie) => {
-            return (
-              <MoviePosterBox
-                  id={movie.id}
-                  poster_path={movie.poster_path}
-                  title={movie.title}
-                  vote_average={movie.vote_average}
-              />
-            );
-          })}
+            <MoviesList movies={movies}/>
         </Box>
       </Box>
     </Container>

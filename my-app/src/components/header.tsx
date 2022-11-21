@@ -1,11 +1,13 @@
-import { Container, Box, AppBar, Button, Drawer, Grid, IconButton, Toolbar } from "@mui/material";
+import {Container, Box, AppBar, Button, Drawer, Grid, IconButton, Toolbar, TextField} from "@mui/material";
 import CustomDrawer from "./drawer";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link as LinkRouter } from "react-router-dom";
 import { useState } from "react";
-import CustomSearch from "./search";
-
-function Header() {
+interface handleChange{
+  message: string,
+  handhandleMessageChange: (e:React.ChangeEvent<HTMLInputElement>)=>void
+}
+const Header = ({message, handhandleMessageChange}: handleChange) => {
   const logo = require("../images/logo.png");
 
   // Navigation
@@ -90,7 +92,10 @@ function Header() {
             >
               <Box sx={{ display: { sm: "block" } }}>
                 <Button sx={{ color: "#fff" }}>
-                    <CustomSearch />
+
+                  <TextField
+                      onChange={handhandleMessageChange}
+                  />
                 </Button>
               </Box>
 
