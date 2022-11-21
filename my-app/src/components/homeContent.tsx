@@ -1,37 +1,14 @@
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import StarIcon from "@mui/icons-material/Star";
 import {
   Container,
   Box,
   Typography,
-  Button,
-  CardMedia,
   Divider,
   Grid,
 } from "@mui/material";
-import { getMovies } from "../dummydata/data";
-import { Link as LinkRouter } from "react-router-dom";
-import { useState } from "react";
+import {Movie, Movies} from "../models/movies";
+import MoviePosterBox from "./box";
 
-function HomeContent() {
-  // Importing dummy data
-  // (!) this will be changed to being fetched from API once connection made to DB
-  const movies = getMovies();
-
-  // Rating with stars
-  const Star = (star: boolean) => {
-    if (star == false) {
-      return <StarIcon sx={{ color: "#FFE600" }} />;
-    } else {
-      return <StarOutlineIcon sx={{ color: "#fff" }} />;
-    }
-  };
-
-  const [star, setStar] = useState(true);
-
-  const handleClick = () => {
-    setStar(!star);
-  };
+function HomeContent({movies}:Movies) {
 
   return (
     <Container
@@ -81,93 +58,14 @@ function HomeContent() {
           }}
           gap={3}
         >
-          {movies.map((movie: any) => {
+          {movies.map((movie: Movie) => {
             return (
-              <Box gridColumn="span 3" sx={{ width: "100%" }}>
-                <LinkRouter to={`/movies/${movie.imdbID}`} key={movie.imdbID}>
-                  <CardMedia
-                    component="img"
-                    className="poster"
-                    src={movie.Poster}
-                    sx={{
-                      display: { xs: "block" },
-                    }}
-                  />
-                </LinkRouter>
-                <Box sx={{ display: { xs: "block" } }}>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      padding: "20px 0 0 5px",
-                      fontSize: "1.1em",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {movie.Title}
-                  </Typography>
-                </Box>
-
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                >
-                  <Box
-                    className="ratings"
-                    sx={{ marginTop: "-33px", marginBottom: "0.8em" }}
-                  >
-                    <Button
-                      sx={{ marginRight: "-1em", padding: "7px" }}
-                      onClick={() => {
-                        handleClick();
-                      }}
-                    >
-                      {Star(star)}
-                    </Button>
-
-                    <Typography
-                      variant="h5"
-                      sx={{ fontSize: "16px", marginTop: "11px" }}
-                    >
-                      {movie.imdbRating}
-                    </Typography>
-                  </Box>
-                </Grid>
-
-                <Box
-                  className="buttons"
-                  sx={{ gap: 1, display: { xs: "block" } }}
-                >
-                  <LinkRouter to={`/movies/${movie.imdbID}`} key={movie.imdbID}>
-                    <Button id="watch-now-button">
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          fontSize: "15px",
-                          fontWeight: "600",
-                          padding: "5px 10px 5px 10px",
-                        }}
-                      >
-                        Watch Now
-                      </Typography>
-                    </Button>
-                  </LinkRouter>
-
-                  <Button id="favorites-button">
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        padding: "5px 10px 5px 10px",
-                      }}
-                    >
-                      + Favorites
-                    </Typography>
-                  </Button>
-                </Box>
-              </Box>
+              <MoviePosterBox
+                  id={movie.id}
+                  poster_path={movie.poster_path}
+                  title={movie.title}
+                  vote_average={movie.vote_average}
+              />
             );
           })}
         </Box>
@@ -175,4 +73,4 @@ function HomeContent() {
     </Container>
   );
 }
-export default HomeContent;
+export default HomeContent
