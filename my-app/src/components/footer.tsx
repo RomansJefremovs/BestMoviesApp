@@ -1,7 +1,7 @@
 import { Container, Box, Typography } from "@mui/material";
+import logo from "../images/logo.png";
 
 function Footer() {
-  const logo = require("../images/logo.png");
 
   return (
     <Container
