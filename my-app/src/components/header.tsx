@@ -2,20 +2,19 @@ import {Container, Box, AppBar, Button, Drawer, Grid, IconButton, Toolbar, TextF
 import CustomDrawer from "./drawer";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link as LinkRouter } from "react-router-dom";
-import { useState } from "react";
+import {ChangeEvent, useState} from "react";
 interface handleChange{
-  message: string,
-  handhandleMessageChange: (e:React.ChangeEvent<HTMLInputElement>)=>void
+  handleMessageChange: (e:ChangeEvent<HTMLInputElement>)=>void
 }
-const Header = ({message, handhandleMessageChange}: handleChange) => {
+const Header = ({handleMessageChange}: handleChange) => {
   const logo = require("../images/logo.png");
 
   // Navigation
   const navItems = [
-    { title: "Home", url: "/" },
-    { title: "New & Popular", url: "*" },
-    { title: "Movies", url: "*" },
-    { title: "TV Shows", url: "*" },
+    { title: "Home", url: "/", onClickHandler:()=>{}},
+    { title: "New & Popular", url: "*",onClickHandler:()=>{}},
+    { title: "Movies", url: "*",onClickHandler:()=>{} },
+    { title: "TV Shows", url: "*",onClickHandler:()=>{} },
   ];
   const signedInNavItems = [{ title: "My Favorites", url: "/favorites" }];
 
@@ -68,7 +67,11 @@ const Header = ({message, handhandleMessageChange}: handleChange) => {
               >
                 {navItems.map((navItem) => (
                   <LinkRouter to={navItem.url}>
-                    <Button key={navItem.title} sx={{ color: "#fff" }}>
+                    <Button
+                        key={navItem.title}
+                        sx={{ color: "#fff" }}
+                        onClick={navItem.onClickHandler}
+                    >
                       {navItem.title}
                     </Button>
                   </LinkRouter>
@@ -94,7 +97,7 @@ const Header = ({message, handhandleMessageChange}: handleChange) => {
                 <Button sx={{ color: "#fff" }}>
 
                   <TextField
-                      onChange={handhandleMessageChange}
+                      onChange={handleMessageChange}
                   />
                 </Button>
               </Box>

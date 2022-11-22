@@ -1,4 +1,4 @@
-import {CircularProgress, TextField, ThemeProvider} from "@mui/material";
+import {CircularProgress, ThemeProvider} from "@mui/material";
 
 import "./App.css";
 import Footer from "./components/footer";
@@ -6,43 +6,45 @@ import Header from "./components/header";
 import Background from "./components/background";
 import { theme } from "./theme/theme";
 import callApi from "./middleware/callApi";
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {Movie} from "./models/movies";
 import HomeContent from "./components/homeContent";
 import {searchMovies} from "./middleware/searchMovies";
+import {useDebounce} from "./middleware/useDebounce";
+
 function App() {
     const baseURL = "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1"
-    const [initialMovies, setInitialMovies] = useState<Movie[]>()
-    const [message, setMessage] = useState<string>('')
-    const [timer, setTimer] = useState(null)
-    const handleMessageChange = (e:React.ChangeEvent<HTMLInputElement>):void=>{
-        setMessage(e.target.value)
+    const [movies, setMovies] = useState<Movie[]>()
+    const handleSearch = async (message:string) => {
+        const temp = await searchMovies(message)
+        setMovies(temp.results)
     }
-
+    const handleMessageChange = async (e:ChangeEvent<HTMLInputElement>) =>{
+        if (e.target.value != ''){
+            await handleSearch(e.target.value)
+        }else{
+            await initialLoad()
+        }
+    }
+    const debounceOnChange = useCallback(useDebounce(handleMessageChange,1000),[])
 
     const initialLoad = async () => {
         const temp = await callApi(baseURL)
         if(temp != false && temp != "Error"){
-            setInitialMovies(temp.results)
+            setMovies(temp.results)
         }
     }
-    const name = "John Wick"
-    const handleSearch = async () => {
-        const temp = await searchMovies(name)
-        console.log(temp)
-        setInitialMovies(temp.results)
-    }
+
     useEffect(() => {
         initialLoad()
     },[])
-    console.log(initialMovies)
   return (
     <ThemeProvider theme={theme}>
-        {initialMovies ? (
+        {movies ? (
             <>
-                <Header message={message} handhandleMessageChange={handleMessageChange}/>
+                <Header handleMessageChange={debounceOnChange}/>
                 <Background />
-                <HomeContent movies={initialMovies}/>
+                <HomeContent movies={movies}/>
                 <Footer />
             </>
         )
