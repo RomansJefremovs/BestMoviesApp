@@ -1,19 +1,20 @@
-import { Container, Box, AppBar, Button, Drawer, Grid, IconButton, Toolbar } from "@mui/material";
+import {Container, Box, AppBar, Button, Drawer, Grid, IconButton, Toolbar, TextField} from "@mui/material";
 import CustomDrawer from "./drawer";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link as LinkRouter } from "react-router-dom";
-import { useState } from "react";
-import CustomSearch from "./search";
-
-function Header() {
+import {ChangeEvent, useState} from "react";
+interface handleChange{
+  handleMessageChange: (e:ChangeEvent<HTMLInputElement>)=>void
+}
+const Header = ({handleMessageChange}: handleChange) => {
   const logo = require("../images/logo.png");
 
   // Navigation
   const navItems = [
-    { title: "Home", url: "/" },
-    { title: "New & Popular", url: "*" },
-    { title: "Movies", url: "*" },
-    { title: "TV Shows", url: "*" },
+    { title: "Home", url: "/", onClickHandler:()=>{}},
+    { title: "New & Popular", url: "*",onClickHandler:()=>{}},
+    { title: "Movies", url: "*",onClickHandler:()=>{} },
+    { title: "TV Shows", url: "*",onClickHandler:()=>{} },
   ];
   const signedInNavItems = [{ title: "My Favorites", url: "/favorites" }];
 
@@ -66,7 +67,11 @@ function Header() {
               >
                 {navItems.map((navItem) => (
                   <LinkRouter to={navItem.url}>
-                    <Button key={navItem.title} sx={{ color: "#fff" }}>
+                    <Button
+                        key={navItem.title}
+                        sx={{ color: "#fff" }}
+                        onClick={navItem.onClickHandler}
+                    >
                       {navItem.title}
                     </Button>
                   </LinkRouter>
@@ -90,7 +95,10 @@ function Header() {
             >
               <Box sx={{ display: { sm: "block" } }}>
                 <Button sx={{ color: "#fff" }}>
-                    <CustomSearch />
+
+                  <TextField
+                      onChange={handleMessageChange}
+                  />
                 </Button>
               </Box>
 
