@@ -27,6 +27,7 @@ function App() {
       await initialLoad();
     }
   };
+  
   const debounceOnChange = useCallback(
     useDebounce(handleMessageChange, 1000),
     []
@@ -39,9 +40,11 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    initialLoad();
-  }, []);
+    useEffect(() => {
+        initialLoad()
+    },[])
+    console.log(movies)
+
   return (
     <ThemeProvider theme={theme}>
       {movies ? (
