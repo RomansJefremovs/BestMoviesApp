@@ -7,6 +7,5 @@ const callApi = async (baseURL:string) => {
        return  "Error"
    }
 }
-
 export default callApi
 

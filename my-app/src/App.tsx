@@ -27,7 +27,6 @@ function App() {
         }
     }
     const debounceOnChange = useCallback(useDebounce(handleMessageChange,1000),[])
-
     const initialLoad = async () => {
         const temp = await callApi(baseURL)
         if(temp != false && temp != "Error"){
@@ -35,9 +34,11 @@ function App() {
         }
     }
 
+
     useEffect(() => {
         initialLoad()
     },[])
+    console.log(movies)
   return (
     <ThemeProvider theme={theme}>
         {movies ? (
