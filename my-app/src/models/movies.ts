@@ -25,3 +25,8 @@ export interface MovieBox {
 export interface Movies {
   movies:Movie[]
 }
+
+export interface User{
+  username:string,
+  password:string
+}
