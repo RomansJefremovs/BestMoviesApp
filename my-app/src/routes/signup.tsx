@@ -11,24 +11,20 @@ import {
   Button,
 } from "@mui/material";
 import { theme } from "../theme/theme";
-import { useState } from "react";
+import {FormEvent} from "react";
+import callApi from "../middleware/callApi";
 
 function SignUp() {
   const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    callApi(
+    await callApi(
       baseURL + `/User/create/${data.get("username")}/${data.get("password")}`
-    );
-  };
+    ,"POST");
 
-  const callApi = async (baseURL: string) => {
-    const temp = await fetch(baseURL, { method: "POST" });
-    const user = temp.text();
-    console.log(await user);
   };
 
   return (
