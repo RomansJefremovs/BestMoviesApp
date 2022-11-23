@@ -1,15 +1,8 @@
-import {
-  Container,
-  Box,
-  Typography,
-  Divider,
-  Grid,
-} from "@mui/material";
-import {Movies} from "../models/movies";
+import { Container, Box, Typography, Divider, Grid } from "@mui/material";
+import { Movies } from "../models/movies";
 import MoviesList from "./moviesList";
 
-function HomeContent({movies}:Movies) {
-
+function HomeContent({ movies }: Movies) {
   return (
     <Container
       className="content"
@@ -58,24 +51,23 @@ function HomeContent({movies}:Movies) {
           }}
           gap={3}
         >
-            {movies.length !=0
-                ?
-                <MoviesList movies={movies}/>
-                :
-                <Typography
-                    variant="h2"
-                    sx={{
-                        padding: "30px",
-                        fontSize: "1.5em",
-                        fontWeight: "bold",
-                    }}
-                >
-                    OOPS! No such movie! Try again!
-                </Typography>
-            }
+          {movies.length !== 0 ? (
+            <MoviesList movies={movies} />
+          ) : (
+            <Typography
+              variant="h2"
+              sx={{
+                padding: "30px",
+                fontSize: "1.5em",
+                fontWeight: "bold",
+              }}
+            >
+              OOPS! No such movie! Try again!
+            </Typography>
+          )}
         </Box>
       </Box>
     </Container>
   );
 }
-export default HomeContent
+export default HomeContent;
