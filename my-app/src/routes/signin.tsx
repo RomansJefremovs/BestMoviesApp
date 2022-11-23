@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import {
   Box,
@@ -16,15 +16,21 @@ import { Link as LinkRouter } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "../App.css";
 import { theme } from "../theme/theme";
+import callApi from "../middleware/callApi";
 
 function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const temp = await callApi(
+      baseURL + `/User/login/${data.get("username")}/${data.get("password")}`
+    );
+
+    console.log(temp);
   };
 
   return (
@@ -73,10 +79,10 @@ function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
               <TextField
