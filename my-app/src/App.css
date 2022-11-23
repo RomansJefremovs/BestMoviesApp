@@ -24,11 +24,6 @@ a:link, a:visited, a:hover, a:active {
   width: 150px;
 }
 
-.MuiContainer-root {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 @media only screen and (min-width: 600px) {
   .MuiContainer-root {
     padding-left: 0;
@@ -40,10 +35,6 @@ a:link, a:visited, a:hover, a:active {
   .MuiContainer-root {
     max-width: 0;
   }
-}
-
-.MuiCardMedia-root {
-  width: 100%;
 }
 
 .backgroundVideo {
