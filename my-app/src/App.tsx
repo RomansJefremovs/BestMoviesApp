@@ -11,6 +11,7 @@ import { Movie } from "./models/movies";
 import HomeContent from "./components/homeContent";
 import { searchMovies } from "./middleware/searchMovies";
 import { useDebounce } from "./middleware/useDebounce";
+import {addToFavourites, removeFromFavourites} from "./middleware/favouritesApiCalls";
 
 function App() {
   const baseURL =
@@ -27,7 +28,7 @@ function App() {
       await initialLoad();
     }
   };
-  
+
   const debounceOnChange = useCallback(
     useDebounce(handleMessageChange, 1000),
     []
