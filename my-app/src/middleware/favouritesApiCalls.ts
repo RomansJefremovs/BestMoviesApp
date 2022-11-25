@@ -1,4 +1,3 @@
-import {useState} from "react";
 import callApi from "./callApi";
 import {Movie} from "../models/movies";
 
@@ -33,13 +32,14 @@ export const getAllFavouriteMoviesById = async(userId:number):Promise<Movie[]> =
     return await transformArray(tempArr)
 }
 
-const useFavourites = ({userId,movieId,type}:Input) => {
-    const [result, setResult] = useState<Promise<any>[]>()
+export const addToFavourites = async (userId:number, movieId:number) => {
+    const url = `https://cloudcomputingapi.azurewebsites.net/Movies/favorites/add/${userId}/${movieId}`
+    const temp = await callApi(url,"POST")
+    return temp
+}
 
-    const getAllFavourites = async(userId:number) => {
-        const result = await getAllFavouriteMoviesById(userId)
-    }
-    if (type == 'GET'){
-
-    }
+export const removeFromFavourites = async (userId:number, movieId:number) => {
+    const url = `https://cloudcomputingapi.azurewebsites.net/Movies/favorites/remove/${userId}/${movieId}`
+    const temp = await callApi(url,"POST")
+    return temp
 }
