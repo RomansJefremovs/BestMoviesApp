@@ -1,5 +1,5 @@
 import callApi from "./callApi";
-import {SearchMovie} from "../models/movies";
+import {SearchMovie} from "../models/SearchMovie";
 
 export const searchMovies = async (movie_name:string):Promise<SearchMovie> => {
     const query = movie_name.replace(/\s/g,"%20").toLowerCase()

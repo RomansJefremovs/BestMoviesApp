@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {Movie} from "../models/movies";
-import {getAllFavouriteMoviesById} from "../middleware/favouritesApiCalls";
+import {Movie} from "../models/Movie";
+import {getAllFavouriteMoviesById} from "../middleware/getAllFavouriteMoviesByID";
 import MoviePosterBox from "../components/box";
 import Box from "@mui/material/Box";
 
