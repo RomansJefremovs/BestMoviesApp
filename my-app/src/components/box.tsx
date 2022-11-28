@@ -1,90 +1,135 @@
-import {Link as LinkRouter} from "react-router-dom";
-import {Box, Button, CardMedia, Grid, Typography} from "@mui/material";
-import {MovieBox} from "../models/movies";
+import { Link as LinkRouter } from "react-router-dom";
+import { Box, Button, CardMedia, Grid, Typography } from "@mui/material";
+import { MovieBox } from "../models/movies";
 import StarIcon from "@mui/icons-material/Star";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { useState } from "react";
 
-const MoviePosterBox = (movie:MovieBox) => {
-    const poster =  `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    return(
-        <Box gridColumn="span 3" sx={{ width: "100%" }}>
-            <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
-                <CardMedia
-                    component="img"
-                    className="poster"
-                    src={poster}
-                    sx={{
-                        display: { xs: "block" },
-                    }}
-                />
-            </LinkRouter>
-            <Box sx={{ display: { xs: "block" } }}>
-                <Typography
-                    variant="h5"
-                    sx={{
-                        padding: "20px 0 0 5px",
-                        fontSize: "1.1em",
-                        fontWeight: "bold",
-                    }}
-                >
-                    {movie.title}
-                </Typography>
-            </Box>
+const MoviePosterBox = (movie: MovieBox) => {
+  const poster = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-            <Grid
-                container
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="center"
+  const [display, setDisplay] = useState(false);
+
+  return (
+    <Box gridColumn="span 3" sx={{ width: "100%" }}>
+      <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
+        <CardMedia
+          component="img"
+          className="poster"
+          src={poster}
+          sx={{
+            borderRadius: "5px",
+            transition: "0.5s",
+            "&:hover": {
+              filter: "brightness(70%)",
+              transform: "scale(1.02)",
+              transition: "all 0.5s",
+            },
+          }}
+          onMouseEnter={() => setDisplay(true)}
+          onMouseLeave={() => setDisplay(false)}
+        />
+        {display && (
+          <PlayCircleOutlineIcon
+            sx={{
+              fontSize: "40px",
+              position: "relative",
+              marginTop: "-2em",
+              float: "right",
+              padding: "20px",
+              color: "#fff",
+            }}
+          />
+        )}
+      </LinkRouter>
+
+      <Grid
+        xs={12}
+        container
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        flexDirection="row"
+        sx={{paddingTop:"12px"}}
+      >
+        <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
+          <Grid>
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                width: {
+                  xs: "auto",
+                  sm: "8em",
+                  md: "11em",
+                },
+                fontSize: "1.1em",
+                fontWeight: "bold",
+              }}
             >
-                <Box
-                    className="ratings"
-                    sx={{ marginTop: "-33px", marginBottom: "0.8em" }}
-                >
-                    <StarIcon sx={{ color: "#FFE600" }} />
+              {movie.title}
+            </Typography>
+          </Grid>
+        </LinkRouter>
 
-                    <Typography
-                        variant="h5"
-                        sx={{ fontSize: "16px", marginTop: "11px" }}
-                    >
-                        {movie.vote_average}
-                    </Typography>
-                </Box>
-            </Grid>
+        <Box
+          className="ratings"
+          display="flex"
+          flexDirection="row"
+          justifyContent="flex-end"
+          sx={{
+            position: "relative",
+            float: "right",
+          }}
+        >
+          <StarIcon
+            sx={{ color: "#FFE600" }}
+          />
 
-            <Box
-                className="buttons"
-                sx={{ gap: 1, display: { xs: "block" } }}
-            >
-                <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
-                    <Button id="watch-now-button">
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontSize: "15px",
-                                fontWeight: "600",
-                                padding: "5px 10px 5px 10px",
-                            }}
-                        >
-                            Watch Now
-                        </Typography>
-                    </Button>
-                </LinkRouter>
-
-                <Button id="favorites-button">
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            fontSize: "15px",
-                            fontWeight: "600",
-                            padding: "5px 10px 5px 10px",
-                        }}
-                    >
-                        + Favorites
-                    </Typography>
-                </Button>
-            </Box>
+          <Typography variant="h5" sx={{ fontSize: "16px", padding:"2px 0 0 2px"}}>
+            {movie.vote_average}
+          </Typography>
         </Box>
-    )
-}
 
-export default MoviePosterBox
+        <Grid
+          container
+          className="buttons"
+          justifyContent="center"
+          direction="row"
+          gap={2}
+          sx={{ margin: "10px 0 10px 0" }}
+        >
+          <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
+            <Button id="watch-now-button" sx={{ borderRadius: "30px" }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  padding: "5px 10px 5px 10px",
+                }}
+              >
+                Watch Now
+              </Typography>
+            </Button>
+          </LinkRouter>
+
+          <Button id="favorites-button" sx={{ borderRadius: "30px" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: "15px",
+                fontWeight: "600",
+                padding: "5px 10px 5px 10px",
+              }}
+            >
+              + Favorites
+            </Typography>
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export default MoviePosterBox;
