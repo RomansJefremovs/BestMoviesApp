@@ -4,12 +4,30 @@ import {MovieBox} from "../models/MovieBox";
 import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useState } from "react";
+import {getUserID} from "../middleware/getUserID";
+import {addToFavourites} from "../middleware/addToFavourites";
+import {removeFromFavourites} from "../middleware/removeFromFavourites";
+
 
 const MoviePosterBox = (movie: MovieBox) => {
   const poster = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
+  const userId = getUserID()
   const [display, setDisplay] = useState(false);
-
+  const [fav, setFav] = useState<"+"|"-">("+")
+    const handleFavourites =  async () => {
+        if (fav == "+" && userId != "Not Found"){
+            await addToFavourites(parseInt(userId),movie.id)
+            setFav("-")
+        }else if(userId == "Not Found"){
+            //redirect
+            alert("Login please")
+            console.log("redirecting")
+            setFav("+")
+        }else{
+            await removeFromFavourites(parseInt(userId),movie.id)
+            setFav("+")
+        }
+    }
   return (
     <Box gridColumn="span 3" sx={{ width: "100%" }}>
       <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
@@ -114,7 +132,11 @@ const MoviePosterBox = (movie: MovieBox) => {
             </Button>
           </LinkRouter>
 
-          <Button id="favorites-button" sx={{ borderRadius: "30px" }}>
+          <Button
+              id="favorites-button"
+              sx={{ borderRadius: "30px" }}
+              onClick={handleFavourites}
+          >
             <Typography
               variant="h5"
               sx={{
@@ -123,7 +145,7 @@ const MoviePosterBox = (movie: MovieBox) => {
                 padding: "5px 10px 5px 10px",
               }}
             >
-              + Favorites
+                {`${fav} Favourites`}
             </Typography>
           </Button>
         </Grid>
