@@ -38,7 +38,7 @@ const Header = ({ handleMessageChange }: handleChange) => {
 
   const handleRadioButtons = () => {
     setRadioButtons(["person"]);
-  }
+  };
 
   // Small screens
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -58,8 +58,8 @@ const Header = ({ handleMessageChange }: handleChange) => {
         position="sticky"
         sx={{
           backgroundColor: "transparent",
-          marginTop: "20px",
           boxShadow: 0,
+          width: "100%"
         }}
       >
         <Toolbar className="toolbar">
@@ -113,28 +113,44 @@ const Header = ({ handleMessageChange }: handleChange) => {
             container
             direction="row"
             justifyContent="flex-end"
-            alignItems="center"
+            alignItems="flex-end"
+            sx={{marginTop: "40px"}}
           >
-            <Grid item>
-              <InputBase
-                sx={{
-                  ml: 1,
-                  flex: 1,
-                  color: "#fff",
-                  fontSize: "0.9em",
-                  borderRadius: "5px",
-                  backgroundColor: "rgba(255, 255, 255, 0.200)",
-                  padding: "4px 4px 4px 14px",
-                }}
-                placeholder="Search..."
-                inputProps={{ "aria-label": "search" }}
-                onChange={handleMessageChange}
-              />
-            </Grid>
+            <Grid container justifyContent="flex-end" alignItems="center">
+              <Grid item>
+                <InputBase
+                  sx={{
+                    display: { xs: "none", md: "block" },
+                    ml: 1,
+                    flex: 1,
+                    color: "#fff",
+                    fontSize: "0.9em",
+                    borderRadius: "5px",
+                    backgroundColor: "rgba(255, 255, 255, 0.200)",
+                    padding: "4px 4px 4px 14px",
+                  }}
+                  placeholder="Search..."
+                  inputProps={{ "aria-label": "search" }}
+                  onChange={handleMessageChange}
+                />
 
-            <Grid item>
+                <IconButton
+                  type="button"
+                  sx={{ p: "10px", display: { xs: "block", md: "none" } }}
+                  aria-label="search"
+                >
+                  <SearchIcon sx={{ color: "#fff" }} />
+                </IconButton>
+              </Grid>
+              <Box sx={{ display: { xs: "none", lg: "block" } }}>
+                <LinkRouter to={`/sign-in`}>
+                  <Button sx={{ color: "#fff" }}>Sign In</Button>
+                </LinkRouter>
+              </Box>
+            </Grid>
+            <Grid sx={{ display: { xs: "none", md: "block" }}}>
               <RadioGroup
-              onChange={handleRadioButtons}
+                onChange={handleRadioButtons}
                 row
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="movie"
@@ -144,43 +160,52 @@ const Header = ({ handleMessageChange }: handleChange) => {
                   value="movie"
                   control={
                     <Radio
+                      size="small"
                       sx={{
                         color: "#fff",
                         "&.Mui-checked": {
                           color: "#e70800",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
                         },
                       }}
                     />
                   }
                   label="Movie"
+                  sx={{
+                    opacity: "80%",
+                    "& .MuiFormControlLabel-label": {
+                      fontSize: "14px",
+                    },
+                  }}
                 />
                 <FormControlLabel
                   value="person"
                   control={
                     <Radio
+                      size="small"
                       sx={{
                         color: "#fff",
                         "&.Mui-checked": {
                           color: "#e70800",
                         },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
                       }}
                     />
                   }
                   label="Person"
+                  sx={{
+                    opacity: "80%",
+                    "& .MuiFormControlLabel-label": {
+                      fontSize: "14px",
+                    },
+                  }}
                 />
               </RadioGroup>
             </Grid>
-            <Grid item>
-              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon sx={{ color: "#fff" }} />
-              </IconButton>
-            </Grid>
-
-            <Box sx={{ display: { xs: "none", lg: "block" } }}>
-              <LinkRouter to={`/sign-in`}>
-                <Button sx={{ color: "#fff" }}>Sign In</Button>
-              </LinkRouter>
-            </Box>
           </Grid>
         </Toolbar>
       </AppBar>
