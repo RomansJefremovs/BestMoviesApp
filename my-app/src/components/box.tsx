@@ -1,6 +1,6 @@
-import { Link as LinkRouter } from "react-router-dom";
-import { Box, Button, CardMedia, Grid, Typography } from "@mui/material";
-import { MovieBox } from "../models/movies";
+import {Link as LinkRouter} from "react-router-dom";
+import {Box, Button, CardMedia, Grid, Typography} from "@mui/material";
+import {MovieBox} from "../models/MovieBox";
 import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useState } from "react";

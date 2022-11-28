@@ -1,4 +1,5 @@
-import {Movie, Movies} from "../models/movies";
+import {Movies} from "../models/Movies";
+import {Movie} from "../models/Movie";
 import MoviePosterBox from "./box";
 const MoviesList = ({movies}:Movies) => {
 
@@ -6,6 +7,7 @@ const MoviesList = ({movies}:Movies) => {
         movies.map((movie: Movie) => {
             return (
                 <MoviePosterBox
+                    key={movie.id}
                     id={movie.id}
                     poster_path={movie.poster_path}
                     title={movie.title}

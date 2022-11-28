@@ -1,5 +1,5 @@
 import { Container, Box, Typography, Divider, Grid } from "@mui/material";
-import { Movies } from "../models/movies";
+import { Movies } from "../models/Movies";
 import MoviesList from "./moviesList";
 import notFound from "../images/search.png";
 

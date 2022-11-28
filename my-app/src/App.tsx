@@ -7,10 +7,13 @@ import Background from "./components/background";
 import { theme } from "./theme/theme";
 import callApi from "./middleware/callApi";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { Movie } from "./models/movies";
+import { Movie } from "./models/Movie";
 import HomeContent from "./components/homeContent";
 import { searchMovies } from "./middleware/searchMovies";
 import { useDebounce } from "./middleware/useDebounce";
+// import {getTopRated} from "./middleware/getTopRated";
+// import {getCredits, getPerson, getPersonByID, searchPerson} from "./middleware/movieCredits";
+
 
 function App() {
   const baseURL =
@@ -27,7 +30,7 @@ function App() {
       await initialLoad();
     }
   };
-  
+
   const debounceOnChange = useCallback(
     useDebounce(handleMessageChange, 1000),
     []
@@ -38,12 +41,17 @@ function App() {
     if (temp !== false && temp !== "Error") {
       setMovies(temp.results);
     }
+    // console.log(await getCredits(436270))
+    // console.log(await getPersonByID(250))
+    // console.log(await searchPerson("Bradley Cooper"))
+    // console.log(await getPerson(250))
+    // console.log(await getTopRated())
   };
 
     useEffect(() => {
         initialLoad()
     },[])
-    console.log(movies)
+    // console.log(movies)
 
   return (
     <ThemeProvider theme={theme}>
