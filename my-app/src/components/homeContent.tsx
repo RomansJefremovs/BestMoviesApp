@@ -1,6 +1,7 @@
 import { Container, Box, Typography, Divider, Grid } from "@mui/material";
 import { Movies } from "../models/Movies";
 import MoviesList from "./moviesList";
+import notFound from "../images/search.png";
 
 function HomeContent({ movies }: Movies) {
   return (
@@ -8,7 +9,7 @@ function HomeContent({ movies }: Movies) {
       className="content"
       sx={{
         display: { xs: "block" },
-        borderRadius: "30px 30px 0 0",
+        borderRadius: "30px",
         backgroundColor: "#000",
         marginTop: {
           xs: "12em",
@@ -16,6 +17,7 @@ function HomeContent({ movies }: Movies) {
           md: "28em",
           lg: "38em",
         },
+        minHeight: "40em",
       }}
     >
       <Grid container>
@@ -26,47 +28,88 @@ function HomeContent({ movies }: Movies) {
             height: "auto",
           }}
         >
-          <Typography
-            variant="h2"
-            sx={{
-              padding: "30px",
-              fontSize: "1.5em",
-              fontWeight: "bold",
-            }}
-          >
-            New & Popular
-          </Typography>
-          <Divider />
-        </Box>
-      </Grid>
-
-      <Box sx={{ width: 1, padding: "6em 0 2em 0" }}>
-        <Box
-          display="grid"
-          gridTemplateColumns={{
-            xs: "repeat(6, 1fr)",
-            sm: "repeat(8, 1fr)",
-            md: "repeat(10, 1fr)",
-            lg: "repeat(12, 1fr)",
-          }}
-          gap={3}
-        >
           {movies.length !== 0 ? (
-            <MoviesList movies={movies} />
-          ) : (
             <Typography
               variant="h2"
               sx={{
-                padding: "30px",
+                padding: "40px",
                 fontSize: "1.5em",
                 fontWeight: "bold",
               }}
             >
-              OOPS! No such movie! Try again!
+              New & Popular
+            </Typography>
+          ) : (
+            <Typography
+              variant="h2"
+              sx={{
+                padding: "70px",
+                fontSize: "3em",
+                fontWeight: "bold",
+              }}
+            >
+              Oops!
             </Typography>
           )}
+          <Divider />
         </Box>
-      </Box>
+      </Grid>
+
+      <Grid container sx={{ padding: "2em", marginTop: "5em" }}>
+        {movies.length !== 0 ? (
+          <Grid
+            item
+            display="grid"
+            gridTemplateColumns=
+            {{
+              xs: "repeat(3, 1fr)",
+              sm: "repeat(6, 1fr)",
+              md: "repeat(9, 1fr)",
+              lg: "repeat(12, 1fr)",
+            }}
+            gap={3}
+          >
+            <MoviesList movies={movies} />
+          </Grid>
+        ) : (
+          <>
+            <Box
+              sx={{
+                color: "#fff",
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "center",
+                textAlign: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                width="200em"
+                height="200em"
+                src={notFound}
+                alt="Not Found Image"
+                className="not-found-image"
+              />
+            </Box>
+
+            <Typography
+              variant="h2"
+              sx={{
+                top: "20em",
+                fontSize: "1.5em",
+                textTransform: "none",
+              }}
+            >
+              No such movie. Try again!
+            </Typography>
+          </>
+        )}
+      </Grid>
     </Container>
   );
 }

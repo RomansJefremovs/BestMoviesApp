@@ -8,6 +8,9 @@ import {
   IconButton,
   Toolbar,
   InputBase,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
 } from "@mui/material";
 import CustomDrawer from "./drawer";
 import SearchIcon from "@mui/icons-material/Search";
@@ -21,7 +24,6 @@ interface handleChange {
 }
 
 const Header = ({ handleMessageChange }: handleChange) => {
-
   // Navigation
   const navItems = [
     { title: "Home", url: "/", onClickHandler: () => {} },
@@ -30,6 +32,13 @@ const Header = ({ handleMessageChange }: handleChange) => {
     { title: "TV Shows", url: "*", onClickHandler: () => {} },
   ];
   const signedInNavItems = [{ title: "My Favorites", url: "/favorites" }];
+
+  // Radio buttons for search
+  const [radioButtons, setRadioButtons] = useState(["movie"]);
+
+  const handleRadioButtons = () => {
+    setRadioButtons(["person"]);
+  }
 
   // Small screens
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -106,7 +115,7 @@ const Header = ({ handleMessageChange }: handleChange) => {
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Box sx={{ display: { xs: "flex" } }}>
+            <Grid item>
               <InputBase
                 sx={{
                   ml: 1,
@@ -116,16 +125,56 @@ const Header = ({ handleMessageChange }: handleChange) => {
                   borderRadius: "5px",
                   backgroundColor: "rgba(255, 255, 255, 0.200)",
                   padding: "4px 4px 4px 14px",
-                  
                 }}
                 placeholder="Search..."
                 inputProps={{ "aria-label": "search" }}
                 onChange={handleMessageChange}
               />
-              <IconButton type="button" sx={{ p: "10px"}} aria-label="search">
+            </Grid>
+
+            <Grid item>
+              <RadioGroup
+              onChange={handleRadioButtons}
+                row
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="movie"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="movie"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#fff",
+                        "&.Mui-checked": {
+                          color: "#e70800",
+                        },
+                      }}
+                    />
+                  }
+                  label="Movie"
+                />
+                <FormControlLabel
+                  value="person"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "#fff",
+                        "&.Mui-checked": {
+                          color: "#e70800",
+                        },
+                      }}
+                    />
+                  }
+                  label="Person"
+                />
+              </RadioGroup>
+            </Grid>
+            <Grid item>
+              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
                 <SearchIcon sx={{ color: "#fff" }} />
               </IconButton>
-            </Box>
+            </Grid>
 
             <Box sx={{ display: { xs: "none", lg: "block" } }}>
               <LinkRouter to={`/sign-in`}>
