@@ -1,6 +1,6 @@
 import {Link as LinkRouter} from "react-router-dom";
 import {Box, Button, CardMedia, Grid, Typography} from "@mui/material";
-import {MovieBox} from "../models/movies";
+import {MovieBox} from "../models/MovieBox";
 import StarIcon from "@mui/icons-material/Star";
 
 const MoviePosterBox = (movie:MovieBox) => {
