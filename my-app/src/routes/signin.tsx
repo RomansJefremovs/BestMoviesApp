@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { ThemeProvider } from "@emotion/react";
 import {
   Box,
@@ -17,11 +17,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "../App.css";
 import { theme } from "../theme/theme";
 import callApi from "../middleware/callApi";
+import {FormEvent} from "react";
 
 function SignIn() {
   const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
@@ -30,7 +31,7 @@ function SignIn() {
       baseURL + `/User/login/${data.get("username")}/${data.get("password")}`
     );
 
-    console.log(temp);
+    localStorage.setItem("userID",temp.toString())
   };
 
   return (
