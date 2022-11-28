@@ -20,8 +20,17 @@ function App() {
   const baseURL =
     "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
   const [movies, setMovies] = useState<Movie[]>();
+  const [radioButtons, setRadioButtons] = useState(["movie"]);
+  const handleRadioButtons = () => {
+    if (radioButtons[0] == "movie"){
+      setRadioButtons(["person"]);
+    }else{
+      setRadioButtons(["movie"]);
+    }
+  };
   const userId = getUserID()
   const handleSearch = async (message: string) => {
+
     const temp = await searchMovies(message);
     setMovies(temp.results);
   };
@@ -60,7 +69,7 @@ function App() {
     <ThemeProvider theme={theme}>
       {movies ? (
         <>
-          <Header handleMessageChange={debounceOnChange} />
+          <Header handleMessageChange={debounceOnChange} handleRadioButtons={handleRadioButtons} />
           <Background />
           <HomeContent movies={movies} />
           <Footer />

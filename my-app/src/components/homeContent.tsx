@@ -4,6 +4,7 @@ import MoviesList from "./moviesList";
 import notFound from "../images/search.png";
 
 function HomeContent({ movies }: Movies) {
+
   return (
     <Container
       className="content"

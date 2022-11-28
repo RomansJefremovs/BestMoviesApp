@@ -21,9 +21,10 @@ import logo from "../images/logo.png";
 
 interface handleChange {
   handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleRadioButtons:()=>void
 }
 
-const Header = ({ handleMessageChange }: handleChange) => {
+const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
   // Navigation
   const navItems = [
     { title: "Home", url: "/", onClickHandler: () => {} },
@@ -33,14 +34,6 @@ const Header = ({ handleMessageChange }: handleChange) => {
   ];
   const signedInNavItems = [{ title: "My Favorites", url: "/favorites" }];
 
-  // Radio buttons for search
-  const [radioButtons, setRadioButtons] = useState(["movie"]);
-
-  const handleRadioButtons = () => {
-    setRadioButtons(["person"]);
-  };
-
-  // Small screens
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
