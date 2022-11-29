@@ -1,4 +1,4 @@
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter, Outlet } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { ThemeProvider } from "@emotion/react";
 import {
@@ -29,6 +29,7 @@ function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Outlet />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
