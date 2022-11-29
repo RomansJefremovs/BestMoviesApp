@@ -1,10 +1,23 @@
 import { Container, Box, Typography, Divider, Grid } from "@mui/material";
-import { Movies } from "../models/Movies";
-import MoviesList from "./moviesList";
+import MoviesList from "./MoviesList";
 import notFound from "../images/search.png";
+import {useEffect, useState} from "react";
+import {Movie} from "../models/Movie";
+import callApi from "../middleware/callApi";
 
-function HomeContent({ movies }: Movies) {
-
+function HomeContent() {
+    const baseURL =
+        "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
+    const [movies, setMovies] = useState<Movie[]>([]);
+    const initialLoad = async () => {
+        const temp = await callApi(baseURL);
+        if (temp !== false && temp !== "Error") {
+            setMovies(temp.results);
+        }
+    }
+    useEffect(() => {
+        initialLoad()
+    },[])
   return (
     <Container
       className="content"

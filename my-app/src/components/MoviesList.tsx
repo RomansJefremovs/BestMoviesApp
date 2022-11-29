@@ -1,6 +1,6 @@
 import {Movies} from "../models/Movies";
 import {Movie} from "../models/Movie";
-import MoviePosterBox from "./box";
+import MoviePosterBox from "./MoviePosterBox";
 const MoviesList = ({movies}:Movies) => {
 
     return (<>{
