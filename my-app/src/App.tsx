@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@mui/material";
-
 import "./App.css";
 import Footer from "./components/Footer";
 import { theme } from "./theme/theme";
@@ -11,11 +10,14 @@ import AppRouter from "./components/AppRouter";
 import Header from "./components/Header";
 // import {getTopRated} from "./middleware/getTopRated";
 // import {getCredits, getPerson, getPersonByID, searchPerson} from "./middleware/movieCredits";
+import {Button, TextField, ThemeProvider} from "@mui/material";
+import "./App.css";
+import Footer from "./components/Footer";
+import { theme } from "./theme/theme";
+import { ChangeEvent, useState } from "react";
+import AppRouter from "./components/AppRouter";
 
 function App() {
-  // const baseURL =
-  //     "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
-  const [movies, setMovies] = useState<Movie[]>();
   const [radioButtons, setRadioButtons] = useState(["movie"]);
   const [message, setMessage] = useState<string>("");
 
@@ -37,21 +39,20 @@ function App() {
   };
 
   const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-    if (e.target.value !== "") {
-      await handleSearch(e.target.value);
-    }
+    console.log(e.target.value)
+    setTimeout(()=>{
+      window.location.href = `/search?movie=${e.target.value}`
+    },1500)
   };
-
-  const debounceOnChange = useCallback(
-    useDebounce(handleMessageChange, 1000),
-    []
-  );
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <Header />
+        <TextField
+            name={"search"}
+            onChange={handleMessageChange}
+          />
         <AppRouter />
         <Footer />
       </ThemeProvider>
