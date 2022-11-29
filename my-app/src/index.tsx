@@ -7,6 +7,12 @@ import SignIn from "./routes/signin";
 import SignUp from "./routes/signup";
 import Movie from "./routes/moviePage";
 import Favorites from "./routes/favorites";
+import { ChangeEvent } from "react";
+
+interface handleChange {
+  handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleRadioButtons:()=>void
+}
 
 render(
   <>
