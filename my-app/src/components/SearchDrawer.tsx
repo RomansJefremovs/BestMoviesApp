@@ -3,7 +3,7 @@ import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import logo from "../images/logo.png";
 
-function MenuDrawer() {
+function SearchDrawer() {
   // Small screens
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
@@ -44,4 +44,4 @@ function MenuDrawer() {
     </Box>
   );
 }
-export default MenuDrawer;
+export default SearchDrawer;

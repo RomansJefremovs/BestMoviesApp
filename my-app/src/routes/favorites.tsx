@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Movie } from "../models/Movie";
 import { getAllFavouriteMoviesById } from "../middleware/getAllFavouriteMoviesByID";
-import MoviePosterBox from "../components/box";
+import MoviePosterBox from "../components/MoviePosterBox";
 import Box from "@mui/material/Box";
 import {
   CircularProgress,
@@ -10,9 +10,10 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import Header from "../components/header";
-import Footer from "../components/footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useDebounce } from "../middleware/useDebounce";
+import {getUserID} from "../middleware/getUserID";
 
 interface handleChange {
   handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -21,6 +22,7 @@ interface handleChange {
 
 function Favorites() {
   const [favourites, setFavourites] = useState<Movie[]>();
+  const userId = getUserID()
   const initialLoad = async (userId: number) => {
     const tempArr = await getAllFavouriteMoviesById(userId);
     console.log(tempArr);
@@ -28,14 +30,11 @@ function Favorites() {
   };
 
   useEffect(() => {
-    initialLoad(1);
+    initialLoad(parseInt(userId));
   });
 
   return (
     <>
-      <Header
-      // handleMessageChange={debounceOnChange} handleRadioButtons={handleRadioButtons}
-      />
       <Container
         className="content"
         sx={{
@@ -128,7 +127,6 @@ function Favorites() {
           )}
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }
