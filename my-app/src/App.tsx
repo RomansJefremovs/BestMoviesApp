@@ -68,7 +68,9 @@ function App() {
     <ThemeProvider theme={theme}>
       {movies ? (
         <>
-          <Header handleMessageChange={debounceOnChange} handleRadioButtons={handleRadioButtons} />
+          <Header 
+          // handleMessageChange={debounceOnChange} handleRadioButtons={handleRadioButtons} 
+          />
           <Background />
           <HomeContent movies={movies} />
           <Footer />

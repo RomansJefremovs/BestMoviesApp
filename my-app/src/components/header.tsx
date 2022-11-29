@@ -12,19 +12,20 @@ import {
   Radio,
   FormControlLabel,
 } from "@mui/material";
-import CustomDrawer from "./drawer";
+import MenuDrawer from "./menuDrawer";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link as LinkRouter } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 import logo from "../images/logo.png";
+import SearchDrawer from "./searchDrawer";
 
 interface handleChange {
   handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleRadioButtons:()=>void
+  handleRadioButtons: () => void;
 }
-
-const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
+// {handleMessageChange,handleRadioButtons} : handleChange
+const Header = () => {
   // Navigation
   const navItems = [
     { title: "Home", url: "/", onClickHandler: () => {} },
@@ -34,10 +35,15 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
   ];
   const signedInNavItems = [{ title: "My Favorites", url: "/favorites" }];
 
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const handleMenuDrawerToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleSearchDrawerToggle = () => {
+    setMobileSearchOpen(!mobileSearchOpen);
   };
 
   return (
@@ -52,13 +58,15 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
         sx={{
           backgroundColor: "transparent",
           boxShadow: 0,
-          width: "100%"
+          width: "100%",
         }}
       >
         <Toolbar className="toolbar">
-          <Box>
-            <img src={logo} alt="BestMovies Logo" className="logo" />
-          </Box>
+          <LinkRouter to={"/"}>
+            <Box>
+              <img src={logo} alt="BestMovies Logo" className="logo" />
+            </Box>
+          </LinkRouter>
           <Grid
             container
             direction="row"
@@ -69,7 +77,7 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              onClick={handleMenuDrawerToggle}
               sx={{ mr: 2, display: { lg: "none" }, marginLeft: "10px" }}
             >
               <ArrowDropDownIcon />
@@ -107,7 +115,7 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
             direction="row"
             justifyContent="flex-end"
             alignItems="flex-end"
-            sx={{marginTop: "40px"}}
+            sx={{ marginTop: "40px" }}
           >
             <Grid container justifyContent="flex-end" alignItems="center">
               <Grid item>
@@ -124,11 +132,12 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
                   }}
                   placeholder="Search..."
                   inputProps={{ "aria-label": "search" }}
-                  onChange={handleMessageChange}
+                  // onChange={handleMessageChange}
                 />
 
                 <IconButton
                   type="button"
+                  onClick={handleSearchDrawerToggle}
                   sx={{ p: "10px", display: { xs: "block", md: "none" } }}
                   aria-label="search"
                 >
@@ -141,9 +150,9 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
                 </LinkRouter>
               </Box>
             </Grid>
-            <Grid sx={{ display: { xs: "none", md: "block" }}}>
+            <Grid sx={{ display: { xs: "none", md: "block" } }}>
               <RadioGroup
-                onChange={handleRadioButtons}
+                // onChange={handleRadioButtons}
                 row
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="movie"
@@ -205,10 +214,10 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
       <Box component="nav">
         <Drawer
           variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
+          open={mobileMenuOpen}
+          onClose={handleMenuDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, 
           }}
           sx={{
             display: { xs: "block", lg: "none" },
@@ -219,7 +228,28 @@ const Header = ({handleMessageChange,handleRadioButtons} : handleChange) => {
             },
           }}
         >
-          <CustomDrawer />
+          <MenuDrawer />
+        </Drawer>
+      </Box>
+      <Box component="nav">
+        <Drawer
+          anchor="right"
+          variant="temporary"
+          open={mobileSearchOpen}
+          onClose={handleSearchDrawerToggle}
+          ModalProps={{
+            keepMounted: true, 
+          }}
+          sx={{
+            display: { xs: "block", lg: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: "240px",
+              backgroundColor: "#E70800",
+            },
+          }}
+        >
+          <SearchDrawer />
         </Drawer>
       </Box>
     </Container>
