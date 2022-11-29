@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Movie} from "../models/Movie";
 import callApi from "../middleware/callApi";
 
-function HomeContent() {
+const HomeContent = () => {
     const baseURL =
         "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -127,4 +127,4 @@ function HomeContent() {
     </Container>
   );
 }
-export default HomeContent;
+export default HomeContent
