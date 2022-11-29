@@ -30,7 +30,6 @@ function App() {
   };
   const userId = getUserID()
   const handleSearch = async (message: string) => {
-
     const temp = await searchMovies(message);
     setMovies(temp.results);
   };
