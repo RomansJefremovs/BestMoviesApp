@@ -12,7 +12,7 @@ import {
   CssBaseline,
   Paper,
 } from "@mui/material";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter, Outlet } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import "../App.css";
 import { theme } from "../theme/theme";
@@ -36,6 +36,7 @@ function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Outlet />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid

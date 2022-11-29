@@ -1,4 +1,8 @@
+import { Outlet } from "react-router-dom";
+
 function MoviePage() {
-  return <></>;
+  return <>
+  <Outlet />
+  </>;
 }
 export default MoviePage;

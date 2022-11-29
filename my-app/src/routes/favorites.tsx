@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Movie } from "../models/Movie";
 import { getAllFavouriteMoviesById } from "../middleware/getAllFavouriteMoviesByID";
 import MoviePosterBox from "../components/MoviePosterBox";
@@ -10,15 +10,8 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useDebounce } from "../middleware/useDebounce";
 import {getUserID} from "../middleware/getUserID";
-
-interface handleChange {
-  handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleRadioButtons: () => void;
-}
+import { Outlet } from "react-router-dom";
 
 function Favorites() {
   const [favourites, setFavourites] = useState<Movie[]>();
@@ -35,6 +28,7 @@ function Favorites() {
 
   return (
     <>
+    <Outlet />
       <Container
         className="content"
         sx={{
