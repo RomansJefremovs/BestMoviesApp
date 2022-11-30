@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "mui-image";
 import { useEffect, useState } from "react";
-import NotFound from "../images/search.png";
+import NotFound from "../assets/images/search.png";
 import { Movie } from "../models/Movie";
 import { getMovieByID } from "../middleware/getMovieByID";
 import { Credits } from "../models/Credits";
