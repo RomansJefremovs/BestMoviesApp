@@ -7,7 +7,7 @@ import { theme } from "./theme/theme";
 import { ChangeEvent, useState } from "react";
 import AppRouter from "./components/AppRouter";
 import {getPerson} from "./middleware/getPerson";
-import ActorPage from "./components/ActorPage";
+import ActorPage from "./components/PersonPage";
 
 function App() {
   const [radioButtons, setRadioButtons] = useState(["movie"]);

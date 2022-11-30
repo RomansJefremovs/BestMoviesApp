@@ -5,8 +5,8 @@ import SignUp from "../routes/signup";
 import Favorites from "../routes/favorites";
 import Movie from "../routes/moviePage";
 import Home from "../routes/home";
-import ActorPage from "./ActorPage";
-import PersonPage from "./ActorPage";
+import ActorPage from "./PersonPage";
+import PersonPage from "./PersonPage";
 
 const AppRouter = () => {
   return (
