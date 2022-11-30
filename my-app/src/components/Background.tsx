@@ -26,18 +26,18 @@ function Background() {
               position: "absolute",
               alignItems: "flex-start",
               justifyContent: "center",
+              fontFamily: "Cooper Hewitt Medium",
               width: "100%",
-              fontWeight: "bold",
               height: "auto",
               typography: {
                 xs: { top: "4em", fontSize: "2em" },
-                sm: { top: "7em" },
-                md: { top: "7em", bottom: 0, fontSize: "2.5em" },
+                sm: { top: "4.5em", fontSize: "2.5em" },
+                md: { top: "5em", bottom: 0, fontSize: "3em" },
                 lg: {
                   alignItems: "center",
                   top: 0,
                   bottom: 0,
-                  fontSize: "4em",
+                  fontSize: "5em",
                 },
               },
             }}
