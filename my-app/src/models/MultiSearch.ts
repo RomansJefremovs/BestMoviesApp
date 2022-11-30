@@ -1,5 +1,5 @@
 import {Movie} from "./Movie";
-import {Person} from "./Person";
+
 
 export interface SMovie{
     poster_path: string | null

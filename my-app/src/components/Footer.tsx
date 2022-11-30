@@ -1,5 +1,5 @@
 import { Container, Box, Typography } from "@mui/material";
-import logo from "../images/logo.png";
+import logo from "../assets/images/logo.png";
 
 function Footer() {
   return (

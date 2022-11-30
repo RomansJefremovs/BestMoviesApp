@@ -1,5 +1,5 @@
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { Outlet, Link as LinkRouter } from "react-router-dom";
+import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+
 interface NavLink {
   url: string;
   title: string;

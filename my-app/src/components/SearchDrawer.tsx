@@ -4,7 +4,6 @@ import handleMessageChange from "../interfaces/handleMessageChange";
 import SearchField from "./SearchField";
 
 function SearchDrawer({ handleMessageChange }: handleMessageChange) {
-  // Small screens
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const handleSearchDrawerToggle = () => {

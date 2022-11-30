@@ -1,15 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Movie} from "../models/Movie";
-import {searchMovies} from "../middleware/searchMovies";
-import MoviesList from "../components/MoviesList";
 import {multiSearch} from "../middleware/multiSearch";
-import {Person} from "../models/Person";
 import {SMovie, SPerson, Tv} from "../models/MultiSearch";
 import MultiSearchList from "../components/MultiSearchList";
 
 function Search() {
-  const [movies, setMovies] = useState<Movie[]>([]);
   const [result, setResult] = useState<(SMovie|SPerson|Tv)[]>([]);
   const [searchTerm] = useSearchParams();
   const searchResult = searchTerm.get("message")
@@ -28,21 +23,7 @@ function Search() {
       return null
     }
   };
-  // const handleSearch = async () => {
-  //   if (searchResult != null){
-  //     const temp = await searchMovies(searchResult);
-  //     if (temp != undefined) {
-  //       setMovies(temp.results);
-  //     }else{
-  //       setMovies([])
-  //     }
-  //   }else{
-  //     return null
-  //   }
-  // };
-
   useEffect(()=>{
-    // handleSearch()
     handleMultiSearch()
   },[])
   return (
