@@ -1,8 +1,7 @@
-import { Container, AppBar } from "@mui/material";
+import { Container } from "@mui/material";
 import { useState } from "react";
 import NavBar from "./NavBar";
-import RadioButtons from "./RadioButtons";
-import SearchField from "./SearchField";
+
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);

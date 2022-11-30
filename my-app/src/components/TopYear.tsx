@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Movie} from "../models/Movie";
 import {Box, Container, Divider, Grid, Typography} from "@mui/material";
 import MoviesList from "./MoviesList";
-import notFound from "../images/search.png";
+import notFound from "../assets/images/search.png";
 import {getTopYear} from "../middleware/getTopYear";
 
 interface Year{
