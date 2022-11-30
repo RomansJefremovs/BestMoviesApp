@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "Cooper Hewitt Bold";
+  src: local("CooperHewitt"),
+    url(./fonts/CooperHewitt-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Cooper Hewitt Semibold";
+  src: local("CooperHewitt"),
+    url(./fonts/CooperHewitt-Semibold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Cooper Hewitt Book";
+  src: local("CooperHewitt"),
+    url(./fonts/CooperHewitt-Book.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Cooper Hewitt Medium";
+  src: local("CooperHewitt"),
+    url(./fonts/CooperHewitt-Medium.ttf) format("truetype");
+}
+

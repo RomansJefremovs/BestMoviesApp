@@ -2,7 +2,6 @@ import { Container, Box, Typography } from "@mui/material";
 import logo from "../images/logo.png";
 
 function Footer() {
-
   return (
     <Container
       className="footer"
@@ -13,7 +12,6 @@ function Footer() {
       <Box
         sx={{
           display: { xs: "flex" },
-          width: "100%",
         }}
         className="footer-box"
       >
