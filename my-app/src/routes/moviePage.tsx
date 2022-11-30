@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Box, CardMedia, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "mui-image";
 import { useEffect, useState } from "react";
 import NotFound from "../images/search.png";
@@ -32,6 +32,11 @@ function MoviePage() {
     initLoad();
   });
 
+  const movieBackdrop =
+    movie?.backdrop_path != null
+      ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+      : NotFound;
+
   const movieURL =
     movie?.poster_path != null
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -44,12 +49,10 @@ function MoviePage() {
 
   return (
     <>
-      <Container
-        className="background"
-      >
+      <Container className="background">
         <Box>
           <Image
-            src={movieURL}
+            src={movie?.backdrop_path != null ? movieBackdrop : movieURL}
             style={{
               position: "absolute",
               display: "flex",
@@ -57,19 +60,22 @@ function MoviePage() {
               justifyContent: "center",
               marginLeft: "auto",
               marginRight: "auto",
-              height:"33em",
+              height: "33em",
               top: 0,
               bottom: 0,
               left: 0,
               right: 0,
-              opacity: "60%",
+              opacity: "40%",
               objectPosition: "75%",
               zIndex: 1,
             }}
           />
         </Box>
       </Container>
-      <Container className="content" sx={{ marginTop: "2em", minHeight: "8em" }}>
+      <Container
+        className="content"
+        sx={{ marginTop: "2em", minHeight: "8em" }}
+      >
         {movie !== undefined && credits !== undefined ? (
           <Container
             sx={{
@@ -97,6 +103,9 @@ function MoviePage() {
                 <Image
                   src={movieURL}
                   style={{
+                    transitionDuration: "500ms",
+                    animation:
+                      "1500ms cubic-bezier(0.7, 0, 0.6, 1) 0s 1 normal none running materialize",
                     height: "30em",
                     width: "20em",
                     borderRadius: "10px",
@@ -134,13 +143,16 @@ function MoviePage() {
                 >
                   <Typography
                     color="#fff"
-                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                    sx={{
+                      fontSize: "17px",
+                      fontFamily: "Cooper Hewitt Semibold",
+                    }}
                   >{`Release Date:`}</Typography>
                   <Typography
                     color="#fff"
                     sx={{
                       float: "right",
-                      fontSize: "20px",
+                      fontSize: "15px",
                       fontFamily: "Cooper Hewitt Medium",
                     }}
                   >{`${movie.release_date}`}</Typography>
@@ -156,7 +168,10 @@ function MoviePage() {
                 >
                   <Typography
                     color="#fff"
-                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                    sx={{
+                      fontSize: "17px",
+                      fontFamily: "Cooper Hewitt Semibold",
+                    }}
                   >
                     Rate:
                   </Typography>
@@ -164,7 +179,7 @@ function MoviePage() {
                     color="#fff"
                     sx={{
                       float: "right",
-                      fontSize: "20px",
+                      fontSize: "15px",
                       fontFamily: "Cooper Hewitt Medium",
                     }}
                   >
@@ -178,35 +193,89 @@ function MoviePage() {
               color="#fff"
               sx={{
                 margin: "auto",
-                padding: "40px 20px 40px 20px",
+                padding: "20px",
                 marginTop: { xs: "20em", sm: "17em", md: 0 },
               }}
             >
               {movie.overview}
             </Typography>
             <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="row"
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                height: "5rem",
+                margin: "auto",
+                padding: "20px 20px 40px 20px",
               }}
             >
-              <Typography color="#fff">Cast:</Typography>
-              <Carousel>
+              <Grid
+                item
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                }}
+              >
+                <Typography
+                  color="#fff"
+                  sx={{
+                    fontSize: "50px",
+                    padding: "30px 30px 30px 0",
+                    fontFamily: "Cooper Hewitt Bold",
+                  }}
+                >
+                  Cast
+                </Typography>
+              </Grid>
+              <Grid
+                display="grid"
+                gridTemplateColumns={{
+                  xs: "repeat(8, 1fr)",
+                  sm: "repeat(10, 1fr)",
+                  md: "repeat(12, 1fr)",
+                  lg: "repeat(12, 1fr)",
+                }}
+                gap={3}
+              >
+                {/* <Carousel> */}
                 <PersonList prop={credits.cast} />
-              </Carousel>
-            </Grid>
-            <Grid
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                height: "5rem",
-              }}
-            >
-              <Typography color="#fff">Crew:</Typography>
-              <Carousel>
+                {/* </Carousel> */}
+              </Grid>
+
+              <Grid
+                item
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                }}
+              >
+                <Typography
+                  color="#fff"
+                  sx={{
+                    fontSize: "50px",
+                    padding: "30px 30px 30px 0",
+                    fontFamily: "Cooper Hewitt Bold",
+                  }}
+                >
+                  Crew
+                </Typography>
+              </Grid>
+              <Grid
+                display="grid"
+                gridTemplateColumns={{
+                  xs: "repeat(8, 1fr)",
+                  sm: "repeat(10, 1fr)",
+                  md: "repeat(12, 1fr)",
+                  lg: "repeat(12, 1fr)",
+                }}
+                gap={3}
+              >
+                {/* <Carousel> */}
                 <PersonList prop={credits.crew} />
-              </Carousel>
+                {/* </Carousel> */}
+              </Grid>
             </Grid>
           </Container>
         ) : (
