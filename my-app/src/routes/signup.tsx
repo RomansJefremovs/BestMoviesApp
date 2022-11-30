@@ -13,6 +13,9 @@ import {
 import { theme } from "../theme/theme";
 import {FormEvent} from "react";
 import callApi from "../middleware/callApi";
+import {login} from "../middleware/login";
+import {register} from "../middleware/register";
+import {passwordHash} from "../middleware/passwordHash";
 
 function SignUp() {
   const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
@@ -20,13 +23,21 @@ function SignUp() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    await callApi(
-      baseURL + `/User/create/${data.get("username")}/${data.get("password")}`
-    ,"POST");
-
-  };
-
+    const username = data.get("username")
+    const password = data.get("password")
+    if (username !== null && password !== null) {
+      const hashPassword = passwordHash(password.toString())
+      const registerCall = await register(username.toString(), hashPassword)
+      if (registerCall == 'Success'){
+        window.location.href = `/sign-in`
+      }else{
+        alert(registerCall)
+      }
+      console.log(registerCall)
+    } else {
+      console.log("oops")
+    }
+  }
   return (
     <ThemeProvider theme={theme}>
       <Outlet />

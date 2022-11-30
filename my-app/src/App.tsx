@@ -4,10 +4,11 @@ import {TextField, ThemeProvider} from "@mui/material";
 import "./App.css";
 import Footer from "./components/Footer";
 import { theme } from "./theme/theme";
-import { ChangeEvent, useState } from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import AppRouter from "./components/AppRouter";
 import {getPerson} from "./middleware/getPerson";
 import ActorPage from "./components/PersonPage";
+import {login} from "./middleware/login";
 
 function App() {
   const [radioButtons, setRadioButtons] = useState(["movie"]);
@@ -18,17 +19,14 @@ function App() {
   //     setRadioButtons(["movie"]);
   //   }
   // };
-
-  localStorage.setItem("userID", "23");
-  console.log(getPerson(488))
-  console.log(localStorage.getItem("userID"));
-
   const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value)
     setTimeout(()=>{
       window.location.href = `/search?movie=${e.target.value}`
     },1500)
   };
+  // localStorage.clear()
+  // console.log(localStorage.getItem("userID"))
 
   return (
     <>

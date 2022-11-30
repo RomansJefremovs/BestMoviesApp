@@ -1,4 +1,3 @@
-
 import { ThemeProvider } from "@emotion/react";
 import {
   Box,
@@ -18,20 +17,25 @@ import "../App.css";
 import { theme } from "../theme/theme";
 import callApi from "../middleware/callApi";
 import {FormEvent} from "react";
+import {login} from "../middleware/login";
+import {passwordHash} from "../middleware/passwordHash";
 
 function SignIn() {
   const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const data = new FormData(event.currentTarget);
+    const username = data.get("username")
+    const password = data.get("password")
+    if (username !== null && password !== null){
+      const loginCall = await login(username.toString(),password.toString())
+      localStorage.setItem("userID",loginCall.toString())
+      window.location.href = `/`
+    }else {
+      console.log("oops")
+    }
 
-    const temp = await callApi(
-      baseURL + `/User/login/${data.get("username")}/${data.get("password")}`
-    );
-
-    localStorage.setItem("userID",temp.toString())
   };
 
   return (
