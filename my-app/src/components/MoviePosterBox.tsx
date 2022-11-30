@@ -32,7 +32,7 @@ const MoviePosterBox = (movie: MovieBox) => {
     <Box gridColumn="span 3" sx={{
         width: "100%",
     }}>
-      <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
+      <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
         <CardMedia
           component="img"
           className="poster"
