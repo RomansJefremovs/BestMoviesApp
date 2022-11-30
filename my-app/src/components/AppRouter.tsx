@@ -5,8 +5,8 @@ import SignUp from "../routes/signup";
 import Favorites from "../routes/favorites";
 import Movie from "../routes/moviePage";
 import Home from "../routes/home";
-import ActorPage from "./PersonPage";
 import PersonPage from "./PersonPage";
+import TopRated from "../routes/TopRated";
 
 const AppRouter = () => {
   return (
@@ -19,6 +19,7 @@ const AppRouter = () => {
         <Route path="favorites" element={<Favorites />} />
         <Route path="movie" element={<Movie />} />
         <Route path="person" element={<PersonPage />} />
+        <Route path="toprated" element={<TopRated/>} />
         <Route
           path="*"
           element={
