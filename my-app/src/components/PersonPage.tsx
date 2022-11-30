@@ -21,6 +21,8 @@ const PersonPage = () => {
   useEffect(() => {
     initLoad();
   });
+
+  
   const url =
     person?.profile_path != null
       ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
