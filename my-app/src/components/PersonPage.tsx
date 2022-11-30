@@ -1,4 +1,4 @@
-import { CardMedia, Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import Image from "mui-image";
 import { Person } from "../models/Person";
 import MoviePosterBox from "./MoviePosterBox";
@@ -28,7 +28,7 @@ const PersonPage = () => {
 
   return (
     <Container sx={{ marginTop: "2em", minHeight: "40em" }}>
-      {person != undefined ? (
+      {person !== undefined ? (
         <Container
           sx={{
             display: "flex",
