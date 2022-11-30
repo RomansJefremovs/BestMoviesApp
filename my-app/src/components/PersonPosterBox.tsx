@@ -13,7 +13,7 @@ const PersonPosterBox = ({id,profile_path,name,known_for_department}:PersonBox)=
         <Box gridColumn="span 3" sx={{
             width: "100%",
         }}>
-            <LinkRouter to={`/person?personId${id}`} key={id}>
+            <LinkRouter to={`/person?personId=${id}`} key={id}>
                 <CardMedia
                     component="img"
                     className="poster"
