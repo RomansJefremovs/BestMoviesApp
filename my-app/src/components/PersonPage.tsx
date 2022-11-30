@@ -4,7 +4,7 @@ import { Person } from "../models/Person";
 import MoviePosterBox from "./MoviePosterBox";
 import { getPerson } from "../middleware/getPerson";
 import { useEffect, useState } from "react";
-import NotFound from "../assets/error-404.png";
+import NotFound from "../images/blank_profile.png";
 import { useSearchParams } from "react-router-dom";
 
 const PersonPage = () => {
@@ -22,7 +22,6 @@ const PersonPage = () => {
     initLoad();
   });
 
-  
   const url =
     person?.profile_path != null
       ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
