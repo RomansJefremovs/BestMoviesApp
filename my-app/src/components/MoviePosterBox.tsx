@@ -7,10 +7,10 @@ import { useState } from "react";
 import {getUserID} from "../middleware/getUserID";
 import {addToFavourites} from "../middleware/addToFavourites";
 import {removeFromFavourites} from "../middleware/removeFromFavourites";
-
+import NotFound from '../assets/error-404.png'
 
 const MoviePosterBox = (movie: MovieBox) => {
-  const poster = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  const poster = movie.poster_path != null ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`: NotFound;
   const userId = getUserID()
   const [display, setDisplay] = useState(false);
   const [fav, setFav] = useState<"+"|"-">("+")
@@ -29,7 +29,9 @@ const MoviePosterBox = (movie: MovieBox) => {
         }
     }
   return (
-    <Box gridColumn="span 3" sx={{ width: "100%" }}>
+    <Box gridColumn="span 3" sx={{
+        width: "100%",
+    }}>
       <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
         <CardMedia
           component="img"

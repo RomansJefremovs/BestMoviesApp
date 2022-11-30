@@ -18,13 +18,5 @@ export const getPerson = async(person_id:number):Promise<Person> => {
         }
     }
 
-    const knownFor = result != null ? result :  {
-        profile_path: "none",
-        adult: false,
-        id: 1,
-        known_for: [{}],
-        name: "dummy",
-        popularity: 0
-    }
-    return  { ...personById,known_for:knownFor}
+    return  { ...personById,known_for:result}
 }

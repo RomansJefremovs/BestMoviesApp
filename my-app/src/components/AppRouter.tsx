@@ -5,6 +5,8 @@ import SignUp from "../routes/signup";
 import Favorites from "../routes/favorites";
 import Movie from "../routes/moviePage";
 import Home from "../routes/home";
+import ActorPage from "./ActorPage";
+import PersonPage from "./ActorPage";
 
 const AppRouter = () => {
   return (
@@ -16,6 +18,7 @@ const AppRouter = () => {
         <Route path="sign-up" element={<SignUp />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="movies/:imdbID" element={<Movie />} />
+        <Route path="person" element={<PersonPage />} />
         <Route
           path="*"
           element={

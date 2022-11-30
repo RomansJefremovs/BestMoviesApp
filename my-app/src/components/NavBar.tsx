@@ -73,6 +73,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen }: handleDrawerToggle) => {
             </Button>
           </Box>
         </Grid>
+
       </Toolbar>
     </AppBar>
   );
