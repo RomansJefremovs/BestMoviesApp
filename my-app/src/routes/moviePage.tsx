@@ -86,7 +86,7 @@ function MoviePage() {
                 }}>
                   <Typography>Crew:</Typography>
                   {credits.crew.map(item=>{
-                    return <p>{item.name}</p>
+                    return 1
                   })}
                 </Container>
               </Container>

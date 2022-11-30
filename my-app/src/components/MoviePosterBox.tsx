@@ -72,7 +72,7 @@ const MoviePosterBox = (movie: MovieBox) => {
         flexDirection="row"
         sx={{paddingTop:"12px"}}
       >
-        <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
+        <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
           <Grid>
             <Typography
               variant="h5"
@@ -119,7 +119,7 @@ const MoviePosterBox = (movie: MovieBox) => {
           gap={2}
           sx={{ margin: "10px 0 10px 0" }}
         >
-          <LinkRouter to={`/movies/${movie.id}`} key={movie.id}>
+          <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
             <Button id="watch-now-button" sx={{ borderRadius: "30px" }}>
               <Typography
                 variant="h5"

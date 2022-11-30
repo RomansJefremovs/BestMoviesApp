@@ -10,7 +10,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import StarIcon from "@mui/icons-material/Star";
 import {PersonBox} from "../models/PersonBox";
 
-const ActorPosterBox = ({id,profile_path,name,known_for_department}:PersonBox)=>{
+const PersonPosterBox = ({id,profile_path,name,known_for_department}:PersonBox)=>{
     const poster = profile_path!= null ? `https://image.tmdb.org/t/p/w500${profile_path}`: NotFound;
     const userId = getUserID()
     const [display, setDisplay] = useState(false);
@@ -97,3 +97,5 @@ const ActorPosterBox = ({id,profile_path,name,known_for_department}:PersonBox)=>
         </Box>
     )
 }
+
+export default PersonPosterBox
