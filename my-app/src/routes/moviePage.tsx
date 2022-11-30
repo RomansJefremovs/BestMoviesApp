@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Container, Grid, Typography } from "@mui/material";
+import { Box, CardMedia, Container, Grid, Typography } from "@mui/material";
 import Image from "mui-image";
 import { useEffect, useState } from "react";
 import NotFound from "../images/search.png";
@@ -43,162 +43,193 @@ function MoviePage() {
       : NotFound;
 
   return (
-    <Container sx={{ marginTop: "2em", minHeight: "8em" }}>
-      {movie !== undefined && credits !== undefined ? (
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            height: "auto",
-          }}
-        >
+    <>
+      <Container
+        className="background"
+      >
+        <Box>
+          <Image
+            src={movieURL}
+            style={{
+              position: "absolute",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginLeft: "auto",
+              marginRight: "auto",
+              height:"33em",
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              opacity: "60%",
+              objectPosition: "75%",
+              zIndex: 1,
+            }}
+          />
+        </Box>
+      </Container>
+      <Container className="content" sx={{ marginTop: "2em", minHeight: "8em" }}>
+        {movie !== undefined && credits !== undefined ? (
           <Container
             sx={{
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexDirection: { xs: "column", md: "row" },
-              height: "30rem",
+              flexDirection: "column",
+              width: "100%",
+              height: "auto",
             }}
           >
-            <Grid
-              display="flex"
-              justifyContent="flex-start"
-              flexDirection="row"
-              alignItems="center"
+            <Container
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: { xs: "column", md: "row" },
+                height: "30rem",
+              }}
             >
-              <Image
-                src={movieURL}
-                style={{ height: "30em", width: "20em", borderRadius: "10px" }}
-              />
-            </Grid>
+              <Grid
+                display="flex"
+                justifyContent="flex-start"
+                flexDirection="row"
+                alignItems="center"
+              >
+                <Image
+                  src={movieURL}
+                  style={{
+                    height: "30em",
+                    width: "20em",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Grid>
 
-            <Container sx={{ width: { md: "35rem" } }}>
-              <Grid
-                display="flex"
-                justifyContent="center"
-                flexDirection="row"
-                alignItems="center"
-              >
-                <Typography
-                  color="#fff"
+              <Container sx={{ width: { md: "35rem" } }}>
+                <Grid
+                  display="flex"
+                  justifyContent="center"
+                  flexDirection="row"
+                  alignItems="center"
+                >
+                  <Typography
+                    color="#fff"
+                    sx={{
+                      padding: "35px 0 35px 0",
+                      fontSize: "50px",
+                      float: "right",
+                      fontFamily: "Cooper Hewitt Semibold",
+                    }}
+                  >
+                    {movie.title}
+                  </Typography>
+                </Grid>
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                   sx={{
-                    padding: "35px 0 35px 0",
-                    fontSize: "50px",
-                    float: "right",
-                    fontFamily: "Cooper Hewitt Semibold",
+                    padding: "5px",
                   }}
                 >
-                  {movie.title}
-                </Typography>
-              </Grid>
-              <Grid
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{
-                  padding: "5px",
-                }}
-              >
-                <Typography
-                  color="#fff"
-                  sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
-                >{`Release Date:`}</Typography>
-                <Typography
-                  color="#fff"
+                  <Typography
+                    color="#fff"
+                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                  >{`Release Date:`}</Typography>
+                  <Typography
+                    color="#fff"
+                    sx={{
+                      float: "right",
+                      fontSize: "20px",
+                      fontFamily: "Cooper Hewitt Medium",
+                    }}
+                  >{`${movie.release_date}`}</Typography>
+                </Grid>
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                   sx={{
-                    float: "right",
-                    fontSize: "20px",
-                    fontFamily: "Cooper Hewitt Medium",
-                  }}
-                >{`${movie.release_date}`}</Typography>
-              </Grid>
-              <Grid
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{
-                  padding: "5px",
-                }}
-              >
-                <Typography
-                  color="#fff"
-                  sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
-                >
-                  Rate:
-                </Typography>
-                <Typography
-                  color="#fff"
-                  sx={{
-                    float: "right",
-                    fontSize: "20px",
-                    fontFamily: "Cooper Hewitt Medium",
+                    padding: "5px",
                   }}
                 >
-                  {movie.vote_average} {"("}
-                  {movie.vote_count} {" votes)"}
-                </Typography>
-              </Grid>
+                  <Typography
+                    color="#fff"
+                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                  >
+                    Rate:
+                  </Typography>
+                  <Typography
+                    color="#fff"
+                    sx={{
+                      float: "right",
+                      fontSize: "20px",
+                      fontFamily: "Cooper Hewitt Medium",
+                    }}
+                  >
+                    {movie.vote_average} {"("}
+                    {movie.vote_count} {" votes)"}
+                  </Typography>
+                </Grid>
+              </Container>
             </Container>
+            <Typography
+              color="#fff"
+              sx={{
+                margin: "auto",
+                padding: "40px 20px 40px 20px",
+                marginTop: { xs: "20em", sm: "17em", md: 0 },
+              }}
+            >
+              {movie.overview}
+            </Typography>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                height: "5rem",
+              }}
+            >
+              <Typography color="#fff">Cast:</Typography>
+              <Carousel>
+                <PersonList prop={credits.cast} />
+              </Carousel>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                height: "5rem",
+              }}
+            >
+              <Typography color="#fff">Crew:</Typography>
+              <Carousel>
+                <PersonList prop={credits.crew} />
+              </Carousel>
+            </Grid>
           </Container>
+        ) : (
           <Typography
             color="#fff"
             sx={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
               margin: "auto",
-              padding: "40px 20px 40px 20px",
-              marginTop: { xs: "20em", sm: "15em", md: 0 },
+              display: "flex",
+              justifyContent: "center",
+              textAlign: "center",
+              alignItems: "center",
             }}
           >
-            {movie.overview}
+            Oops! <br></br> Nothing's here.
           </Typography>
-          <Grid
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              height: "5rem",
-            }}
-          >
-            <Typography>Cast:</Typography>
-            <Carousel>
-              <PersonList prop={credits.cast} />
-            </Carousel>
-          </Grid>
-          <Grid
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              height: "5rem",
-            }}
-          >
-            <Typography>Crew:</Typography>
-            <Carousel>
-              <PersonList prop={credits.crew} />
-            </Carousel>
-          </Grid>
-        </Container>
-      ) : (
-        <Typography
-          color="#fff"
-          sx={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            margin: "auto",
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center",
-            alignItems: "center",
-          }}
-        >
-          Oops! <br></br> Nothing's here.
-        </Typography>
-      )}
-    </Container>
+        )}
+      </Container>
+    </>
   );
 }
 export default MoviePage;
