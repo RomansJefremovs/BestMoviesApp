@@ -1,15 +1,13 @@
-import {Outlet, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {Container, Typography} from "@mui/material";
 import Image from "mui-image";
-import MoviePosterBox from "../components/MoviePosterBox";
 import {useEffect, useState} from "react";
-import {Person} from "../models/Person";
-import {getPerson} from "../middleware/getPerson";
 import NotFound from "../assets/error-404.png";
 import {Movie} from "../models/Movie";
 import {getMovieByID} from "../middleware/getMovieByID";
 import {Credits} from "../models/Credits";
 import {getCredits} from "../middleware/getCredits";
+import PersonList from "../components/PersonList";
 
 function MoviePage() {
   const [param] = useSearchParams()
@@ -75,9 +73,7 @@ function MoviePage() {
                   height:"5rem"
                 }}>
                   <Typography>Cast:</Typography>
-                  {credits.cast.map(item=>{
-                    return <p>{item.name}</p>
-                  })}
+                  <PersonList  prop={credits.cast}/>
                 </Container>
                 <Container sx={{
                   display: "flex",
@@ -85,9 +81,7 @@ function MoviePage() {
                   height:"5rem"
                 }}>
                   <Typography>Crew:</Typography>
-                  {credits.crew.map(item=>{
-                    return 1
-                  })}
+                  <PersonList  prop={credits.crew}/>
                 </Container>
               </Container>
               :

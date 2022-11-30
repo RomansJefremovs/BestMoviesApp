@@ -1,18 +1,12 @@
-import {MovieBox} from "../models/MovieBox";
 import NotFound from "../assets/error-404.png";
-import {getUserID} from "../middleware/getUserID";
 import {useState} from "react";
-import {addToFavourites} from "../middleware/addToFavourites";
-import {removeFromFavourites} from "../middleware/removeFromFavourites";
-import {Box, Button, CardMedia, Grid, Typography} from "@mui/material";
+import {Box, CardMedia, Grid, Typography} from "@mui/material";
 import {Link as LinkRouter} from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import StarIcon from "@mui/icons-material/Star";
 import {PersonBox} from "../models/PersonBox";
 
 const PersonPosterBox = ({id,profile_path,name,known_for_department}:PersonBox)=>{
     const poster = profile_path!= null ? `https://image.tmdb.org/t/p/w500${profile_path}`: NotFound;
-    const userId = getUserID()
     const [display, setDisplay] = useState(false);
 
     return(
