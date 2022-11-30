@@ -1,28 +1,14 @@
-import {
-  Toolbar,
-  Grid,
-  Box,
-  List,
-  AppBar,
-  Container,
-  IconButton,
-} from "@mui/material";
+import { Toolbar, Grid, Box, AppBar, IconButton, Button } from "@mui/material";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { getNavItems, getSignedInNavItems } from "./NavItems";
-import { useState } from "react";
+import handleDrawerToggle from "../interfaces/handleDrawerToggle";
+import NavBarDrawer from "./NavBarDrawer";
 
-const NavBar = () => {
+const NavBar = ({ handleDrawerToggle, mobileOpen }: handleDrawerToggle) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
-
-  // Small screens
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   return (
     <AppBar
@@ -31,26 +17,51 @@ const NavBar = () => {
         backgroundColor: "transparent",
         boxShadow: 0,
         width: "100%",
+        marginTop: "1.5em",
       }}
     >
       <Toolbar>
-        <Logo />
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { lg: "none" }, marginLeft: "10px" }}
+        <Grid
+          container
+          flexDirection="row"
+          justifyContent="flex-start"
+          alignItems="center"
         >
-          <ArrowDropDownIcon />
-        </IconButton>
-        <Grid container flexDirection="row">
+          <Logo />
+          <Box>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { lg: "none" }, marginLeft: "10px" }}
+            >
+              <ArrowDropDownIcon />
+            </IconButton>
+            {mobileOpen ? (
+              <NavBarDrawer
+                handleDrawerToggle={handleDrawerToggle}
+                mobileOpen={mobileOpen}
+              />
+            ) : (
+              ""
+            )}
+          </Box>
+
           <Box
             sx={{
               display: { xs: "none", lg: "block" },
+              marginLeft: "10px",
             }}
           >
-            <List sx={{ color: "#fff" }}>
+            <Button
+              sx={{
+                "& .MuiTypography-root": {
+                  fontSize: "15px",
+                  fontWeight: "500",
+                },
+              }}
+            >
               {navItems.map((navItem: { title: string; url: string }) => (
                 <NavLink title={navItem.title} url={navItem.url} />
               ))}
@@ -59,7 +70,7 @@ const NavBar = () => {
                   <NavLink title={navItem.title} url={navItem.url} />
                 )
               )}
-            </List>
+            </Button>
           </Box>
         </Grid>
       </Toolbar>

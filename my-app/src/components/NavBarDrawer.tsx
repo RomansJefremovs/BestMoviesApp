@@ -1,20 +1,15 @@
-import { Box, Drawer, IconButton, List } from "@mui/material";
-import { useState } from "react";
+import { Box, Drawer, List } from "@mui/material";
 import NavLink from "./NavLink";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { getNavItems, getSignedInNavItems } from "./NavItems";
 import Logo from "./Logo";
+import handleDrawerToggle from "../interfaces/handleDrawerToggle";
 
-function NavBarDrawer() {
+const NavBarDrawer = ({
+  handleDrawerToggle,
+  mobileOpen,
+}: handleDrawerToggle) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
-
-  // Small screens
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   return (
     <Drawer
@@ -33,9 +28,17 @@ function NavBarDrawer() {
         },
       }}
     >
-      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Box
+        sx={{
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          padding: "32px",
+        }}
+      >
         <Logo />
-        <List sx={{ color: "#fff" }}>
+        <List sx={{ color: "#fff", paddingTop: "20px" }}>
           {navItems.map((navItem: { title: string; url: string }) => (
             <NavLink title={navItem.title} url={navItem.url} />
           ))}
@@ -46,5 +49,5 @@ function NavBarDrawer() {
       </Box>
     </Drawer>
   );
-}
+};
 export default NavBarDrawer;
