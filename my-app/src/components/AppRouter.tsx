@@ -7,6 +7,11 @@ import Movie from "../routes/moviePage";
 import Home from "../routes/home";
 import PersonPage from "./PersonPage";
 import TopRated from "../routes/TopRated";
+import Top80s from "../routes/Top80s";
+import Top70s from "../routes/Top70s";
+import Top90s from "../routes/Top90s";
+import Top10s from "../routes/Top10s";
+import Top00s from "../routes/Top00s";
 
 const AppRouter = () => {
   return (
@@ -20,6 +25,11 @@ const AppRouter = () => {
         <Route path="movie" element={<Movie />} />
         <Route path="person" element={<PersonPage />} />
         <Route path="toprated" element={<TopRated/>} />
+        <Route path="70s" element={<Top70s/>} />
+        <Route path="80s" element={<Top80s/>} />
+        <Route path="90s" element={<Top90s/>} />
+        <Route path="00s" element={<Top00s/>} />
+        <Route path="10s" element={<Top10s/>} />
         <Route
           path="*"
           element={
