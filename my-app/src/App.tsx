@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import { theme } from "./theme/theme";
 import { ChangeEvent, useState } from "react";
 import AppRouter from "./components/AppRouter";
+import {getPerson} from "./middleware/getPerson";
+import ActorPage from "./components/ActorPage";
 
 function App() {
   const [radioButtons, setRadioButtons] = useState(["movie"]);
@@ -18,7 +20,7 @@ function App() {
   // };
 
   localStorage.setItem("userID", "23");
-
+  console.log(getPerson(488))
   console.log(localStorage.getItem("userID"));
 
   const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +32,6 @@ function App() {
 
   return (
     <>
-
       <ThemeProvider theme={theme}>
         <Header />
         <AppRouter />
@@ -39,6 +40,7 @@ function App() {
             name={"search"}
             onChange={handleMessageChange}
         />
+        {/*<ActorPage/>*/}
       </ThemeProvider>
     </>
   );

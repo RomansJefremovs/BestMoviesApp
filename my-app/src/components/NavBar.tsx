@@ -62,6 +62,7 @@ const NavBar = () => {
             </List>
           </Box>
         </Grid>
+
       </Toolbar>
     </AppBar>
   );

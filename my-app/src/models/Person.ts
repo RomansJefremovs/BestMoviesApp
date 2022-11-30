@@ -15,5 +15,5 @@ export interface Person{
     adult:  boolean,
     imdb_id: string,
     homepage: null | string,
-    known_for: Movie[]|{profile_path: string, adult: boolean, id: number, known_for: {}[], name: string, popularity: number}
+    known_for?: Movie[]|null
 }
