@@ -3,12 +3,7 @@ import logo from "../assets/images/logo.png";
 
 function Footer() {
   return (
-    <Container
-      className="footer"
-      sx={{
-        display: { xs: "block" },
-      }}
-    >
+    <>
       <Box
         sx={{
           display: { xs: "flex" },
@@ -31,7 +26,7 @@ function Footer() {
           <a href="/">BestMovies Inc., All Rights Reserved.</a>
         </Typography>
       </Box>
-    </Container>
+    </>
   );
 }
 export default Footer;

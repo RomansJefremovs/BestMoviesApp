@@ -6,18 +6,25 @@ import { getPerson } from "../middleware/getPerson";
 import { useEffect, useState } from "react";
 import NotFound from "../images/blank_profile.png";
 import { useSearchParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const PersonPage = () => {
   const [param] = useSearchParams();
   const personId = param.get("personId");
   const [person, setPerson] = useState<Person>();
+
+  const [loading, setLoading] = useState(false);
+
   const initLoad = async () => {
+    setLoading(true);
     if (personId != null) {
+      setLoading(false);
       setPerson(await getPerson(parseInt(personId)));
     } else {
       setPerson(undefined);
     }
   };
+
   useEffect(() => {
     initLoad();
   });
@@ -29,7 +36,11 @@ const PersonPage = () => {
 
   return (
     <Container sx={{ marginTop: "2em", minHeight: "40em" }}>
-      {person !== undefined ? (
+      {
+      loading ? (
+        <Loading />
+      ) : 
+      person !== undefined ? (
         <Container
           sx={{
             display: "flex",
@@ -110,62 +121,62 @@ const PersonPage = () => {
                 " "
               )}
               {person.known_for_department !== null ? (
-              <Grid
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{
-                  padding: "5px",
-                }}
-              >
-                <Typography
-                  color="#fff"
-                  sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
-                >
-                  Role:
-                </Typography>
-                <Typography
-                  color="#fff"
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                   sx={{
-                    float: "right",
-                    fontSize: "20px",
-                    fontFamily: "Cooper Hewitt Medium",
+                    padding: "5px",
                   }}
                 >
-                  {person.known_for_department}
-                </Typography>
-              </Grid>
+                  <Typography
+                    color="#fff"
+                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                  >
+                    Role:
+                  </Typography>
+                  <Typography
+                    color="#fff"
+                    sx={{
+                      float: "right",
+                      fontSize: "20px",
+                      fontFamily: "Cooper Hewitt Medium",
+                    }}
+                  >
+                    {person.known_for_department}
+                  </Typography>
+                </Grid>
               ) : (
                 " "
               )}
               {person.popularity !== null ? (
-              <Grid
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{
-                  padding: "5px",
-                }}
-              >
-                <Typography
-                  color="#fff"
-                  sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
-                >
-                  Popularity:
-                </Typography>
-                <Typography
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                   sx={{
-                    color:"#fff",
-                    float: "right",
-                    fontSize: "20px",
-                    fontFamily: "Cooper Hewitt Medium",
+                    padding: "5px",
                   }}
                 >
-                  {person.popularity}
-                </Typography>
-              </Grid>
+                  <Typography
+                    color="#fff"
+                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                  >
+                    Popularity:
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#fff",
+                      float: "right",
+                      fontSize: "20px",
+                      fontFamily: "Cooper Hewitt Medium",
+                    }}
+                  >
+                    {person.popularity}
+                  </Typography>
+                </Grid>
               ) : (
                 " "
               )}
@@ -182,6 +193,7 @@ const PersonPage = () => {
             {person.biography}
           </Typography>
           <Grid
+            className="reveal"
             sx={{ marginBottom: "2ems" }}
             display="grid"
             gridTemplateColumns={{
@@ -209,6 +221,7 @@ const PersonPage = () => {
       ) : (
         <Typography
           color="#fff"
+          className="reveal"
           sx={{
             position: "absolute",
             left: 0,

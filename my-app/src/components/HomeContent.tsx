@@ -5,14 +5,19 @@ import { useEffect, useState } from "react";
 import { Movie } from "../models/Movie";
 import callApi from "../middleware/callApi";
 import { getReveal } from "./revealEvent";
+import Loading from "./Loading";
 
 const HomeContent = () => {
   const baseURL =
     "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const initialLoad = async () => {
+    setLoading(true);
     const temp = await callApi(baseURL);
     if (temp !== false && temp !== "Error") {
+      setLoading(false);
       setMovies(temp.results);
     }
   };
@@ -24,7 +29,7 @@ const HomeContent = () => {
 
   return (
     <Container
-      className="content"
+      className="content reveal"
       sx={{
         display: { xs: "block" },
         borderRadius: "30px",
@@ -34,7 +39,7 @@ const HomeContent = () => {
           sm: "16em",
           md: "22em",
           lg: "30em",
-          xl: "38em"
+          xl: "38em",
         },
         minHeight: "40em",
       }}
@@ -75,7 +80,11 @@ const HomeContent = () => {
       </Grid>
 
       <Grid container sx={{ padding: "2em", marginTop: "5em" }}>
-        {movies.length !== 0 ? (
+        {
+        loading ? (
+          <Loading />
+        ) : 
+        movies.length !== 0 ? (
           <Grid
             item
             display="grid"
