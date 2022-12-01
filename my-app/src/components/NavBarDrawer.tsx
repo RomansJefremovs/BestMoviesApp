@@ -7,7 +7,7 @@ import handleDrawerToggle from "../interfaces/handleDrawerToggle";
 const NavBarDrawer = ({
   handleDrawerToggle,
   mobileOpen,
-    userID
+  userID
 }: handleDrawerToggle) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();

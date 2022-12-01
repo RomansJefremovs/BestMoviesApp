@@ -183,7 +183,7 @@ function MoviePage() {
                       fontFamily: "Cooper Hewitt Medium",
                     }}
                   >
-                    {movie.vote_average} {"("}
+                    {Math.floor(movie.vote_average * 10) / 10} {"("}
                     {movie.vote_count} {" votes)"}
                   </Typography>
                 </Grid>

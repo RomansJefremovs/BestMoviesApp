@@ -107,7 +107,7 @@ const MoviePosterBox = (movie: MovieBox) => {
           />
 
           <Typography variant="h5" sx={{ fontSize: "16px", padding:"2px 0 0 2px"}}>
-            {movie.vote_average}
+            {Math.floor(movie.vote_average * 10) / 10}
           </Typography>
         </Box>
 

@@ -78,32 +78,38 @@ const PersonPage = () => {
                   {person.name}
                 </Typography>
               </Grid>
-              <Grid
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{
-                  padding: "5px",
-                }}
-              >
-                <Typography
-                  color="#fff"
-                  sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
-                >{`Birthday ${
-                  person.deathday != null ? "and deathday" : ""
-                }:`}</Typography>
-                <Typography
-                  color="#fff"
+
+              {person.birthday !== null ? (
+                <Grid
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                   sx={{
-                    float: "right",
-                    fontSize: "20px",
-                    fontFamily: "Cooper Hewitt Medium",
+                    padding: "5px",
                   }}
-                >{`${person.birthday} ${
-                  person.deathday != null ? person.deathday : ""
-                }`}</Typography>
-              </Grid>
+                >
+                  <Typography
+                    color="#fff"
+                    sx={{ fontSize: "15px", fontFamily: "Cooper Hewitt Book" }}
+                  >{`Birthday ${
+                    person.deathday != null ? "and deathday" : ""
+                  }:`}</Typography>
+                  <Typography
+                    color="#fff"
+                    sx={{
+                      float: "right",
+                      fontSize: "20px",
+                      fontFamily: "Cooper Hewitt Medium",
+                    }}
+                  >{`${person.birthday} ${
+                    person.deathday != null ? person.deathday : ""
+                  }`}</Typography>
+                </Grid>
+              ) : (
+                " "
+              )}
+              {person.known_for_department !== null ? (
               <Grid
                 display="flex"
                 flexDirection="row"
@@ -130,6 +136,10 @@ const PersonPage = () => {
                   {person.known_for_department}
                 </Typography>
               </Grid>
+              ) : (
+                " "
+              )}
+              {person.popularity !== null ? (
               <Grid
                 display="flex"
                 flexDirection="row"
@@ -147,6 +157,7 @@ const PersonPage = () => {
                 </Typography>
                 <Typography
                   sx={{
+                    color:"#fff",
                     float: "right",
                     fontSize: "20px",
                     fontFamily: "Cooper Hewitt Medium",
@@ -155,6 +166,9 @@ const PersonPage = () => {
                   {person.popularity}
                 </Typography>
               </Grid>
+              ) : (
+                " "
+              )}
             </Container>
           </Container>
           <Typography

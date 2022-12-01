@@ -1,23 +1,27 @@
 import { Container, Box, Typography, Divider, Grid } from "@mui/material";
 import MoviesList from "./MoviesList";
 import notFound from "../assets/images/search.png";
-import {useEffect, useState} from "react";
-import {Movie} from "../models/Movie";
+import { useEffect, useState } from "react";
+import { Movie } from "../models/Movie";
 import callApi from "../middleware/callApi";
+import { getReveal } from "./revealEvent";
 
 const HomeContent = () => {
-    const baseURL =
-        "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
-    const [movies, setMovies] = useState<Movie[]>([]);
-    const initialLoad = async () => {
-        const temp = await callApi(baseURL);
-        if (temp !== false && temp !== "Error") {
-            setMovies(temp.results);
-        }
+  const baseURL =
+    "https://api.themoviedb.org/3/movie/popular?api_key=ac1ccaf7cc1c015abd2c2cddca72cb16&page=1";
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const initialLoad = async () => {
+    const temp = await callApi(baseURL);
+    if (temp !== false && temp !== "Error") {
+      setMovies(temp.results);
     }
-    useEffect(() => {
-        initialLoad()
-    },[])
+  };
+  useEffect(() => {
+    initialLoad();
+  }, []);
+
+  getReveal();
+
   return (
     <Container
       className="content"
@@ -26,10 +30,11 @@ const HomeContent = () => {
         borderRadius: "30px",
         backgroundColor: "#000",
         marginTop: {
-          xs: "12em",
-          sm: "18em",
-          md: "28em",
-          lg: "38em",
+          xs: "10em",
+          sm: "16em",
+          md: "22em",
+          lg: "30em",
+          xl: "38em"
         },
         minHeight: "40em",
       }}
@@ -74,8 +79,7 @@ const HomeContent = () => {
           <Grid
             item
             display="grid"
-            gridTemplateColumns=
-            {{
+            gridTemplateColumns={{
               xs: "repeat(3, 1fr)",
               sm: "repeat(6, 1fr)",
               md: "repeat(9, 1fr)",
@@ -126,5 +130,5 @@ const HomeContent = () => {
       </Grid>
     </Container>
   );
-}
-export default HomeContent
+};
+export default HomeContent;
