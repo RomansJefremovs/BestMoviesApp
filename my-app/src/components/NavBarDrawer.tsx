@@ -7,6 +7,7 @@ import handleDrawerToggle from "../interfaces/handleDrawerToggle";
 const NavBarDrawer = ({
   handleDrawerToggle,
   mobileOpen,
+    userID
 }: handleDrawerToggle) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
@@ -42,9 +43,9 @@ const NavBarDrawer = ({
           {navItems.map((navItem: { title: string; url: string }) => (
             <NavLink title={navItem.title} url={navItem.url} />
           ))}
-          {signedInNavItems.map((navItem: { title: string; url: string }) => (
+          {userID !== null ? signedInNavItems.map((navItem: { title: string; url: string }) => (
             <NavLink title={navItem.title} url={navItem.url} />
-          ))}
+          )):<></>}
         </List>
       </Box>
     </Drawer>
