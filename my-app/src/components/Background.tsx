@@ -32,12 +32,17 @@ function Background() {
               typography: {
                 xs: { top: "4em", fontSize: "2em" },
                 sm: { top: "4.5em", fontSize: "2.5em" },
-                md: { top: "5em", bottom: 0, fontSize: "3em" },
+                md: { fontSize: "3em" },
                 lg: {
+                  top: "5em",
+                  bottom: 0,
+                  fontSize: "4em",
+                },
+                xl: {
                   alignItems: "center",
                   top: 0,
                   bottom: 0,
-                  fontSize: "5em",
+                  fontSize: "4em",
                 },
               },
             }}

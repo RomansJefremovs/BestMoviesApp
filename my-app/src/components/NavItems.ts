@@ -1,6 +1,5 @@
 const navItems: any = [
   { title: "Home", url: "/" },
-  { title: "New & Popular", url: "*" },
   { title: "Movies", url: "*" },
   { title: "TV Shows", url: "*" },
   { title: "Top Rated", url: "toprated" },

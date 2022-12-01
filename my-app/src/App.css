@@ -30,6 +30,20 @@ a:active {
   width: 150px;
 }
 
+.reveal,
+.reveal.active {
+  transition: all 1s ease;
+}
+
+.reveal {
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.reveal.active {
+  transform: translateY(0);
+}
+
 @media only screen and (min-width: 600px) {
   .MuiContainer-root {
     padding-left: 0;

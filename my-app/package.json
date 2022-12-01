@@ -19,6 +19,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-scroll": "^1.8.8",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -50,6 +51,7 @@
     "@types/mui-image": "^1.0.1",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@types/react-scroll": "^1.8.5",
     "jest": "^27.5.1"
   }
 }

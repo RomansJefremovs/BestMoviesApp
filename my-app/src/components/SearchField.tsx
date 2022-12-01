@@ -19,7 +19,7 @@ const SearchField = ({ handleMessageChange }: handleMessageChange) => {
 
   return (
     <>
-      <Grid container justifyContent="flex-end" alignItems="center">
+      <Grid container alignItems="center">
         <Grid item>
           <InputBase
             sx={{

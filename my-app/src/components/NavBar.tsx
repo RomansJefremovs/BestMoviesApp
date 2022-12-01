@@ -5,8 +5,13 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { getNavItems, getSignedInNavItems } from "./NavItems";
 import handleDrawerToggle from "../interfaces/handleDrawerToggle";
 import NavBarDrawer from "./NavBarDrawer";
+import handleMessageChange from "../interfaces/handleMessageChange";
+import SearchField from "./SearchField";
 
-const NavBar = ({ handleDrawerToggle, mobileOpen,userID }: handleDrawerToggle) => {
+const NavBar = (
+  { handleDrawerToggle, mobileOpen, userID }: handleDrawerToggle,
+  { handleMessageChange }: handleMessageChange
+) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
   return (
@@ -15,7 +20,6 @@ const NavBar = ({ handleDrawerToggle, mobileOpen,userID }: handleDrawerToggle) =
       sx={{
         backgroundColor: "transparent",
         boxShadow: 0,
-        width: "100%",
         marginTop: "1.5em",
       }}
     >
@@ -23,57 +27,83 @@ const NavBar = ({ handleDrawerToggle, mobileOpen,userID }: handleDrawerToggle) =
         <Grid
           container
           flexDirection="row"
-          justifyContent="flex-start"
-          alignItems="center"
+          justifyContent="space-between"
         >
-          <Logo />
-          <Box>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { lg: "none" }, marginLeft: "10px" }}
-            >
-              <ArrowDropDownIcon />
-            </IconButton>
-            {mobileOpen ? (
-              <NavBarDrawer
-                handleDrawerToggle={handleDrawerToggle}
-                mobileOpen={mobileOpen}
-                userID={userID}
-              />
-            ) : (
-              ""
-            )}
-          </Box>
+          <Grid container justifyContent="flex-start" sx={{padding:"1em 0 0 1em"}}>
+            <Grid item>
+              <Logo />
+            </Grid>
 
-          <Box
-            sx={{
-              display: { xs: "none", lg: "block" },
-              marginLeft: "10px",
-            }}
-          >
-            <Button
-              sx={{
-                "& .MuiTypography-root": {
-                  fontSize: "15px",
-                  fontWeight: "500",
-                },
-              }}
-            >
-              {navItems.map((navItem: { title: string; url: string }) => (
-                <NavLink title={navItem.title} url={navItem.url} />
-              ))}
-              {userID !==null ? signedInNavItems.map(
-                (navItem: { title: string; url: string }) => (
-                  <NavLink title={navItem.title} url={navItem.url} />
-                )
-              ):<></>}
-            </Button>
-          </Box>
+            <Grid item>
+              <Box>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  sx={{ display: { lg: "none" }, marginLeft:"0.5em"}}
+                >
+                  <ArrowDropDownIcon />
+                </IconButton>
+                {mobileOpen ? (
+                  <NavBarDrawer
+                    handleDrawerToggle={handleDrawerToggle}
+                    mobileOpen={mobileOpen}
+                    userID={userID}
+                  />
+                ) : (
+                  ""
+                )}
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box
+                sx={{
+                  display: { xs: "none", lg: "flex" },
+                  marginLeft: "10px",
+                  width: "auto",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  sx={{
+                    transition: "none",
+                    color: "transparent",
+                    "& .MuiTypography-root": {
+                      fontSize: "13.5px",
+                      textTransform: "uppercase",
+                      fontWeight: "500",
+                    },
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                >
+                  {navItems.map((navItem: { title: string; url: string }) => (
+                    <NavLink title={navItem.title} url={navItem.url} />
+                  ))}
+                  {userID !== null ? (
+                    signedInNavItems.map(
+                      (navItem: { title: string; url: string }) => (
+                        <NavLink title={navItem.title} url={navItem.url} />
+                      )
+                    )
+                  ) : (
+                    <></>
+                  )}
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Grid container justifyContent="flex-end" sx={{marginTop:"-45px"}}>
+            <Grid item justifyContent="center">
+              <SearchField handleMessageChange={handleMessageChange} />
+            </Grid>
+          </Grid>
         </Grid>
-
       </Toolbar>
     </AppBar>
   );
