@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import { Movie } from "../models/Movie";
 import { getAllFavouriteMoviesById } from "../middleware/getAllFavouriteMoviesByID";
-import MoviePosterBox from "../components/MoviePosterBox";
 import Box from "@mui/material/Box";
-import {
-  CircularProgress,
-  Container,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
-import {getUserID} from "../middleware/getUserID";
-import { Outlet } from "react-router-dom";
+import { Container, Divider, Grid, Typography } from "@mui/material";
+import { getUserID } from "../middleware/getUserID";
+import Loading from "../components/Loading";
+import MoviesList from "../components/MoviesList";
 
 function Favorites() {
-  const [favourites, setFavourites] = useState<Movie[]>();
-  const userId = getUserID()
+  const [favourites, setFavourites] = useState<Movie[]>([]);
+  const userId = getUserID();
+
   const initialLoad = async (userId: number) => {
     const tempArr = await getAllFavouriteMoviesById(userId);
     console.log(tempArr);
@@ -28,7 +23,6 @@ function Favorites() {
 
   return (
     <>
-    <Outlet />
       <Container
         className="content"
         sx={{
@@ -79,31 +73,24 @@ function Favorites() {
         </Grid>
 
         <Grid container sx={{ padding: "2em" }}>
-          {favourites ? (
-            favourites.map((movie) => {
-              return (
-                <Grid
-                  item
-                  display="grid"
-                  gridTemplateColumns={{
-                    xs: "repeat(3, 1fr)",
-                    sm: "repeat(6, 1fr)",
-                    md: "repeat(9, 1fr)",
-                    lg: "repeat(12, 1fr)",
-                  }}
-                  gap={3}
-                >
-                  <MoviePosterBox
-                    id={movie.id}
-                    poster_path={movie.poster_path}
-                    title={movie.title}
-                    vote_average={movie.vote_average}
-                  />
-                </Grid>
-              );
-            })
+          {favourites.length !== 0 ? (
+            <Grid
+              container
+              display="grid"
+              gridTemplateColumns={{
+                xs: "repeat(3, 1fr)",
+                sm: "repeat(6, 1fr)",
+                md: "repeat(9, 1fr)",
+                lg: "repeat(12, 1fr)",
+              }}
+              gap={3}
+            >
+              <MoviesList movies={favourites} />
+            </Grid>
           ) : (
-            <CircularProgress
+            <Typography
+              color="#fff"
+              className="reveal"
               sx={{
                 position: "absolute",
                 left: 0,
@@ -115,9 +102,10 @@ function Favorites() {
                 justifyContent: "center",
                 textAlign: "center",
                 alignItems: "center",
-                color: "#fff",
               }}
-            />
+            >
+              Oops! <br></br> Nothing's here.
+            </Typography>
           )}
         </Grid>
       </Container>
