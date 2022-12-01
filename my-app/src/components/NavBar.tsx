@@ -6,10 +6,9 @@ import { getNavItems, getSignedInNavItems } from "./NavItems";
 import handleDrawerToggle from "../interfaces/handleDrawerToggle";
 import NavBarDrawer from "./NavBarDrawer";
 
-const NavBar = ({ handleDrawerToggle, mobileOpen }: handleDrawerToggle) => {
+const NavBar = ({ handleDrawerToggle, mobileOpen,userID }: handleDrawerToggle) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
-
   return (
     <AppBar
       position="sticky"
@@ -42,6 +41,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen }: handleDrawerToggle) => {
               <NavBarDrawer
                 handleDrawerToggle={handleDrawerToggle}
                 mobileOpen={mobileOpen}
+                userID={userID}
               />
             ) : (
               ""
@@ -65,11 +65,11 @@ const NavBar = ({ handleDrawerToggle, mobileOpen }: handleDrawerToggle) => {
               {navItems.map((navItem: { title: string; url: string }) => (
                 <NavLink title={navItem.title} url={navItem.url} />
               ))}
-              {signedInNavItems.map(
+              {userID !==null ? signedInNavItems.map(
                 (navItem: { title: string; url: string }) => (
                   <NavLink title={navItem.title} url={navItem.url} />
                 )
-              )}
+              ):<></>}
             </Button>
           </Box>
         </Grid>

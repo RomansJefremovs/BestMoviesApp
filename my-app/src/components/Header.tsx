@@ -9,7 +9,7 @@ const Header = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  
+  const userID = localStorage.getItem('userID')
   return (
     <Container
       className="header"
@@ -17,7 +17,7 @@ const Header = () => {
         display: { xs: "block" },
       }}
     >
-      <NavBar handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
+      <NavBar handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen} userID={userID}/>
       {/* <SearchField handleMessageChange={handleMessageChange} /> */}
       {/* <RadioButtons handleRadioButtons={handleRadioButtons} /> */}
     </Container>
