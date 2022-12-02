@@ -1,9 +1,8 @@
 import "./App.css";
-import { TextField, ThemeProvider } from "@mui/material";
-import "./App.css";
+import { ThemeProvider } from "@mui/material";
 import Footer from "./components/Footer";
 import { theme } from "./theme/theme";
-import {ChangeEvent, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
 import {createPlaylist} from "./middleware/PlaylistsMiddleware/createPlaylist";

@@ -45,19 +45,6 @@ a:active {
   opacity: 1;
 }
 
-@media only screen and (min-width: 600px) {
-  .MuiContainer-root {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-@media (min-width: 1200px) {
-  .MuiContainer-root {
-    max-width: 0;
-  }
-}
-
 .backgroundVideo {
   position: absolute;
   display: flex;
@@ -132,6 +119,13 @@ h6 a {
 .ratings {
   display: flex;
   justify-content: flex-end;
+}
+
+#sign-button {
+  width: 100%;
+  border-radius: 30px;
+  height: 50px;
+  background: linear-gradient(120deg, #e70800 0, #000000 100%) no-repeat padding-box;
 }
 
 #watch-now-button {
