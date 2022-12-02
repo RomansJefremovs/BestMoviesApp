@@ -1,4 +1,4 @@
-export const createPlaylist = async (user_list_name:string,public_list:0|1,userID:string) => {
+export const createPlaylist = async (user_list_name:string,public_list:boolean,userID:string) => {
     const url = `https://cloudcomputingapi.azurewebsites.net/Movies/list/create/${user_list_name}/${public_list}`
    try {
        const temp = await fetch(url,{
@@ -8,7 +8,7 @@ export const createPlaylist = async (user_list_name:string,public_list:0|1,userI
                "Content-Type":"application/json"
            }
        })
-       return temp.json()
+       return await temp.text()
    }catch (e) {
        console.log(e)
        return "Error"

@@ -27,7 +27,7 @@ const PersonPage = () => {
 
   useEffect(() => {
     initLoad();
-  });
+  },[]);
 
   const url =
     person?.profile_path != null

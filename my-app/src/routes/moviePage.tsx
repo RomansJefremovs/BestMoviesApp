@@ -8,7 +8,6 @@ import { getMovieByID } from "../middleware/getMovieByID";
 import { Credits } from "../models/Credits";
 import { getCredits } from "../middleware/getCredits";
 import PersonList from "../components/PersonList";
-import Carousel from "react-material-ui-carousel";
 import { Person } from "../models/Person";
 import Loading from "../components/Loading";
 
@@ -37,7 +36,7 @@ function MoviePage() {
 
   useEffect(() => {
     initLoad();
-  });
+  },[]);
 
   const movieBackdrop =
     movie?.backdrop_path != null
