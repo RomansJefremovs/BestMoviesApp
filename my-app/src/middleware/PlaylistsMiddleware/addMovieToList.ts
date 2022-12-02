@@ -8,7 +8,7 @@ export const addMovieToList = async (user_list_id:string,movie_id:number,userID:
                 "Content-Type":"application/json"
             }
         })
-        return temp.json()
+        return temp.text()
     }catch (e) {
         console.log(e)
         return "Error"

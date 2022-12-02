@@ -19,7 +19,7 @@ function Favorites() {
 
   useEffect(() => {
     initialLoad(parseInt(userId));
-  });
+  },[]);
 
   return (
     <>

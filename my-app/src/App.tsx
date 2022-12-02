@@ -8,6 +8,8 @@ import NavBar from "./components/NavBar";
 import {createPlaylist} from "./middleware/PlaylistsMiddleware/createPlaylist";
 import {addMovieToList} from "./middleware/PlaylistsMiddleware/addMovieToList";
 import {removeMovieFromList} from "./middleware/PlaylistsMiddleware/removeMovieFromList";
+import {getUserLists} from "./middleware/PlaylistsMiddleware/getUserLists";
+import {getFavouritesIds} from "./middleware/getFavouritesIds";
 
 function App() {
   const userID = localStorage.getItem("userID");
@@ -15,12 +17,14 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const tryout = async()=>{
-    return await removeMovieFromList('5',65300,"2")
-  }
-  useEffect(()=>{
-    console.log(tryout())
-  })
+  // const tryout = async()=>{
+  //   const temp = await removeMovieFromList("5",72364,"2")
+  //   console.log(temp)
+  // }
+  // localStorage.clear()
+  // useEffect(()=>{
+  //   tryout()
+  // },[])
   return (
     <>
       <ThemeProvider theme={theme}>
