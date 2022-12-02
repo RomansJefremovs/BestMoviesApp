@@ -1,21 +1,18 @@
 import { Link as LinkRouter, Outlet } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { ThemeProvider } from "@emotion/react";
 import {
-  Container,
-  CssBaseline,
-  Box,
-  Avatar,
-  Grid,
-  TextField,
-  Button,
+  Checkbox,
+  FormControlLabel,
+  ThemeProvider,
+  Typography,
 } from "@mui/material";
+import { Container, Box, Avatar, Grid, TextField, Button } from "@mui/material";
 import { theme } from "../theme/theme";
-import {FormEvent} from "react";
+import { FormEvent } from "react";
 import callApi from "../middleware/callApi";
-import {login} from "../middleware/login";
-import {register} from "../middleware/register";
-import {passwordHash} from "../middleware/passwordHash";
+import { login } from "../middleware/login";
+import { register } from "../middleware/register";
+import { passwordHash } from "../middleware/passwordHash";
 
 function SignUp() {
   const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
@@ -23,86 +20,161 @@ function SignUp() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const username = data.get("username")
-    const password = data.get("password")
+    const username = data.get("username");
+    const password = data.get("password");
     if (username !== null && password !== null) {
-      const hashPassword = passwordHash(password.toString())
-      const registerCall = await register(username.toString(), hashPassword)
-      if (registerCall == 'Success'){
-        window.location.href = `/sign-in`
-      }else{
-        alert(registerCall)
+      const hashPassword = passwordHash(password.toString());
+      const registerCall = await register(username.toString(), hashPassword);
+      if (registerCall == "Success") {
+        window.location.href = `/sign-in`;
+      } else {
+        alert(registerCall);
       }
-      console.log(registerCall)
+      console.log(registerCall);
     } else {
-      console.log("oops")
+      console.log("oops");
     }
-  }
+  };
   return (
-    <ThemeProvider theme={theme}>
+    <Container
+      sx={{
+        background:
+          "linear-gradient(150deg, rgba(0,0,0,1) 40%, rgba(231,8,0,1) 100%)",
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        margin: "auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minWidth: "100%",
+      }}
+    >
       <Outlet />
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+      <Grid container sx={{ width: "80em", height: "40em", padding: "50px" }}>
+        <Grid item xs={12} sm={8} md={5}>
           <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="user-name"
-                  name="username"
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Avatar sx={{ m: 1 }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Create An Account
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
             >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <LinkRouter to="/sign-in">
-                  Already have an account? Sign in
-                </LinkRouter>
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "#fff",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#fff",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#fff",
+                    borderRadius: "10px",
+                    opacity: "20%",
+                  },
+                  "& .Mui:focused": {
+                    borderColor: "#fff",
+                  },
+                  "& .Mui:hover": {
+                    borderColor: "#fff",
+                  },
+                }}
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "#fff",
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#fff",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#fff",
+                    borderRadius: "10px",
+                    opacity: "20%",
+                  },
+                  "& .Mui:focused": {
+                    borderColor: "#fff",
+                  },
+                  "& .Mui:hover": {
+                    borderColor: "#fff",
+                  },
+                }}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                id="sign-button"
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    textTransform: "uppercase",
+                    padding: "5px 10px 5px 10px",
+                  }}
+                >
+                  Sign Up
+                </Typography>
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <LinkRouter to="/sign-in">
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontFamily: "Cooper Hewitt Book",
+                        fontSize: "15px",
+                        fontWeight: "100",
+                        padding: "5px 10px 5px 10px",
+                      }}
+                    >
+                      Already have an account? <strong>Sign In</strong>
+                    </Typography>
+                  </LinkRouter>
+                </Grid>
               </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 

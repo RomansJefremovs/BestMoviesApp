@@ -49,7 +49,7 @@ const AppRouter = () => {
                   alignItems: "center",
                   color: "#fff",
                 }}
-              ></main>
+              >Oops! <br></br> There's nothing here.</main>
             }
           />
         </Routes>
