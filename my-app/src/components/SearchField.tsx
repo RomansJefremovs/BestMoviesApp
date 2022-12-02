@@ -6,10 +6,13 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import NavLink from "./NavLink";
-import { useState } from "react";
-import handleMessageChange from "../interfaces/handleMessageChange";
+import React, {ChangeEvent, useState} from "react";
 
-const SearchField = ({ handleMessageChange }: handleMessageChange) => {
+interface SearchField {
+    handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void,
+    handleEnterPress: (e: React.KeyboardEvent<HTMLDivElement>) => void
+}
+const SearchField = ({handleMessageChange,handleEnterPress}:SearchField) => {
   // Small screens
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
@@ -35,6 +38,7 @@ const SearchField = ({ handleMessageChange }: handleMessageChange) => {
             placeholder="Search..."
             inputProps={{ "aria-label": "search" }}
             onChange={handleMessageChange}
+            onKeyPress={handleEnterPress}
           />
 
           <IconButton

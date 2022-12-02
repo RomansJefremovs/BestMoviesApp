@@ -1,19 +1,22 @@
 import { Box, Grid } from "@mui/material";
-import { useState } from "react";
-import handleMessageChange from "../interfaces/handleMessageChange";
+import React, {ChangeEvent, useState} from "react";
 import SearchField from "./SearchField";
-
-function SearchDrawer({ handleMessageChange }: handleMessageChange) {
+interface SearchFieldProps {
+    handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void,
+    handleEnterPress: (e: React.KeyboardEvent<HTMLDivElement>) => void
+}
+function SearchDrawer({ handleMessageChange,handleEnterPress }: SearchFieldProps) {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const handleSearchDrawerToggle = () => {
     setMobileSearchOpen(!mobileSearchOpen);
   };
 
+
   return (
     <Box onClick={handleSearchDrawerToggle} sx={{ textAlign: "center" }}>
       <Grid>
-        <SearchField handleMessageChange={handleMessageChange} />
+        <SearchField handleMessageChange={handleMessageChange} handleEnterPress={handleEnterPress}/>
       </Grid>
     </Box>
   );

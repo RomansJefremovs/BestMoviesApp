@@ -3,15 +3,27 @@ import NavLink from "./NavLink";
 import Logo from "./Logo";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { getNavItems, getSignedInNavItems } from "./NavItems";
-import handleDrawerToggle from "../interfaces/handleDrawerToggle";
+import NavBarProps from "../interfaces/NavBar";
 import NavBarDrawer from "./NavBarDrawer";
-import handleMessageChange from "../interfaces/handleMessageChange";
 import SearchField from "./SearchField";
+import React, {ChangeEvent, useState} from "react";
+
 
 const NavBar = (
-  { handleDrawerToggle, mobileOpen, userID }: handleDrawerToggle,
-  { handleMessageChange }: handleMessageChange
+  { handleDrawerToggle, mobileOpen, userID }: NavBarProps,
 ) => {
+    const [message,setMessage] = useState<string|null>()
+    const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+            setMessage(value)
+    }
+
+    const handleEnterPress = (e:React.KeyboardEvent<HTMLDivElement>)=>{
+        if (e.key === 'Enter' && message !== undefined && message !== null && message.length >= 2 && message !==''){
+            window.location.href = `/search?message=${message}`
+        }
+    }
+
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
   return (
@@ -50,6 +62,7 @@ const NavBar = (
                     handleDrawerToggle={handleDrawerToggle}
                     mobileOpen={mobileOpen}
                     userID={userID}
+                    // handleMessageChange={handleMessageChange}
                   />
                 ) : (
                   ""
@@ -100,7 +113,7 @@ const NavBar = (
 
           <Grid container justifyContent="flex-end" sx={{marginTop:"-45px"}}>
             <Grid item justifyContent="center">
-              <SearchField handleMessageChange={handleMessageChange} />
+              <SearchField handleMessageChange={handleMessageChange} handleEnterPress={handleEnterPress} />
             </Grid>
           </Grid>
         </Grid>
