@@ -2,13 +2,13 @@ import { Box, Drawer, List } from "@mui/material";
 import NavLink from "./NavLink";
 import { getNavItems, getSignedInNavItems } from "./NavItems";
 import Logo from "./Logo";
-import handleDrawerToggle from "../interfaces/handleDrawerToggle";
+import navBar from "../interfaces/NavBar";
 
 const NavBarDrawer = ({
   handleDrawerToggle,
   mobileOpen,
   userID
-}: handleDrawerToggle) => {
+}: navBar) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
 

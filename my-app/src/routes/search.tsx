@@ -12,6 +12,7 @@ function Search() {
   const handleMultiSearch = async () => {
     if (searchResult != null){
       const temp = await multiSearch(searchResult);
+      console.log(temp.results)
       if (temp != undefined) {
         setResult(temp.results.filter((obj)=>{
           return obj.media_type !== 'tv'
