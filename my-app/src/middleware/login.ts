@@ -9,6 +9,7 @@ export const login = async (username:string, password:string) => {
                 "Content-Type": 'application/json'
             }
         })
+        console.log(temp)
        return temp.json()
     }catch (e){
         return e

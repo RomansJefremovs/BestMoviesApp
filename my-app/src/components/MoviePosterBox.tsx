@@ -8,6 +8,8 @@ import {getUserID} from "../middleware/getUserID";
 import {addToFavourites} from "../middleware/addToFavourites";
 import {removeFromFavourites} from "../middleware/removeFromFavourites";
 import NotFound from '../assets/error-404.png'
+import {getFavouritesIds} from "../middleware/getFavouritesIds";
+import {getAllFavouriteMoviesById} from "../middleware/getAllFavouriteMoviesByID";
 
 const MoviePosterBox = (movie: MovieBox) => {
   const poster = movie.poster_path != null ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`: NotFound;
