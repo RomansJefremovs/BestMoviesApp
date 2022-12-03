@@ -5,12 +5,11 @@ import {
   InputBase,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import NavLink from "./NavLink";
 import React, {ChangeEvent, useState} from "react";
 
 interface SearchField {
     handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    handleEnterPress: (e: React.KeyboardEvent<HTMLDivElement>) => void
+    handleEnterPress: (e: React.KeyboardEvent<HTMLDivElement>) => void,
 }
 const SearchField = ({handleMessageChange,handleEnterPress}:SearchField) => {
   // Small screens
@@ -50,9 +49,6 @@ const SearchField = ({handleMessageChange,handleEnterPress}:SearchField) => {
             <SearchIcon sx={{ color: "#fff" }} />
           </IconButton>
         </Grid>
-        <Box sx={{ display: { xs: "none", lg: "block" } }}>
-          <NavLink title={"Sign In"} url={"sign-in"} />
-        </Box>
       </Grid>
     </>
   );
