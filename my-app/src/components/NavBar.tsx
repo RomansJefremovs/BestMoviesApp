@@ -24,7 +24,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
       message.length >= 2 &&
       message !== ""
     ) {
-      window.location.href = `/search?message=${message}`;
+      window.location.href = `/search?message=${message}&page=${1}`;
     }
   };
 

@@ -18,29 +18,29 @@ import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
 
 function Search() {
-  const [result, setResult] = useState<(SMovie | SPerson | Tv)[]>([]);
+
   const [searchTerm] = useSearchParams();
   const searchValue = searchTerm.get("message");
+  const pageNumber = searchTerm.get("page")
+    const [result, setResult] = useState<(SMovie | SPerson | Tv)[]>( []);
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
+  const [currentPage, setCurrentPage] = useState<number>(parseInt(pageNumber !== null ? pageNumber: "1"));
   const handleMultiSearch = useCallback(async () => {
     setLoading(true);
     if (searchValue != null) {
-      const temp = await multiSearch(searchValue);
+      const temp = await multiSearch(searchValue,currentPage);
       console.log(temp.results);
-      if (temp != undefined) {
+      if (temp.results.length !== 0) {
         setLoading(false);
         setResult(
           temp.results.filter((obj) => {
             return obj.media_type !== "tv";
           })
         );
-        setTotal(temp.results.length);
+        setTotal(temp.total_pages);
         console.log(temp.results.length);
       } else {
-        setResult([]);
       }
     } else {
       return null;
@@ -53,7 +53,7 @@ function Search() {
 
   useEffect(() => {
     handleMultiSearch();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     document.title = "Search | BestMovies";
@@ -161,7 +161,7 @@ function Search() {
                     <PaginationItem
                       component={Link}
                       to={`/search${
-                        item.page === 1 ? "" : `?page=${item.page}`
+                        item.page === 1 ? "" : `?message=${searchValue}&page=${item.page}`
                       }`}
                       {...item}
                     />
