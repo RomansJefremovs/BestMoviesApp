@@ -7,6 +7,7 @@ import NavBarProps from "../interfaces/NavBar";
 import NavBarDrawer from "./NavBarDrawer";
 import SearchField from "./SearchField";
 import React, { ChangeEvent, useState } from "react";
+import { SignOut } from "../middleware/signOut";
 
 const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
   const [message, setMessage] = useState<string | null>();
@@ -122,12 +123,24 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
               />
             </Grid>
             <Grid item justifyContent="center">
-            <Box sx={{ display: { xs: "none", lg: "block" } }}>
+              <Box sx={{ display: { xs: "none", lg: "block" } }}>
                 {userID == null ? (
                   <NavLink title={"Sign In"} url={"sign-in"} />
                 ) : (
-                  // TODO instead of url, use a fucntion for sign out
-                  <NavLink title={"Sign Out"} url={"sign-out"} />
+                  <Button
+                    sx={{
+                      padding: 0,
+                      transition: "none",
+                      color: "#fff",
+                      textTransform: "capitalize",
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                      },
+                    }}
+                    onClick={SignOut}
+                  >
+                    <NavLink title={"Sign Out"} url={"/"} />
+                  </Button>
                 )}
               </Box>
             </Grid>
