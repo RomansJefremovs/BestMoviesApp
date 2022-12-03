@@ -4,7 +4,7 @@ import { Person } from "../models/Person";
 import MoviePosterBox from "./MoviePosterBox";
 import { getPerson } from "../middleware/getPerson";
 import { useEffect, useState } from "react";
-import NotFound from "../images/blank_profile.png";
+import NotFound from "../assets/images/NotFoundPerson.png";
 import { useSearchParams } from "react-router-dom";
 import Loading from "./Loading";
 

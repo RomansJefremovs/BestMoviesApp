@@ -1,4 +1,4 @@
-import NotFound from "../images/blank_profile.png";
+import NotFound from "../assets/images/NotFoundPerson.png";
 import { Box, CardMedia, Grid, Typography } from "@mui/material";
 import { Link as LinkRouter } from "react-router-dom";
 import { PersonBox } from "../models/PersonBox";

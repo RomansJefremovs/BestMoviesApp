@@ -7,7 +7,7 @@ import { useState } from "react";
 import {getUserID} from "../middleware/getUserID";
 import {addToFavourites} from "../middleware/addToFavourites";
 import {removeFromFavourites} from "../middleware/removeFromFavourites";
-import NotFound from '../assets/error-404.png'
+import NotFound from '../assets/images/NotFoundMovie.png'
 import {getFavouritesIds} from "../middleware/getFavouritesIds";
 import {getAllFavouriteMoviesById} from "../middleware/getAllFavouriteMoviesByID";
 
@@ -21,9 +21,7 @@ const MoviePosterBox = (movie: MovieBox) => {
             await addToFavourites(parseInt(userId),movie.id)
             setFav("-")
         }else if(userId == "Not Found"){
-            //redirect
-            alert("Login please")
-            console.log("redirecting")
+            <LinkRouter to="sign-in" />
             setFav("+")
         }else{
             await removeFromFavourites(parseInt(userId),movie.id)
@@ -42,6 +40,9 @@ const MoviePosterBox = (movie: MovieBox) => {
           sx={{
             borderRadius: "5px",
             transition: "0.5s",
+            objectFit: "cover",
+            objectPosition: "center",
+            height: { xs: "15em", sm: "20em", md: "25em" },
             "&:hover": {
               filter: "brightness(70%)",
               transform: "scale(1.02)",
