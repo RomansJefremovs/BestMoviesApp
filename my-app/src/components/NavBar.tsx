@@ -6,23 +6,26 @@ import { getNavItems, getSignedInNavItems } from "./NavItems";
 import NavBarProps from "../interfaces/NavBar";
 import NavBarDrawer from "./NavBarDrawer";
 import SearchField from "./SearchField";
-import React, {ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 
+const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
+  const [message, setMessage] = useState<string | null>();
+  const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setMessage(value);
+  };
 
-const NavBar = (
-  { handleDrawerToggle, mobileOpen, userID }: NavBarProps,
-) => {
-    const [message,setMessage] = useState<string|null>()
-    const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-            setMessage(value)
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (
+      e.key === "Enter" &&
+      message !== undefined &&
+      message !== null &&
+      message.length >= 2 &&
+      message !== ""
+    ) {
+      window.location.href = `/search?message=${message}`;
     }
-
-    const handleEnterPress = (e:React.KeyboardEvent<HTMLDivElement>)=>{
-        if (e.key === 'Enter' && message !== undefined && message !== null && message.length >= 2 && message !==''){
-            window.location.href = `/search?message=${message}`
-        }
-    }
+  };
 
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
@@ -36,12 +39,12 @@ const NavBar = (
       }}
     >
       <Toolbar>
-        <Grid
-          container
-          flexDirection="row"
-          justifyContent="space-between"
-        >
-          <Grid container justifyContent="flex-start" sx={{padding:"1em 0 0 1em"}}>
+        <Grid container flexDirection="row" justifyContent="space-between">
+          <Grid
+            container
+            justifyContent="flex-start"
+            sx={{ padding: "1em 0 0 1em" }}
+          >
             <Grid item>
               <Logo />
             </Grid>
@@ -53,7 +56,7 @@ const NavBar = (
                   aria-label="open drawer"
                   edge="start"
                   onClick={handleDrawerToggle}
-                  sx={{ display: { lg: "none" }, marginLeft:"0.5em"}}
+                  sx={{ display: { lg: "none" }, marginLeft: "0.5em" }}
                 >
                   <ArrowDropDownIcon />
                 </IconButton>
@@ -111,9 +114,22 @@ const NavBar = (
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="flex-end" sx={{marginTop:"-45px"}}>
+          <Grid container justifyContent="flex-end" sx={{ marginTop: "-45px" }}>
             <Grid item justifyContent="center">
-              <SearchField handleMessageChange={handleMessageChange} handleEnterPress={handleEnterPress} />
+              <SearchField
+                handleMessageChange={handleMessageChange}
+                handleEnterPress={handleEnterPress}
+              />
+            </Grid>
+            <Grid item justifyContent="center">
+            <Box sx={{ display: { xs: "none", lg: "block" } }}>
+                {userID == null ? (
+                  <NavLink title={"Sign In"} url={"sign-in"} />
+                ) : (
+                  // TODO instead of url, use a fucntion for sign out
+                  <NavLink title={"Sign Out"} url={"sign-out"} />
+                )}
+              </Box>
             </Grid>
           </Grid>
         </Grid>
