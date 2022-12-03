@@ -10,6 +10,9 @@ import {addMovieToList} from "./middleware/PlaylistsMiddleware/addMovieToList";
 import {removeMovieFromList} from "./middleware/PlaylistsMiddleware/removeMovieFromList";
 import {getUserLists} from "./middleware/PlaylistsMiddleware/getUserLists";
 import {getFavouritesIds} from "./middleware/getFavouritesIds";
+import {getPlaylist} from "./middleware/PlaylistsMiddleware/getPlaylist";
+import {editPlaylist} from "./middleware/PlaylistsMiddleware/editPlaylist";
+import {getAllPublicPlaylists} from "./middleware/PlaylistsMiddleware/getAllPublicPlaylists";
 
 function App() {
   const userID = localStorage.getItem("userID");
@@ -17,14 +20,14 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  // const tryout = async()=>{
-  //   const temp = await removeMovieFromList("5",72364,"2")
-  //   console.log(temp)
-  // }
+  const tryout = async()=>{
+    const temp = await getAllPublicPlaylists(2)
+    console.log(temp)
+  }
   // localStorage.clear()
-  // useEffect(()=>{
-  //   tryout()
-  // },[])
+  useEffect(()=>{
+    tryout()
+  },[])
   return (
     <>
       <ThemeProvider theme={theme}>
