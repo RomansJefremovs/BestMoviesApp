@@ -1,7 +1,13 @@
 import {Movies} from "../models/Movies";
 import {Movie} from "../models/Movie";
 import MoviePosterBox from "./MoviePosterBox";
-const MoviesList = ({movies}:Movies) => {
+import {handleFavouritesProps} from "../interfaces/handleFavourtiesProps";
+
+interface MoviesListProps{
+    movies:Movie[],
+    initialLoad?: (userId: number) => Promise<void>
+}
+const MoviesList = ({movies,initialLoad}:MoviesListProps) => {
 
     return (<>{
         movies.map((movie: Movie) => {
@@ -12,6 +18,7 @@ const MoviesList = ({movies}:Movies) => {
                     poster_path={movie.poster_path}
                     title={movie.title}
                     vote_average={movie.vote_average}
+                    initialLoad={initialLoad}
                 />
             );
         })
