@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8b1e270b.css",
+    "main.js": "/static/js/main.12f8cf24.js",
+    "static/media/BestMovies.webm": "/static/media/BestMovies.55afa76ebb4bbd0bb907.webm",
+    "static/media/CooperHewitt-Book.ttf": "/static/media/CooperHewitt-Book.25e8353b6aa4afdd21ae.ttf",
+    "static/media/CooperHewitt-Medium.ttf": "/static/media/CooperHewitt-Medium.0ae6d9596d8d79803b44.ttf",
+    "static/media/CooperHewitt-Semibold.ttf": "/static/media/CooperHewitt-Semibold.98f0f37046984dc51d0b.ttf",
+    "static/media/CooperHewitt-Bold.ttf": "/static/media/CooperHewitt-Bold.31c77713f70db32bc671.ttf",
+    "static/media/logo.png": "/static/media/logo.fc08fc061148ecc8a74f.png",
+    "static/media/search.png": "/static/media/search.b7740345861b56e8a5b0.png",
+    "static/media/NotFoundPerson.png": "/static/media/NotFoundPerson.36dc03a1de663cf8c32c.png",
+    "static/media/NotFoundMovie.png": "/static/media/NotFoundMovie.0f540d652b9f09e4f704.png",
+    "index.html": "/index.html",
+    "main.8b1e270b.css.map": "/static/css/main.8b1e270b.css.map",
+    "main.12f8cf24.js.map": "/static/js/main.12f8cf24.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8b1e270b.css",
+    "static/js/main.12f8cf24.js"
+  ]
+}

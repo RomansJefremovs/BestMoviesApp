@@ -1,0 +1,26 @@
+Index: my-app/src/middleware/addFavs.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/my-app/src/middleware/addFavs.ts b/my-app/src/middleware/addFavs.ts
+new file mode 100644
+--- /dev/null	(date 1669660941073)
++++ b/my-app/src/middleware/addFavs.ts	(date 1669660941073)
+@@ -0,0 +1,15 @@
++import {useState} from "react";
++import {addToFavourites} from "./addToFavourites";
++import {removeFromFavourites} from "./removeFromFavourites";
++
++const [fav, setFav] = useState<"+"|"-">()
++
++const handleFavourites = async () => {
++    if (fav == "+"){
++        await addToFavourites(userId,movieId)
++        setFav("-")
++    }else{
++        await removeFromFavourites(userId,movieId)
++        setFav("+")
++    }
++}
+\ No newline at end of file

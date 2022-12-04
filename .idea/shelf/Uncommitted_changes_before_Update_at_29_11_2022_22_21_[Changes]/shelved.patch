@@ -1,0 +1,18 @@
+Index: my-app/src/App.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Button, TextField, ThemeProvider} from \"@mui/material\";\r\nimport \"./App.css\";\r\nimport Footer from \"./components/Footer\";\r\nimport { theme } from \"./theme/theme\";\r\nimport { ChangeEvent, useState } from \"react\";\r\n\r\nimport AppRouter from \"./components/AppRouter\";\r\n\r\n\r\nfunction App() {\r\n  const [radioButtons, setRadioButtons] = useState([\"movie\"]);\r\n\r\n  const handleRadioButtons = () => {\r\n    if (radioButtons[0] == \"movie\"){\r\n      setRadioButtons([\"person\"]);\r\n    }else{\r\n      setRadioButtons([\"movie\"]);\r\n    }\r\n  };\r\n\r\n  const handleMessageChange = async (e: ChangeEvent<HTMLInputElement>) => {\r\n    console.log(e.target.value)\r\n    console.log(e.target.value)\r\n    setTimeout(()=>{\r\n      window.location.href = `/search?movie=${e.target.value}`\r\n    },1500)\r\n  };\r\n\r\n  return (\r\n      <>\r\n        <ThemeProvider theme={theme}>\r\n          {/*<Header handleMessageChange={handleMessageChange} handleRadioButtons={handleRadioButtons}/>*/}\r\n          <TextField\r\n            name={\"search\"}\r\n            onChange={handleMessageChange}\r\n          />\r\n          <AppRouter />\r\n          <Footer/>\r\n       </ThemeProvider>\r\n      </>\r\n\r\n  );\r\n}\r\n\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/my-app/src/App.tsx b/my-app/src/App.tsx
+--- a/my-app/src/App.tsx	(revision fdb0951418ae40e892195deae3c5d2d9838a884f)
++++ b/my-app/src/App.tsx	(date 1669756829374)
+@@ -6,7 +6,6 @@
+ 
+ import AppRouter from "./components/AppRouter";
+ 
+-
+ function App() {
+   const [radioButtons, setRadioButtons] = useState(["movie"]);
+ 
