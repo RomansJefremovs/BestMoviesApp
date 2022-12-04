@@ -13,6 +13,7 @@ import {getFavouritesIds} from "./middleware/getFavouritesIds";
 import {getPlaylist} from "./middleware/PlaylistsMiddleware/getPlaylist";
 import {editPlaylist} from "./middleware/PlaylistsMiddleware/editPlaylist";
 import {getAllPublicPlaylists} from "./middleware/PlaylistsMiddleware/getAllPublicPlaylists";
+import {checkIfMovieIsFavourite} from "./middleware/checkIfMovieIsFavourite";
 
 function App() {
   const userID = localStorage.getItem("userID");
@@ -21,7 +22,8 @@ function App() {
     setMobileOpen(!mobileOpen);
   };
   const tryout = async()=>{
-    const temp = await getAllPublicPlaylists(2)
+    // const temp = await getAllPublicPlaylists(2)
+    const temp = await checkIfMovieIsFavourite(1013860)
     console.log(temp)
   }
   // localStorage.clear()

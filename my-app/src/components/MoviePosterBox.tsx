@@ -3,13 +3,13 @@ import {Box, Button, CardMedia, Grid, Typography} from "@mui/material";
 import {MovieBox} from "../models/MovieBox";
 import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {getUserID} from "../middleware/getUserID";
 import {addToFavourites} from "../middleware/addToFavourites";
 import {removeFromFavourites} from "../middleware/removeFromFavourites";
 import NotFound from '../assets/images/NotFoundMovie.png'
-import {getFavouritesIds} from "../middleware/getFavouritesIds";
-import {getAllFavouriteMoviesById} from "../middleware/getAllFavouriteMoviesByID";
+import {checkIfMovieIsFavourite} from "../middleware/checkIfMovieIsFavourite";
+import {handleFavourites} from "../interfaces/handleFavourtiesProps";
 
 const MoviePosterBox = (movie: MovieBox) => {
   const poster = movie.poster_path != null ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`: NotFound;
@@ -28,6 +28,17 @@ const MoviePosterBox = (movie: MovieBox) => {
             setFav("+")
         }
     }
+    const initFavState = async () => {
+      const isPresent = await checkIfMovieIsFavourite(movie.id)
+        if (isPresent){
+            setFav("-")
+        }else {
+            setFav("+")
+        }
+    }
+    useEffect(()=>{
+        initFavState()
+    })
   return (
     <Box gridColumn="span 3" sx={{
         width: "100%",
