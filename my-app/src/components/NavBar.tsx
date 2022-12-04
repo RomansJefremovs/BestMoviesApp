@@ -1,4 +1,12 @@
-import { Toolbar, Grid, Box, AppBar, IconButton, Button } from "@mui/material";
+import {
+  Toolbar,
+  Grid,
+  Box,
+  AppBar,
+  IconButton,
+  Button,
+  Typography,
+} from "@mui/material";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -7,7 +15,7 @@ import NavBarProps from "../interfaces/NavBar";
 import NavBarDrawer from "./NavBarDrawer";
 import SearchField from "./SearchField";
 import React, { ChangeEvent, useState } from "react";
-import { SignOut } from "../middleware/signOut";
+import UserDropdownMenu from "./UserDropdownMenu";
 
 const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
   const [message, setMessage] = useState<string | null>();
@@ -115,32 +123,35 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="flex-end" sx={{ marginTop: "-45px" }}>
+          <Grid
+            container
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{ marginTop: "-48px" }}
+          >
             <Grid item justifyContent="center">
               <SearchField
                 handleMessageChange={handleMessageChange}
                 handleEnterPress={handleEnterPress}
               />
             </Grid>
+
+            <Grid item justifyContent="center">
+              <Box sx={{ display: { xs: "none", lg: "block" } }}>
+                {userID == null ? (
+                  <></>
+                ) : (
+                  <Typography sx={{ paddingLeft: "15px" }}>Username</Typography>
+                )}
+              </Box>
+            </Grid>
+
             <Grid item justifyContent="center">
               <Box sx={{ display: { xs: "none", lg: "block" } }}>
                 {userID == null ? (
                   <NavLink title={"Sign In"} url={"sign-in"} />
                 ) : (
-                  <Button
-                    sx={{
-                      padding: 0,
-                      transition: "none",
-                      color: "#fff",
-                      textTransform: "capitalize",
-                      "&:hover": {
-                        backgroundColor: "transparent",
-                      },
-                    }}
-                    onClick={SignOut}
-                  >
-                    <NavLink title={"Sign Out"} url={"/"} />
-                  </Button>
+                  <UserDropdownMenu />
                 )}
               </Box>
             </Grid>

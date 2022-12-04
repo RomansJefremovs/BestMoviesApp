@@ -95,6 +95,10 @@ function SignUp() {
                   "& .Mui:hover": {
                     borderColor: "#fff",
                   },
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "#fff",
+                  },
                 }}
                 margin="normal"
                 required
@@ -122,6 +126,10 @@ function SignUp() {
                     borderColor: "#fff",
                   },
                   "& .Mui:hover": {
+                    borderColor: "#fff",
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                  {
                     borderColor: "#fff",
                   },
                 }}
