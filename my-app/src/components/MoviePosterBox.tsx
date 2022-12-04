@@ -9,9 +9,9 @@ import {addToFavourites} from "../middleware/addToFavourites";
 import {removeFromFavourites} from "../middleware/removeFromFavourites";
 import NotFound from '../assets/images/NotFoundMovie.png'
 import {checkIfMovieIsFavourite} from "../middleware/checkIfMovieIsFavourite";
-import {handleFavourites} from "../interfaces/handleFavourtiesProps";
 
-const MoviePosterBox = (movie: MovieBox) => {
+
+const MoviePosterBox = (movie: MovieBox ) => {
   const poster = movie.poster_path != null ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`: NotFound;
   const userId = getUserID()
   const [display, setDisplay] = useState(false);
@@ -21,11 +21,12 @@ const MoviePosterBox = (movie: MovieBox) => {
             await addToFavourites(parseInt(userId),movie.id)
             setFav("-")
         }else if(userId == "Not Found"){
-            <LinkRouter to="sign-in" />
-            setFav("+")
+            // <LinkRouter to="sign-in" />
+            window.location.href = '/sign-in'
         }else{
             await removeFromFavourites(parseInt(userId),movie.id)
             setFav("+")
+            movie.initialLoad ?  await movie.initialLoad(parseInt(userId)) : getUserID()
         }
     }
     const initFavState = async () => {
