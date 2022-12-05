@@ -5,7 +5,6 @@ import {
   AppBar,
   IconButton,
   Button,
-  Typography,
 } from "@mui/material";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
@@ -15,7 +14,7 @@ import NavBarProps from "../interfaces/NavBar";
 import NavBarDrawer from "./NavBarDrawer";
 import SearchField from "./SearchField";
 import React, { ChangeEvent, useState } from "react";
-import UserDropdownMenu from "./UserDropDownMenu";
+import { SignOut } from "../middleware/signOut";
 
 const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
   const [message, setMessage] = useState<string | null>();
@@ -139,19 +138,22 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
             <Grid item justifyContent="center">
               <Box sx={{ display: { xs: "none", lg: "block" } }}>
                 {userID == null ? (
-                  <></>
-                ) : (
-                  <Typography sx={{ paddingLeft: "15px" }}>Username</Typography>
-                )}
-              </Box>
-            </Grid>
-
-            <Grid item justifyContent="center">
-              <Box sx={{ display: { xs: "none", lg: "block" } }}>
-                {userID == null ? (
                   <NavLink title={"Sign In"} url={"sign-in"} />
                 ) : (
-                  <UserDropdownMenu />
+                  <Button
+                    sx={{
+                      padding: 0,
+                      transition: "none",
+                      color: "#fff",
+                      textTransform: "capitalize",
+                      "&:hover": {
+                        backgroundColor: "transparent",
+                      },
+                    }}
+                    onClick={SignOut}
+                  >
+                    <NavLink title={"Sign Out"} url={"/"} />
+                  </Button>
                 )}
               </Box>
             </Grid>
