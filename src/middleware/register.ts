@@ -10,6 +10,6 @@ export const register = async (username:string, password:string) => {
         })
         return temp.text()
     }catch (e){
-        return e
+        return `Error ${e}`
     }
 }
