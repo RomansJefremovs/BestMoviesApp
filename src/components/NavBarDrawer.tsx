@@ -1,8 +1,9 @@
-import { Box, Drawer, List } from "@mui/material";
+import { Box, Button, Drawer, List } from "@mui/material";
 import NavLink from "./NavLink";
 import { getDiscoverItems, getNavItems, getSignedInNavItems } from "./NavItems";
 import Logo from "./Logo";
 import navBar from "../interfaces/NavBar";
+import { SignOut } from "../middleware/signOut";
 
 const NavBarDrawer = ({ handleDrawerToggle, mobileOpen, userID }: navBar) => {
   const navItems = getNavItems();
@@ -37,34 +38,41 @@ const NavBarDrawer = ({ handleDrawerToggle, mobileOpen, userID }: navBar) => {
         }}
       >
         <Logo />
-        <List sx={{ color: "#fff", paddingTop: "20px" }}>
-          {navItems.map((navItem: { title: string; url: string }) => (
-            <NavLink title={navItem.title} url={navItem.url} />
-          ))}
-          {discoverItems.map((navItem: { title: string; url: string }) => (
-            <NavLink title={navItem.title} url={navItem.url} />
-          ))}
-        </List>
-      </Box>
+        <br></br>
+        {navItems.map((navItem: { title: string; url: string }) => (
+          <NavLink title={navItem.title} url={navItem.url} />
+        ))}
 
-      <Box
-        sx={{
-          textAlign: "center",
-          display: "flex",
-          justifyContent: "flex-end",
-          flexDirection: "column",
-          padding: "32px",
-        }}
-      >
-        <List sx={{ color: "#fff" }}>
-          {userID !== null ? (
-            signedInNavItems.map((navItem: { title: string; url: string }) => (
-              <NavLink title={navItem.title} url={navItem.url} />
-            ))
-          ) : (
-            <></>
-          )}
-        </List>
+        {discoverItems.map((navItem: { title: string; url: string }) => (
+          <NavLink title={navItem.title} url={navItem.url} />
+        ))}
+
+        {userID !== null ? (
+          signedInNavItems.map((navItem: { title: string; url: string }) => (
+            <NavLink title={navItem.title} url={navItem.url} />
+          ))
+        ) : (
+          <></>
+        )}
+
+        {userID == null ? (
+          <NavLink title={"Sign In"} url={"sign-in"} />
+        ) : (
+          <Button
+            sx={{
+              padding: 0,
+              transition: "none",
+              color: "#fff",
+              textTransform: "capitalize",
+              "&:hover": {
+                backgroundColor: "transparent",
+              },
+            }}
+            onClick={SignOut}
+          >
+            <NavLink title={"Sign Out"} url={"/"} />
+          </Button>
+        )}
       </Box>
     </Drawer>
   );
