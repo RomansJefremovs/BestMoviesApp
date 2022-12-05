@@ -12,6 +12,6 @@ export const login = async (username:string, password:string) => {
         console.log(temp)
        return temp.json()
     }catch (e){
-        return e
+        return `Error ${e}`
     }
 }

@@ -22,5 +22,9 @@ export const getTopYear = async (year:"70"|"80"|"90"|"00"|"10"):Promise<SearchMo
             return ''
         }
     }
-    return await callApi(url(),"GET")
+    try {
+        return await callApi(url(),"GET")
+    }catch (e) {
+        return {page: 0, results: [], total_pages: 0, total_results: 0}
+    }
 }
