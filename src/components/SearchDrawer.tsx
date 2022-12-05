@@ -1,24 +1,46 @@
-import { Box, Grid } from "@mui/material";
-import React, {ChangeEvent, useState} from "react";
+import { Box, Drawer, Grid, List } from "@mui/material";
+import { SearchProps } from "../interfaces/Search";
 import SearchField from "./SearchField";
-interface SearchFieldProps {
-    handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    handleEnterPress: (e: React.KeyboardEvent<HTMLDivElement>) => void
-}
-function SearchDrawer({ handleMessageChange,handleEnterPress }: SearchFieldProps) {
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
-  const handleSearchDrawerToggle = () => {
-    setMobileSearchOpen(!mobileSearchOpen);
-  };
-
-
+const SearchDrawer = ({
+  handleMessageChange,
+  handleEnterPress,
+  mobilerOpen,
+  handleSearchDrawerToggle,
+}: SearchProps) => {
   return (
-    <Box onClick={handleSearchDrawerToggle} sx={{ textAlign: "center" }}>
-      <Grid>
-        <SearchField handleMessageChange={handleMessageChange} handleEnterPress={handleEnterPress}/>
-      </Grid>
-    </Box>
+    <Drawer
+      anchor="right"
+      variant="temporary"
+      open={mobilerOpen}
+      onClose={handleSearchDrawerToggle}
+      ModalProps={{
+        keepMounted: true,
+      }}
+      sx={{
+        display: { xs: "block", lg: "none" },
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: "240px",
+          backgroundColor: "#1e1e1e",
+        },
+      }}
+    >
+      <Box
+        sx={{
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          padding: "32px",
+        }}
+      >
+        <SearchField
+          handleMessageChange={handleMessageChange}
+          handleEnterPress={handleEnterPress}
+        />
+      </Box>
+    </Drawer>
   );
-}
+};
 export default SearchDrawer;

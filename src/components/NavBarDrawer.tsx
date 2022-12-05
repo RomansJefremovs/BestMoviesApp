@@ -1,19 +1,17 @@
 import { Box, Drawer, List } from "@mui/material";
 import NavLink from "./NavLink";
-import { getNavItems, getSignedInNavItems } from "./NavItems";
+import { getDiscoverItems, getNavItems, getSignedInNavItems } from "./NavItems";
 import Logo from "./Logo";
 import navBar from "../interfaces/NavBar";
 
-const NavBarDrawer = ({
-  handleDrawerToggle,
-  mobileOpen,
-  userID
-}: navBar) => {
+const NavBarDrawer = ({ handleDrawerToggle, mobileOpen, userID }: navBar) => {
   const navItems = getNavItems();
   const signedInNavItems = getSignedInNavItems();
+  const discoverItems = getDiscoverItems();
 
   return (
     <Drawer
+      anchor="left"
       variant="temporary"
       open={mobileOpen}
       onClose={handleDrawerToggle}
@@ -33,7 +31,7 @@ const NavBarDrawer = ({
         sx={{
           textAlign: "center",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           flexDirection: "column",
           padding: "32px",
         }}
@@ -43,9 +41,29 @@ const NavBarDrawer = ({
           {navItems.map((navItem: { title: string; url: string }) => (
             <NavLink title={navItem.title} url={navItem.url} />
           ))}
-          {userID !== null ? signedInNavItems.map((navItem: { title: string; url: string }) => (
+          {discoverItems.map((navItem: { title: string; url: string }) => (
             <NavLink title={navItem.title} url={navItem.url} />
-          )):<></>}
+          ))}
+        </List>
+      </Box>
+
+      <Box
+        sx={{
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "flex-end",
+          flexDirection: "column",
+          padding: "32px",
+        }}
+      >
+        <List sx={{ color: "#fff" }}>
+          {userID !== null ? (
+            signedInNavItems.map((navItem: { title: string; url: string }) => (
+              <NavLink title={navItem.title} url={navItem.url} />
+            ))
+          ) : (
+            <></>
+          )}
         </List>
       </Box>
     </Drawer>

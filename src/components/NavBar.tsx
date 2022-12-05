@@ -9,6 +9,8 @@ import SearchField from "./SearchField";
 import React, { ChangeEvent, useState } from "react";
 import { SignOut } from "../middleware/signOut";
 import DiscoverDropDownMenu from "./DiscoverDropDownMenu";
+import SearchIcon from "@mui/icons-material/Search";
+import SearchDrawer from "./SearchDrawer";
 
 const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
   const [message, setMessage] = useState<string | null>();
@@ -17,6 +19,11 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
     setMessage(value);
   };
 
+  const [mobilerOpen, setMobilerOpen] = useState(false);
+
+  const handleSearchDrawerToggle = () => {
+    setMobilerOpen(!mobilerOpen);
+  };
   const handleEnterPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (
       e.key === "Enter" &&
@@ -67,7 +74,6 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                     handleDrawerToggle={handleDrawerToggle}
                     mobileOpen={mobileOpen}
                     userID={userID}
-                    // handleMessageChange={handleMessageChange}
                   />
                 ) : (
                   ""
@@ -124,11 +130,36 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
             alignItems="center"
             sx={{ marginTop: "-48px" }}
           >
-            <Grid item justifyContent="center">
+            <Grid
+              item
+              justifyContent="center"
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
               <SearchField
                 handleMessageChange={handleMessageChange}
                 handleEnterPress={handleEnterPress}
               />
+            </Grid>
+
+            <Grid item justifyContent="center">
+              <IconButton
+                type="button"
+                onClick={handleSearchDrawerToggle}
+                sx={{ p: "10px", display: { xs: "block", md: "none" } }}
+                aria-label="search"
+              >
+                <SearchIcon sx={{ color: "#fff" }} />
+              </IconButton>
+              {mobilerOpen ? (
+                <SearchDrawer
+                  handleMessageChange={handleMessageChange}
+                  handleEnterPress={handleEnterPress}
+                  handleSearchDrawerToggle={handleSearchDrawerToggle}
+                  mobilerOpen={mobilerOpen}
+                />
+              ) : (
+                ""
+              )}
             </Grid>
 
             <Grid item justifyContent="center">
