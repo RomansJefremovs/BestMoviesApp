@@ -8,6 +8,7 @@ import NavBarDrawer from "./NavBarDrawer";
 import SearchField from "./SearchField";
 import React, { ChangeEvent, useState } from "react";
 import { SignOut } from "../middleware/signOut";
+import DiscoverDropDownMenu from "./DiscoverDropDownMenu";
 
 const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
   const [message, setMessage] = useState<string | null>();
@@ -91,7 +92,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                     "& .MuiTypography-root": {
                       fontSize: "13.5px",
                       textTransform: "uppercase",
-                      fontWeight: "500",
+                      fontWeight: "600",
                     },
                     "&:hover": {
                       backgroundColor: "transparent",
@@ -101,6 +102,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                   {navItems.map((navItem: { title: string; url: string }) => (
                     <NavLink title={navItem.title} url={navItem.url} />
                   ))}
+
                   {userID !== null ? (
                     signedInNavItems.map(
                       (navItem: { title: string; url: string }) => (
@@ -111,17 +113,24 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                     <></>
                   )}
                 </Button>
+                <DiscoverDropDownMenu />
               </Box>
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="flex-end" sx={{ marginTop: "-45px" }}>
+          <Grid
+            container
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{ marginTop: "-48px" }}
+          >
             <Grid item justifyContent="center">
               <SearchField
                 handleMessageChange={handleMessageChange}
                 handleEnterPress={handleEnterPress}
               />
             </Grid>
+
             <Grid item justifyContent="center">
               <Box sx={{ display: { xs: "none", lg: "block" } }}>
                 {userID == null ? (

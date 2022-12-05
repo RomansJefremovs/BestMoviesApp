@@ -13,6 +13,8 @@ import Top90s from "../routes/Top90s";
 import Top10s from "../routes/Top10s";
 import Top00s from "../routes/Top00s";
 import ScrollToTop from "./ScrollToTop";
+import Playlists from "../routes/playlists";
+
 
 const AppRouter = () => {
   return (
@@ -24,6 +26,7 @@ const AppRouter = () => {
           <Route path="sign-in" element={<SignIn />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="favorites" element={<Favorites />} />
+          <Route path="playlists" element={<Playlists />} />
           <Route path="movie" element={<Movie />} />
           <Route path="person" element={<PersonPage />} />
           <Route path="toprated" element={<TopRated />} />
