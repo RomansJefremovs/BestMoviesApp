@@ -29,7 +29,7 @@ const HomeContent = () => {
 
   return (
     <Container
-      className="content reveal"
+      className="content"
       sx={{
         display: { xs: "block" },
         borderRadius: "30px",

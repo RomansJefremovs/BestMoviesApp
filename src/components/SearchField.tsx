@@ -1,31 +1,16 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  InputBase,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import React, {ChangeEvent, useState} from "react";
+import { Grid, InputBase } from "@mui/material";
+import SearchFieldProps from "../interfaces/Search";
 
-interface SearchField {
-    handleMessageChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    handleEnterPress: (e: React.KeyboardEvent<HTMLDivElement>) => void,
-}
-const SearchField = ({handleMessageChange,handleEnterPress}:SearchField) => {
-  // Small screens
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-
-  const handleSearchDrawerToggle = () => {
-    setMobileSearchOpen(!mobileSearchOpen);
-  };
+const SearchField = ({
+  handleMessageChange,
+  handleEnterPress,
+}: SearchFieldProps) => {
 
   return (
     <>
       <Grid container alignItems="center">
-        <Grid item>
           <InputBase
             sx={{
-              display: { xs: "none", md: "block" },
               ml: 1,
               flex: 1,
               color: "#fff",
@@ -39,16 +24,6 @@ const SearchField = ({handleMessageChange,handleEnterPress}:SearchField) => {
             onChange={handleMessageChange}
             onKeyPress={handleEnterPress}
           />
-
-          <IconButton
-            type="button"
-            onClick={handleSearchDrawerToggle}
-            sx={{ p: "10px", display: { xs: "block", md: "none" } }}
-            aria-label="search"
-          >
-            <SearchIcon sx={{ color: "#fff" }} />
-          </IconButton>
-        </Grid>
       </Grid>
     </>
   );

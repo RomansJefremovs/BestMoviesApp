@@ -2,7 +2,7 @@ const navItems: any = [
   { title: "Home", url: "/" },
 ];
 
-const signedInNavItems: any = [{ title: "My Favorites", url: "/favorites" }, { title: "Top Rated", url: "toprated" }];
+const signedInNavItems: any = [{ title: "My Favorites", url: "/favorites" }, { title: "My Playlists", url: "playlists" }];
 
 const discoverItems: any = [
   { title: "Top Rated", url: "toprated" },
