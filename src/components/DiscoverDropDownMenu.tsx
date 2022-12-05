@@ -27,9 +27,14 @@ const DiscoverDropdownMenu = () => {
     <>
       <Button
         sx={{
+          transition: "none",
           color: "#fff",
+          fontSize: "13.5px",
+          textTransform: "uppercase",
           fontWeight: "600",
-          marginTop: "-3px"
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
         }}
         id="positioned-button"
         aria-controls={open ? "positioned-menu" : undefined}

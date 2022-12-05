@@ -1,11 +1,4 @@
-import {
-  Toolbar,
-  Grid,
-  Box,
-  AppBar,
-  IconButton,
-  Button,
-} from "@mui/material";
+import { Toolbar, Grid, Box, AppBar, IconButton, Button } from "@mui/material";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -110,8 +103,6 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                     <NavLink title={navItem.title} url={navItem.url} />
                   ))}
 
-                  <DiscoverDropDownMenu />
-
                   {userID !== null ? (
                     signedInNavItems.map(
                       (navItem: { title: string; url: string }) => (
@@ -122,6 +113,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                     <></>
                   )}
                 </Button>
+                <DiscoverDropDownMenu />
               </Box>
             </Grid>
           </Grid>
