@@ -1,5 +1,18 @@
 import { useSearchParams } from "react-router-dom";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  Container,
+  FormControl,
+  Grid,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import Image from "mui-image";
 import { useEffect, useState } from "react";
 import NotFound from "../assets/images/search.png";
@@ -10,6 +23,7 @@ import { getCredits } from "../middleware/getCredits";
 import PersonList from "../components/PersonList";
 import { Person } from "../models/Person";
 import Loading from "../components/Loading";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 function MoviePage() {
   const [param] = useSearchParams();
@@ -19,6 +33,16 @@ function MoviePage() {
   const [crew, setCrew] = useState<Credits>();
   const [cast, setCast] = useState<Credits>();
   const [loading, setLoading] = useState(false);
+  const [playlistTitle, setPlaylistTitle] = useState<string[]>([]);
+
+  const handleChange = (event: SelectChangeEvent<typeof playlistTitle>) => {
+    const {
+      target: { value },
+    } = event;
+    setPlaylistTitle(typeof value === "string" ? value.split(",") : value);
+  };
+
+  const titles = ["My Favorites", "My Playlists"];
 
   const initLoad = async () => {
     setLoading(true);
@@ -208,6 +232,76 @@ function MoviePage() {
               >
                 {movie.overview}
               </Typography>
+              <Box
+                sx={{
+                  width: "auto",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems:"center"
+                }}
+              >
+                  <PlaylistAddIcon sx={{ color: "#fff" }}/>
+                <FormControl
+                  sx={{
+                    color: "#fff",
+                    backgroundColor: "#404040",
+                    borderRadius: "5px",
+                    m: 1,
+                    width: 250,
+                  }}
+                >
+                  <InputLabel
+                    sx={{
+                      color: "#fff",
+                      "&.MuiInputLabel-root.Mui-focused": {
+                        color: "#fff",
+                      },
+                    }}
+                  >
+                    Save to Playlist
+                  </InputLabel>
+                  <Select
+                    multiple
+                    value={playlistTitle}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Save to Playlist" />}
+                    renderValue={(selected) => selected.join(", ")}
+                    sx={{
+                      height: "48px",
+                      paddingTop: "8px",
+                      width: "250px",
+                      border: "none",
+                      color: "#fff",
+                      "& .MuiSvgIcon-root": {
+                        color: "#fff",
+                      },
+                      "&.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        border:"1px solid",
+                        borderColor: "#fff",
+                      },
+                    }}
+                  >
+                    {titles.map((title) => (
+                      <MenuItem
+                        key={title}
+                        value={title}
+                      >
+                        <Checkbox
+                          sx={{
+                            color: "#e70800",
+                            "&.Mui-checked": {
+                              color: "#e70800",
+                            },
+                          }}
+                          checked={playlistTitle.indexOf(title) > -1}
+                        />
+                        <ListItemText sx={{ height: "30px", color: "#000" }} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
               <Grid
                 container
                 className="reveal"
