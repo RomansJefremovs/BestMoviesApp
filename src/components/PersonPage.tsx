@@ -204,7 +204,7 @@ const PersonPage = () => {
             }}
             gap={3}
           >
-            {person.known_for != undefined && true
+            {person.known_for !== undefined && person.known_for !== null
               ? person.known_for.map((item) => {
                   return (
                     <MoviePosterBox

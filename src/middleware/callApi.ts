@@ -1,6 +1,6 @@
 const callApi = async (baseURL:string,method?:"GET"|"POST") => {
    try {
-       if (method != undefined && method == "POST"){
+       if (method !== undefined && method === "POST"){
            const temp = await fetch(baseURL, { method: "POST" });
            return temp.text();
        }else {

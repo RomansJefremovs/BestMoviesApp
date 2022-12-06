@@ -1,10 +1,10 @@
 import {SMovie, SPerson, Tv} from "../models/MultiSearch";
 import MoviePosterBox from "./MoviePosterBox";
 import PersonPosterBox from "./PersonPosterBox";
-interface MultiSearchList {
+interface MultiSearchListProps {
     array:(SMovie|SPerson|Tv)[]
 }
-const MultiSearchList = ({array}:MultiSearchList) => {
+const MultiSearchList = ({array}:MultiSearchListProps) => {
 
     return(
         <>

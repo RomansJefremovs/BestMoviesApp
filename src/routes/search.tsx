@@ -115,7 +115,7 @@ function Search() {
         <Grid container sx={{ padding: "2em" }}>
           {loading ? (
             <Loading />
-          ) : result.length != 0 ? (
+          ) : result.length !== 0 ? (
             <>
               <Grid
                 container

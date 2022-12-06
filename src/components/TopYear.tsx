@@ -4,34 +4,30 @@ import { Box, Container, Divider, Grid, Typography } from "@mui/material";
 import MoviesList from "./MoviesList";
 import notFound from "../assets/images/search.png";
 import { getTopYear } from "../middleware/getTopYear";
-import Loading from "./Loading";
 
 interface Year {
   year: "70" | "80" | "90" | "00" | "10";
 }
 const TopYear = ({ year }: Year) => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const titleDisplay = () => {
-    if (year == "70") {
+    if (year === "70") {
       return "1970s";
-    } else if (year == "80") {
+    } else if (year === "80") {
       return "1980s";
-    } else if (year == "90") {
+    } else if (year === "90") {
       return "1990s";
-    } else if (year == "00") {
+    } else if (year === "00") {
       return "2000s";
-    } else if (year == "10") {
+    } else if (year === "10") {
       return "2010s";
     } else {
       return "";
     }
   };
   const initialLoad = async () => {
-    setLoading(true);
     const temp = await getTopYear(year);
-    setLoading(false);
     setMovies(temp.results);
   };
   useEffect(() => {

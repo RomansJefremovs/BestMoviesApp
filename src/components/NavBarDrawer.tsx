@@ -1,4 +1,4 @@
-import { Box, Button, Drawer, List } from "@mui/material";
+import { Box, Button, Drawer } from "@mui/material";
 import NavLink from "./NavLink";
 import { getDiscoverItems, getNavItems, getSignedInNavItems } from "./NavItems";
 import Logo from "./Logo";

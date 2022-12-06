@@ -8,7 +8,6 @@ export const getAllFavouriteMoviesById = async(userId:number):Promise<Movie[]> =
         return await transformArray(tempArr)
     }catch (e){
         console.log(e)
-        const tempArr:Movie[] = []
-        return tempArr
+        return []
     }
 }

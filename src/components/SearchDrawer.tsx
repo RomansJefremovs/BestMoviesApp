@@ -1,4 +1,4 @@
-import { Box, Drawer, Grid, List } from "@mui/material";
+import { Box, Drawer } from "@mui/material";
 import { SearchProps } from "../models/Search";
 import SearchField from "./SearchField";
 

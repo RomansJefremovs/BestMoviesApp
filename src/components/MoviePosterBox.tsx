@@ -19,10 +19,10 @@ const MoviePosterBox = (movie: MovieBox) => {
   const [display, setDisplay] = useState(false);
   const [fav, setFav] = useState<"+" | "-">("+");
   const handleFavourites = async () => {
-    if (fav == "+" && userId != "Not Found") {
+    if (fav === "+" && userId !== "Not Found") {
       await addToFavourites(parseInt(userId), movie.id);
       setFav("-");
-    } else if (userId == "Not Found") {
+    } else if (userId === "Not Found") {
       // <LinkRouter to="sign-in" />
       window.location.href = "/sign-in";
     } else {

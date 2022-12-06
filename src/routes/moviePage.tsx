@@ -21,7 +21,6 @@ import { getMovieByID } from "../middleware/getMovieByID";
 import { Credits } from "../models/Credits";
 import { getCredits } from "../middleware/getCredits";
 import PersonList from "../components/PersonList";
-import { Person } from "../models/Person";
 import Loading from "../components/Loading";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
@@ -29,7 +28,6 @@ function MoviePage() {
   const [param] = useSearchParams();
   const movieId = param.get("movieId");
   const [movie, setMovie] = useState<Movie>();
-  const [person, setPerson] = useState<Person>();
   const [crew, setCrew] = useState<Credits>();
   const [cast, setCast] = useState<Credits>();
   const [loading, setLoading] = useState(false);
@@ -70,11 +68,6 @@ function MoviePage() {
   const movieURL =
     movie?.poster_path != null
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-      : NotFound;
-
-  const personURL =
-    person?.profile_path != null
-      ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
       : NotFound;
 
   return (
