@@ -12,23 +12,26 @@ import {
 import "../App.css";
 import { Link as LinkRouter, Outlet } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import callApi from "../middleware/callApi";
 import { FormEvent } from "react";
 import { login } from "../middleware/login";
 import { passwordHash } from "../middleware/passwordHash";
 
 function SignIn() {
-  const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
-
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const username = data.get("username");
     const password = data.get("password");
+    const hashPass = passwordHash(password ? password.toString() : '')
     if (username !== null && password !== null) {
-      const loginCall = await login(username.toString(), password.toString());
-      localStorage.setItem("userID", loginCall.toString());
-      window.location.href = `/`;
+      const loginCall = await login(username.toString(), hashPass);
+      if (loginCall !== 'Error TypeError: Failed to fetch' && loginCall !== '0'){
+          localStorage.setItem("userID", loginCall.toString());
+          window.location.href = `/`;
+      }else {
+          alert("Wrong Credentials")
+      }
+
     } else {
       console.log("oops");
     }
