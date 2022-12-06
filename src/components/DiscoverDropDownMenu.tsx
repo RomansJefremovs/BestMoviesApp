@@ -27,6 +27,7 @@ const DiscoverDropdownMenu = () => {
     <>
       <Button
         sx={{
+          marginTop:"-3px",
           transition: "none",
           color: "#fff",
           fontSize: "13.5px",

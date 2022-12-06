@@ -5,6 +5,7 @@ import {
   Container,
   FormControl,
   Grid,
+  InputBase,
   InputLabel,
   ListItemText,
   MenuItem,
@@ -24,6 +25,7 @@ import PersonList from "../components/PersonList";
 import { Person } from "../models/Person";
 import Loading from "../components/Loading";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import handleMessageChange from "../interfaces/handleMessageChange";
 
 function MoviePage() {
   const [param] = useSearchParams();
@@ -42,7 +44,7 @@ function MoviePage() {
     setPlaylistTitle(typeof value === "string" ? value.split(",") : value);
   };
 
-  const titles = ["My Favorites", "My Playlists"];
+  const playlists = ["1st", "2nd"];
 
   const initLoad = async () => {
     setLoading(true);
@@ -60,7 +62,7 @@ function MoviePage() {
 
   useEffect(() => {
     initLoad();
-  },[]);
+  }, []);
 
   const movieBackdrop =
     movie?.backdrop_path != null
@@ -70,11 +72,6 @@ function MoviePage() {
   const movieURL =
     movie?.poster_path != null
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-      : NotFound;
-
-  const personURL =
-    person?.profile_path != null
-      ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
       : NotFound;
 
   return (
@@ -237,14 +234,14 @@ function MoviePage() {
                   width: "auto",
                   display: "flex",
                   justifyContent: "flex-end",
-                  alignItems:"center"
+                  alignItems: "center",
                 }}
               >
-                  <PlaylistAddIcon sx={{ color: "#fff" }}/>
+                <PlaylistAddIcon sx={{ color: "#fff" }} />
                 <FormControl
                   sx={{
                     color: "#fff",
-                    backgroundColor: "#404040",
+                    backgroundColor: "#202020",
                     borderRadius: "5px",
                     m: 1,
                     width: 250,
@@ -260,6 +257,7 @@ function MoviePage() {
                   >
                     Save to Playlist
                   </InputLabel>
+
                   <Select
                     multiple
                     value={playlistTitle}
@@ -275,17 +273,40 @@ function MoviePage() {
                       "& .MuiSvgIcon-root": {
                         color: "#fff",
                       },
-                      "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                      {
-                        border:"1px solid",
+                      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                        border: "1px solid",
                         borderColor: "#fff",
                       },
                     }}
                   >
-                    {titles.map((title) => (
+                    <InputBase
+                      placeholder=" + New Playlist"
+                      sx={{
+                        fontSize: "0.9em",
+                        color: "#fff",
+                        width: "100%",
+                        borderRadius: "5px 5px 0 0",
+                        padding: "4px 4px 4px 14px",
+                        backgroundColor: "#202020",
+                      }}
+                    />
+                    {playlists.map((playlist) => (
                       <MenuItem
-                        key={title}
-                        value={title}
+                        sx={{
+                          backgroundColor: "#303030",
+                          "&.MuiList-root.MuiMenu-list": {
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                          },
+                          "&:hover": {
+                            backgroundColor: "#404040",
+                          },
+                          "&.MuiMenuItem-root.Mui-selected": {
+                            backgroundColor: "#404040",
+                          },
+                        }}
+                        key={playlist}
+                        value={playlist}
                       >
                         <Checkbox
                           sx={{
@@ -294,9 +315,12 @@ function MoviePage() {
                               color: "#e70800",
                             },
                           }}
-                          checked={playlistTitle.indexOf(title) > -1}
+                          checked={playlistTitle.indexOf(playlist) > -1}
                         />
-                        <ListItemText sx={{ height: "30px", color: "#000" }} />
+                        <ListItemText
+                          sx={{ color: "#fff" }}
+                          primary={playlist}
+                        />
                       </MenuItem>
                     ))}
                   </Select>
