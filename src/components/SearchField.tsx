@@ -1,5 +1,5 @@
 import { Grid, InputBase } from "@mui/material";
-import SearchFieldProps from "../interfaces/Search";
+import SearchFieldProps from "../models/Search";
 
 const SearchField = ({
   handleMessageChange,

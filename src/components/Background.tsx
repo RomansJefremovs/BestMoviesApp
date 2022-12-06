@@ -1,5 +1,5 @@
 import { Container, Box, Typography, CardMedia, Grid } from "@mui/material";
-import backgroundVideo from "../videos/BestMovies.webm";
+import backgroundVideo from "../assets/videos/BestMovies.webm";
 
 function Background() {
   return (

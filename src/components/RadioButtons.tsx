@@ -1,5 +1,5 @@
 import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
-import handleRadioButtons from "../interfaces/handleRadioButtons";
+import handleRadioButtons from "../models/handleRadioButtons";
 
 const RadioButtons = (
   { handleRadioButtons }: handleRadioButtons

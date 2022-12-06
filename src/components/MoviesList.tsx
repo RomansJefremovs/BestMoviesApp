@@ -1,7 +1,7 @@
 import {Movies} from "../models/Movies";
 import {Movie} from "../models/Movie";
 import MoviePosterBox from "./MoviePosterBox";
-import {handleFavouritesProps} from "../interfaces/handleFavourtiesProps";
+import {handleFavouritesProps} from "../models/handleFavourtiesProps";
 
 interface MoviesListProps{
     movies:Movie[],

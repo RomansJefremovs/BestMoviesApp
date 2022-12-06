@@ -11,13 +11,11 @@ import {removeFromFavourites} from "../middleware/removeFromFavourites";
 
 function Favorites() {
   const [favourites, setFavourites] = useState<Movie[]>([]);
-
   const initialLoad = async (userId: number) => {
     const tempArr = await getAllFavouriteMoviesById(userId);
     console.log(tempArr);
     setFavourites(tempArr);
   };
-
   useEffect(() => {
     initialLoad(parseInt(getUserID()));
   },[]);

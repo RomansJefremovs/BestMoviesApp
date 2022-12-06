@@ -12,7 +12,7 @@ import {
   Pagination,
   PaginationItem,
 } from "@mui/material";
-import { pluralizeUnlessSingle } from "../common/utils";
+import { pluralizeUnlessSingle } from "../middleware/utils";
 import notFound from "../assets/images/search.png";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";

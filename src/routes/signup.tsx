@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Container, Box, Avatar, Grid, TextField, Button } from "@mui/material";
-import { theme } from "../theme/theme";
+import { theme } from "../assets/theme/theme";
 import { FormEvent } from "react";
 import callApi from "../middleware/callApi";
 import { login } from "../middleware/login";
