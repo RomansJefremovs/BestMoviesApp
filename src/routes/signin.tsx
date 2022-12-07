@@ -19,7 +19,7 @@ import { passwordHash } from "../middleware/passwordHash";
 function SignIn() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+      const data = new FormData(event.currentTarget);
     const username = data.get("username");
     const password = data.get("password");
     const hashPass = passwordHash(password ? password.toString() : '')

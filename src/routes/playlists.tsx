@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
-import { Movie } from "../models/Movie";
+import {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import { getUserID } from "../middleware/getUserID";
-import MoviesList from "../components/MoviesList";
-import { getAllPublicPlaylists } from "../middleware/PlaylistsMiddleware/getAllPublicPlaylists";
+import MyPlaylists from "../components/Playlists/MyPlaylists";
+import {Playlist} from "../models/Playlist";
+import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
+import * as React from "react";
 
 function Playlists() {
-  const [playlists, setPlaylists] = useState<Movie[]>([]);
-  const userId = getUserID();
-
-  const initialLoad = async (userId: number) => {
-    // const tempArr = await getAllPublicPlaylists(userId);
-    // console.log(tempArr);
-    // setPlaylists(tempArr);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const initialLoad = async () => {
+    const tempArr = await getUserLists(parseInt(getUserID()));
+    console.log(tempArr);
+    setPlaylists(tempArr);
   };
 
   useEffect(() => {
-    initialLoad(parseInt(userId));
+    initialLoad();
   },[]);
 
   return (
-    <>
       <Container
         className="content"
         sx={{
@@ -40,7 +38,7 @@ function Playlists() {
               height: "auto",
             }}
           >
-            {playlists ? (
+            {playlists.length !== 0 ? (
               <Typography
                 variant="h2"
                 sx={{
@@ -83,8 +81,9 @@ function Playlists() {
                 lg: "repeat(12, 1fr)",
               }}
               gap={3}
+              sx={{display:"flex", flexDirection:"column"}}
             >
-              <MoviesList movies={playlists} />
+              <MyPlaylists playlists={playlists} initialLoad={initialLoad} userId={getUserID()}/>
             </Grid>
           ) : (
             <Typography
@@ -108,7 +107,6 @@ function Playlists() {
           )}
         </Grid>
       </Container>
-    </>
   );
 }
 
