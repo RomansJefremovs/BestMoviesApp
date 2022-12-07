@@ -1,17 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import {
   Box,
-  Checkbox,
   Container,
-  FormControl,
   Grid,
-  InputBase,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  SelectChangeEvent,
   Typography,
 } from "@mui/material";
 import Image from "mui-image";
@@ -22,30 +13,23 @@ import { getMovieByID } from "../middleware/getMovieByID";
 import { Credits } from "../models/Credits";
 import { getCredits } from "../middleware/getCredits";
 import PersonList from "../components/PersonList";
-import { Person } from "../models/Person";
 import Loading from "../components/Loading";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import handleMessageChange from "../interfaces/handleMessageChange";
+import { getUserID } from "../middleware/getUserID";
+import PlaylistDropwdown from "../components/PlaylistDropdown";
 
 function MoviePage() {
   const [param] = useSearchParams();
-  const movieId = param.get("movieId");
+  const movieId = param.get("movieId") !== null ? param.get("movieId") : '';
   const [movie, setMovie] = useState<Movie>();
-  const [person, setPerson] = useState<Person>();
   const [crew, setCrew] = useState<Credits>();
   const [cast, setCast] = useState<Credits>();
   const [loading, setLoading] = useState(false);
-  const [playlistTitle, setPlaylistTitle] = useState<string[]>([]);
+  const userID = getUserID();
 
-  const handleChange = (event: SelectChangeEvent<typeof playlistTitle>) => {
-    const {
-      target: { value },
-    } = event;
-    setPlaylistTitle(typeof value === "string" ? value.split(",") : value);
-  };
 
-  const playlists = ["1st", "2nd"];
-
+ 
+  
   const initLoad = async () => {
     setLoading(true);
     if (movieId != null) {
@@ -238,93 +222,7 @@ function MoviePage() {
                 }}
               >
                 <PlaylistAddIcon sx={{ color: "#fff" }} />
-                <FormControl
-                  sx={{
-                    color: "#fff",
-                    backgroundColor: "#202020",
-                    borderRadius: "5px",
-                    m: 1,
-                    width: 250,
-                  }}
-                >
-                  <InputLabel
-                    sx={{
-                      color: "#fff",
-                      "&.MuiInputLabel-root.Mui-focused": {
-                        color: "#fff",
-                      },
-                    }}
-                  >
-                    Save to Playlist
-                  </InputLabel>
-
-                  <Select
-                    multiple
-                    value={playlistTitle}
-                    onChange={handleChange}
-                    input={<OutlinedInput label="Save to Playlist" />}
-                    renderValue={(selected) => selected.join(", ")}
-                    sx={{
-                      height: "48px",
-                      paddingTop: "8px",
-                      width: "250px",
-                      border: "none",
-                      color: "#fff",
-                      "& .MuiSvgIcon-root": {
-                        color: "#fff",
-                      },
-                      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                        border: "1px solid",
-                        borderColor: "#fff",
-                      },
-                    }}
-                  >
-                    <InputBase
-                      placeholder=" + New Playlist"
-                      sx={{
-                        fontSize: "0.9em",
-                        color: "#fff",
-                        width: "100%",
-                        borderRadius: "5px 5px 0 0",
-                        padding: "4px 4px 4px 14px",
-                        backgroundColor: "#202020",
-                      }}
-                    />
-                    {playlists.map((playlist) => (
-                      <MenuItem
-                        sx={{
-                          backgroundColor: "#303030",
-                          "&.MuiList-root.MuiMenu-list": {
-                            paddingTop: 0,
-                            paddingBottom: 0,
-                          },
-                          "&:hover": {
-                            backgroundColor: "#404040",
-                          },
-                          "&.MuiMenuItem-root.Mui-selected": {
-                            backgroundColor: "#404040",
-                          },
-                        }}
-                        key={playlist}
-                        value={playlist}
-                      >
-                        <Checkbox
-                          sx={{
-                            color: "#e70800",
-                            "&.Mui-checked": {
-                              color: "#e70800",
-                            },
-                          }}
-                          checked={playlistTitle.indexOf(playlist) > -1}
-                        />
-                        <ListItemText
-                          sx={{ color: "#fff" }}
-                          primary={playlist}
-                        />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+          {/* <PlaylistDropwdown userId={userID} movieId={movie.id} /> */}
               </Box>
               <Grid
                 container

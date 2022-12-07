@@ -1,7 +1,7 @@
 import callApi from "../callApi";
-import {Playlists} from "../../models/Playlist";
+import {Playlist} from "../../models/Playlist";
 
-export const getUserLists = async(user_id:number):Promise<Playlists> => {
+export const getUserLists = async(user_id:number):Promise<Playlist[]> => {
     const url = `https://cloudcomputingapi.azurewebsites.net/Movies/list/user/get/${user_id}`
     try {
         return  await callApi(url,"GET")
