@@ -7,6 +7,7 @@ import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
 import {createPlaylist} from "./middleware/PlaylistsMiddleware/createPlaylist";
 import {addMovieToList} from "./middleware/PlaylistsMiddleware/addMovieToList";
+import PlaylistsDropdown from "./components/Playlists/PlaylistsDropdown";
 
 
 function App() {

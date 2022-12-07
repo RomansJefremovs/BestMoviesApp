@@ -41,6 +41,7 @@ const MoviePosterBox = (movie: MovieBox) => {
       setFav("+");
     }
   };
+  const isInPlaylist =
   useEffect(() => {
     initFavState();
   });

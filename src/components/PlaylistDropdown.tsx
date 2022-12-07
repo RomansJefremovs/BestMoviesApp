@@ -67,7 +67,6 @@ const handleAddRemovePlaylist = async (event: SelectChangeEvent<typeof playlistT
         }else{
             removeMovieFromList(value,movieId, userId)
         }
-        
        }
 }
 useEffect(()=>{
