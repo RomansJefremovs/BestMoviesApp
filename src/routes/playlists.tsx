@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
-import { Movie } from "../models/Movie";
+import {useState} from "react";
 import Box from "@mui/material/Box";
-import { Container, Divider, Grid, Typography } from "@mui/material";
+import {Container, Divider, Grid, Typography} from "@mui/material";
 import { getUserID } from "../middleware/getUserID";
-import MoviesList from "../components/MoviesList";
-import { getAllPublicPlaylists } from "../middleware/PlaylistsMiddleware/getAllPublicPlaylists";
+import MyPlaylists from "../components/Playlists/MyPlaylists";
+import * as React from "react";
 
 function Playlists() {
-  const [playlists, setPlaylists] = useState<Movie[]>([]);
-  const userId = getUserID();
 
-  const initialLoad = async (userId: number) => {
-    // const tempArr = await getAllPublicPlaylists(userId);
-    // console.log(tempArr);
-    // setPlaylists(tempArr);
-  };
+    const [open, setOpen] = React.useState(false);
+    const [error, setError] = useState<boolean>(false)
+    const handleErrorOpen = ()=>setError(true)
+    const handleErrorClose = ()=>setError(false)
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-  useEffect(() => {
-    initialLoad(parseInt(userId));
-  },[]);
 
   return (
-    <>
       <Container
         className="content"
         sx={{
@@ -40,7 +34,6 @@ function Playlists() {
               height: "auto",
             }}
           >
-            {playlists ? (
               <Typography
                 variant="h2"
                 sx={{
@@ -53,9 +46,6 @@ function Playlists() {
               >
                 My Playlists
               </Typography>
-            ) : (
-              <></>
-            )}
             <Divider />
           </Box>
         </Grid>
@@ -72,7 +62,6 @@ function Playlists() {
         </Grid>
 
         <Grid container sx={{ padding: "2em" }}>
-          {playlists.length !== 0 ? (
             <Grid
               container
               display="grid"
@@ -83,32 +72,20 @@ function Playlists() {
                 lg: "repeat(12, 1fr)",
               }}
               gap={3}
+              sx={{display:"flex", flexDirection:"column"}}
             >
-              <MoviesList movies={playlists} />
+              <MyPlaylists
+                  userId={getUserID()}
+                  open={open}
+                  error={error}
+                  handleClose={handleClose}
+                  handleOpen={handleOpen}
+                  handleErrorClose={handleErrorClose}
+                  handleErrorOpen={handleErrorOpen}
+              />
             </Grid>
-          ) : (
-            <Typography
-              color="#fff"
-              className="reveal"
-              sx={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                margin: "auto",
-                display: "flex",
-                justifyContent: "center",
-                textAlign: "center",
-                alignItems: "center",
-              }}
-            >
-              Oops! <br></br> Nothing's here.
-            </Typography>
-          )}
         </Grid>
       </Container>
-    </>
   );
 }
 

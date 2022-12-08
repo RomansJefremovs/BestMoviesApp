@@ -4,17 +4,13 @@ import { getAllFavouriteMoviesById } from "../middleware/getAllFavouriteMoviesBy
 import Box from "@mui/material/Box";
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import { getUserID } from "../middleware/getUserID";
-import Loading from "../components/Loading";
 import MoviesList from "../components/MoviesList";
-import {addToFavourites} from "../middleware/addToFavourites";
-import {removeFromFavourites} from "../middleware/removeFromFavourites";
 
 function Favorites() {
   const [favourites, setFavourites] = useState<Movie[]>([]);
 
   const initialLoad = async (userId: number) => {
     const tempArr = await getAllFavouriteMoviesById(userId);
-    console.log(tempArr);
     setFavourites(tempArr);
   };
 

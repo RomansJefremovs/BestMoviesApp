@@ -1,22 +1,14 @@
 import { Link as LinkRouter, Outlet } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
-  Checkbox,
-  FormControlLabel,
-  ThemeProvider,
   Typography,
 } from "@mui/material";
 import { Container, Box, Avatar, Grid, TextField, Button } from "@mui/material";
-import { theme } from "../theme/theme";
 import { FormEvent } from "react";
-import callApi from "../middleware/callApi";
-import { login } from "../middleware/login";
 import { register } from "../middleware/register";
 import { passwordHash } from "../middleware/passwordHash";
 
 function SignUp() {
-  const baseURL = `https://cloudcomputingapi.azurewebsites.net`;
-
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,7 +17,7 @@ function SignUp() {
     if (username !== null && password !== null) {
       const hashPassword = passwordHash(password.toString());
       const registerCall = await register(username.toString(), hashPassword);
-      if (registerCall == "Success") {
+      if (registerCall === "Success") {
         window.location.href = `/sign-in`;
       } else {
         alert(registerCall);

@@ -16,7 +16,9 @@ import PersonList from "../components/PersonList";
 import Loading from "../components/Loading";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { getUserID } from "../middleware/getUserID";
-import PlaylistDropwdown from "../components/PlaylistDropdown";
+import PlaylistsDropdown from "../components/Playlists/PlaylistsDropdown";
+import {Playlist} from "../models/Playlist";
+import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
 
 function MoviePage() {
   const [param] = useSearchParams();
@@ -25,11 +27,8 @@ function MoviePage() {
   const [crew, setCrew] = useState<Credits>();
   const [cast, setCast] = useState<Credits>();
   const [loading, setLoading] = useState(false);
-  const userID = getUserID();
+  const [playlistsM,setPlaylistsM] = useState<Playlist[]>([])
 
-
- 
-  
   const initLoad = async () => {
     setLoading(true);
     if (movieId != null) {
@@ -37,6 +36,8 @@ function MoviePage() {
       setMovie(await getMovieByID(parseInt(movieId)));
       setCrew(await getCredits(parseInt(movieId)));
       setCast(await getCredits(parseInt(movieId)));
+      const tempArr = await getUserLists(parseInt(getUserID()));
+      setPlaylistsM(tempArr);
     } else {
       setMovie(undefined);
       setCrew(undefined);
@@ -221,8 +222,13 @@ function MoviePage() {
                   alignItems: "center",
                 }}
               >
-                <PlaylistAddIcon sx={{ color: "#fff" }} />
-          {/* <PlaylistDropwdown userId={userID} movieId={movie.id} /> */}
+                {movieId !==null && playlistsM.length !==0 ?
+                   <>
+                     <PlaylistAddIcon sx={{ color: "#fff" }} />
+                     <PlaylistsDropdown playlists={playlistsM} movieId={parseInt(movieId)}/>
+                   </>
+                    :''
+                }
               </Box>
               <Grid
                 container

@@ -9,6 +9,8 @@ import { addToFavourites } from "../middleware/addToFavourites";
 import { removeFromFavourites } from "../middleware/removeFromFavourites";
 import NotFound from "../assets/images/NotFoundMovie.png";
 import { checkIfMovieIsFavourite } from "../middleware/checkIfMovieIsFavourite";
+import {checkIfMovieIsInList} from "../middleware/PlaylistsMiddleware/checkIfMovieIsInList";
+import {removeMovieFromList} from "../middleware/PlaylistsMiddleware/removeMovieFromList";
 
 const MoviePosterBox = (movie: MovieBox) => {
   const poster =
@@ -18,11 +20,12 @@ const MoviePosterBox = (movie: MovieBox) => {
   const userId = getUserID();
   const [display, setDisplay] = useState(false);
   const [fav, setFav] = useState<"+" | "-">("+");
+  const [isInPlaylist,setIsInPlaylist] = useState<boolean>()
   const handleFavourites = async () => {
-    if (fav == "+" && userId != "Not Found") {
+    if (fav === "+" && userId !== "Not Found") {
       await addToFavourites(parseInt(userId), movie.id);
       setFav("-");
-    } else if (userId == "Not Found") {
+    } else if (userId === "Not Found") {
       // <LinkRouter to="sign-in" />
       window.location.href = "/sign-in";
     } else {
@@ -35,12 +38,26 @@ const MoviePosterBox = (movie: MovieBox) => {
   };
   const initFavState = async () => {
     const isPresent = await checkIfMovieIsFavourite(movie.id);
+    if (movie.list_id){
+        await checkIfMovieIsInList(movie.list_id,movie.id)
+        setIsInPlaylist(true)
+    }else{
+        setIsInPlaylist(false)
+    }
+
     if (isPresent) {
       setFav("-");
     } else {
       setFav("+");
     }
   };
+
+  const handleRemoveFromPlaylist = async()=>{
+      if (movie.list_id && movie.initialLoadLists){
+          await removeMovieFromList(movie.list_id,movie.id,userId)
+          await movie.initialLoadLists()
+      }
+  }
   useEffect(() => {
     initFavState();
   });
@@ -142,20 +159,40 @@ const MoviePosterBox = (movie: MovieBox) => {
           gap={2}
           sx={{ margin: "10px 0 10px 0" }}
         >
-          <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
-            <Button id="watch-now-button" sx={{ borderRadius: "30px" }}>
-              <Typography
-                variant="h5"
-                sx={{
-                  fontSize: "15px",
-                  fontWeight: "600",
-                  padding: "5px 10px 5px 10px",
-                }}
-              >
-                Watch Now
-              </Typography>
-            </Button>
-          </LinkRouter>
+            { isInPlaylist
+                ?
+                <Button
+                    id="watch-now-button"
+                    sx={{ borderRadius: "30px" }}
+                    onClick={handleRemoveFromPlaylist}
+                >
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            fontSize: "15px",
+                            fontWeight: "600",
+                            padding: "5px 10px 5px 10px",
+                        }}
+                    >
+                        Remove From Playlist
+                    </Typography>
+                </Button>
+                :
+                <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
+                    <Button id="watch-now-button" sx={{ borderRadius: "30px" }}>
+                        <Typography
+                            variant="h5"
+                            sx={{
+                                fontSize: "15px",
+                                fontWeight: "600",
+                                padding: "5px 10px 5px 10px",
+                            }}
+                        >
+                            Watch Now
+                        </Typography>
+                    </Button>
+                </LinkRouter>
+            }
 
           <Button
             id="favorites-button"

@@ -11,6 +11,6 @@ export const createPlaylist = async (user_list_name:string,public_list:boolean,u
        return await temp.text()
    }catch (e) {
        console.log(e)
-       return "Error"
+       return `Error ${e}`
    }
 }

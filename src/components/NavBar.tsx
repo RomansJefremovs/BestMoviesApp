@@ -3,7 +3,7 @@ import NavLink from "./NavLink";
 import Logo from "./Logo";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { getNavItems, getSignedInNavItems } from "./NavItems";
-import NavBarProps from "../interfaces/NavBar";
+import NavBarProps from "../models/interfaces/NavBar";
 import NavBarDrawer from "./NavBarDrawer";
 import SearchField from "./SearchField";
 import React, { ChangeEvent, useState } from "react";

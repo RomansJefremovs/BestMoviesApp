@@ -1,11 +1,11 @@
 import { ListItem, ListItemButton, ListItemText } from "@mui/material";
 
-interface NavLink {
+interface NavLinkProps {
   url: string;
   title: string;
 }
 
-const NavLink = ({ url, title }: NavLink) => {
+const NavLink = ({ url, title }: NavLinkProps) => {
   return (
     <>
       <ListItem key={title} disablePadding sx={{ width: "auto" }}>
