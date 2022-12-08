@@ -11,6 +11,7 @@ import NotFound from "../assets/images/NotFoundMovie.png";
 import { checkIfMovieIsFavourite } from "../middleware/checkIfMovieIsFavourite";
 import {checkIfMovieIsInList} from "../middleware/PlaylistsMiddleware/checkIfMovieIsInList";
 import {removeMovieFromList} from "../middleware/PlaylistsMiddleware/removeMovieFromList";
+import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
 
 const MoviePosterBox = (movie: MovieBox) => {
   const poster =
@@ -38,8 +39,16 @@ const MoviePosterBox = (movie: MovieBox) => {
   };
   const initFavState = async () => {
     const isPresent = await checkIfMovieIsFavourite(movie.id);
-    if (movie.list_id){
-        await checkIfMovieIsInList(movie.list_id,movie.id)
+    const userPlaylistsTemp = await getUserLists(parseInt(getUserID()))
+      let checkIfUserHasAccess = false
+      for (let i = 0; i < userPlaylistsTemp.length; i++) {
+            if (userPlaylistsTemp[i].list_id === movie.list_id){
+                checkIfUserHasAccess = true
+            }
+      }
+    if (movie.list_id && checkIfUserHasAccess){
+        const tempCheck = await checkIfMovieIsInList(movie.list_id,movie.id)
+        console.log(tempCheck)
         setIsInPlaylist(true)
     }else{
         setIsInPlaylist(false)
