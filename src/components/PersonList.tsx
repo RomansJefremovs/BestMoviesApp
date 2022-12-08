@@ -1,10 +1,10 @@
 import {Crew} from "../models/Crew";
 import {Cast} from "../models/Cast";
 import PersonPosterBox from "./PersonPosterBox";
-interface PersonList{
+interface PersonListProps{
     prop: Cast[]|Crew[]
 }
-const PersonList = ({prop}:PersonList) => {
+const PersonList = ({prop}:PersonListProps) => {
     return(
         <>
             {

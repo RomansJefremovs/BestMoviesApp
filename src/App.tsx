@@ -16,13 +16,6 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  // const createSome = async()=>{
-  //   const temp = await addMovieToList("17",460, "45")
-  //   console.log(temp)
-  // }
-  // useEffect(()=>{
-  //   createSome()
-  // })
   return (
     <>
       <ThemeProvider theme={theme}>

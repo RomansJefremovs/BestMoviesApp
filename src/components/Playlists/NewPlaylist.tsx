@@ -2,8 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import {Button, FormControlLabel, MenuItem, Radio, RadioGroup, Select, TextField} from "@mui/material";
-import {FormEvent, useCallback, useState} from "react";
+import {Button, FormControlLabel, Radio, RadioGroup, TextField} from "@mui/material";
+import {FormEvent} from "react";
 import {createPlaylist} from "../../middleware/PlaylistsMiddleware/createPlaylist";
 const style = {
     position: 'absolute' as 'absolute',
@@ -26,12 +26,11 @@ interface NewPlaylistProps {
     userId:string
     handleErrorOpen:()=>void,
 }
-const NewPlaylist = ({open,handleClose,handleOpen,initialLoad,userId,handleErrorOpen}:NewPlaylistProps) => {
+const NewPlaylist = ({open,handleClose,initialLoad,userId,handleErrorOpen}:NewPlaylistProps) => {
     const handleCreatePlaylist = async (event: FormEvent<HTMLFormElement>)=>{
         const data = new FormData(event.currentTarget);
         const playlistName = data.get("playlistName");
         const privacyField = data.get("privacy");
-        console.log(privacyField)
         handleClose()
         if (playlistName !==null && privacyField !==null && playlistName !== '' && privacyField !== ''){
             const privacy = () => {

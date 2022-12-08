@@ -1,8 +1,8 @@
-import { Box, Button, Drawer, List } from "@mui/material";
+import { Box, Button, Drawer } from "@mui/material";
 import NavLink from "./NavLink";
 import { getDiscoverItems, getNavItems, getSignedInNavItems } from "./NavItems";
 import Logo from "./Logo";
-import navBar from "../interfaces/NavBar";
+import navBar from "../models/interfaces/NavBar";
 import { SignOut } from "../middleware/signOut";
 
 const NavBarDrawer = ({ handleDrawerToggle, mobileOpen, userID }: navBar) => {

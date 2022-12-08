@@ -1,5 +1,5 @@
-import { Box, Drawer, Grid, List } from "@mui/material";
-import { SearchProps } from "../interfaces/Search";
+import { Box, Drawer } from "@mui/material";
+import { SearchProps } from "../models/interfaces/Search";
 import SearchField from "./SearchField";
 
 const SearchDrawer = ({

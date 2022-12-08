@@ -39,7 +39,7 @@ const MoviePosterBox = (movie: MovieBox) => {
   const initFavState = async () => {
     const isPresent = await checkIfMovieIsFavourite(movie.id);
     if (movie.list_id){
-        const tempIsInPlaylist = await checkIfMovieIsInList(movie.list_id,movie.id)
+        await checkIfMovieIsInList(movie.list_id,movie.id)
         setIsInPlaylist(true)
     }else{
         setIsInPlaylist(false)
@@ -54,7 +54,7 @@ const MoviePosterBox = (movie: MovieBox) => {
 
   const handleRemoveFromPlaylist = async()=>{
       if (movie.list_id && movie.initialLoadLists){
-          const removeCall = await removeMovieFromList(movie.list_id,movie.id,userId)
+          await removeMovieFromList(movie.list_id,movie.id,userId)
           await movie.initialLoadLists()
       }
   }

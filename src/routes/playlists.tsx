@@ -1,10 +1,8 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Box from "@mui/material/Box";
-import {Button, Container, Divider, Grid, Typography} from "@mui/material";
+import {Container, Divider, Grid, Typography} from "@mui/material";
 import { getUserID } from "../middleware/getUserID";
 import MyPlaylists from "../components/Playlists/MyPlaylists";
-import {Playlist} from "../models/Playlist";
-import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
 import * as React from "react";
 
 function Playlists() {

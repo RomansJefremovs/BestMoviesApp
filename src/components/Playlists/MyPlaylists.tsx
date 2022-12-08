@@ -6,7 +6,6 @@ import NewPlaylist from "./NewPlaylist";
 import {useEffect, useState} from "react";
 import ErrorModal from "./ErrorModal";
 import PlaylistsDropdown from "./PlaylistsDropdown";
-import {checkIfMovieIsInList} from "../../middleware/PlaylistsMiddleware/checkIfMovieIsInList";
 import {getUserID} from "../../middleware/getUserID";
 import {getUserLists} from "../../middleware/PlaylistsMiddleware/getUserLists";
 

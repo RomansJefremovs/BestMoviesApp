@@ -16,7 +16,6 @@ import PersonList from "../components/PersonList";
 import Loading from "../components/Loading";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { getUserID } from "../middleware/getUserID";
-import PlaylistDropwdown from "../components/PlaylistDropdown";
 import PlaylistsDropdown from "../components/Playlists/PlaylistsDropdown";
 import {Playlist} from "../models/Playlist";
 import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
@@ -29,7 +28,6 @@ function MoviePage() {
   const [cast, setCast] = useState<Credits>();
   const [loading, setLoading] = useState(false);
   const [playlistsM,setPlaylistsM] = useState<Playlist[]>([])
-  const userID = getUserID();
 
   const initLoad = async () => {
     setLoading(true);

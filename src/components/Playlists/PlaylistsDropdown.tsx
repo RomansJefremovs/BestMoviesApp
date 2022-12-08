@@ -9,11 +9,9 @@ interface PlaylistsDropdownProps {
 }
 const PlaylistsDropdown = ({playlists, movieId}:PlaylistsDropdownProps) => {
     const [playlist, setPlaylist] = useState('');
-
     const handleChange = async (event: SelectChangeEvent) => {
         const listId = event.target.value
-        const tempAddToPlaylist = await addMovieToList(listId,movieId,getUserID())
-        console.log(tempAddToPlaylist)
+        await addMovieToList(listId,movieId,getUserID())
     };
 
     return (
