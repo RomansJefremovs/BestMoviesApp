@@ -86,7 +86,7 @@ const Playlist = () => {
                                 }}
                                 gap={3}
                             >
-                                <MoviesList movies={playlistContent}/>
+                                {listId ?  <MoviesList movies={playlistContent} initialLoadLists={playlistLoad} isListBox={true} list_id={parseInt(listId)}/> : <p>Ooops</p>}
 
                             </Grid>)
                             :

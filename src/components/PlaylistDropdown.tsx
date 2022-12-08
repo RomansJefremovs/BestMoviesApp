@@ -57,21 +57,21 @@ const handlePlaylistsLoad= async ()=>{
 //     }
 //   };
 
-const handleAddRemovePlaylist = async (event: SelectChangeEvent<typeof playlistTitle>)=>{
-    const {target: { value },} = event;
-
-         const playlistContent = await getPlaylist(parseInt(value), userId)
-       for (let index = 0; index < playlistContent.length; index++) {
-        if (playlistContent[index] === movieId) {
-            addMovieToList(value,movieId, userId)
-        }else{
-            removeMovieFromList(value,movieId, userId)
-        }
-       }
-}
-useEffect(()=>{
-    handlePlaylistsLoad()
-},[])
+// const handleAddRemovePlaylist = async (event: SelectChangeEvent<typeof playlistTitle>)=>{
+//     const {target: { value },} = event;
+//
+//          const playlistContent = await getPlaylist(parseInt(value), userId)
+//        for (let index = 0; index < playlistContent.length; index++) {
+//         if (playlistContent[index] === movieId) {
+//             addMovieToList(value,movieId, userId)
+//         }else{
+//             removeMovieFromList(value,movieId, userId)
+//         }
+//        }
+// }
+// useEffect(()=>{
+//     handlePlaylistsLoad()
+// },[])
   return (
     <>
      {playlists.length !== 0 ?
@@ -98,7 +98,7 @@ useEffect(()=>{
          <Select
            multiple
            value={playlistTitle}
-           onChange={handleAddRemovePlaylist}
+           // onChange={handleAddRemovePlaylist}
            input={<OutlinedInput label="Save to Playlist" />}
          //   renderValue={(selected) => selected.join(", ")}
            sx={{

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
-import { Container, Divider, Grid, Typography } from "@mui/material";
+import {Button, Container, Divider, Grid, Typography} from "@mui/material";
 import { getUserID } from "../middleware/getUserID";
 import MyPlaylists from "../components/Playlists/MyPlaylists";
 import {Playlist} from "../models/Playlist";
@@ -8,16 +8,14 @@ import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
 import * as React from "react";
 
 function Playlists() {
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const initialLoad = async () => {
-    const tempArr = await getUserLists(parseInt(getUserID()));
-    console.log(tempArr);
-    setPlaylists(tempArr);
-  };
 
-  useEffect(() => {
-    initialLoad();
-  },[]);
+    const [open, setOpen] = React.useState(false);
+    const [error, setError] = useState<boolean>(false)
+    const handleErrorOpen = ()=>setError(true)
+    const handleErrorClose = ()=>setError(false)
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
 
   return (
       <Container
@@ -38,7 +36,6 @@ function Playlists() {
               height: "auto",
             }}
           >
-            {playlists.length !== 0 ? (
               <Typography
                 variant="h2"
                 sx={{
@@ -51,9 +48,6 @@ function Playlists() {
               >
                 My Playlists
               </Typography>
-            ) : (
-              <></>
-            )}
             <Divider />
           </Box>
         </Grid>
@@ -70,7 +64,6 @@ function Playlists() {
         </Grid>
 
         <Grid container sx={{ padding: "2em" }}>
-          {playlists.length !== 0 ? (
             <Grid
               container
               display="grid"
@@ -83,28 +76,16 @@ function Playlists() {
               gap={3}
               sx={{display:"flex", flexDirection:"column"}}
             >
-              <MyPlaylists playlists={playlists} initialLoad={initialLoad} userId={getUserID()}/>
+              <MyPlaylists
+                  userId={getUserID()}
+                  open={open}
+                  error={error}
+                  handleClose={handleClose}
+                  handleOpen={handleOpen}
+                  handleErrorClose={handleErrorClose}
+                  handleErrorOpen={handleErrorOpen}
+              />
             </Grid>
-          ) : (
-            <Typography
-              color="#fff"
-              className="reveal"
-              sx={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                margin: "auto",
-                display: "flex",
-                justifyContent: "center",
-                textAlign: "center",
-                alignItems: "center",
-              }}
-            >
-              Oops! <br></br> Nothing's here.
-            </Typography>
-          )}
         </Grid>
       </Container>
   );

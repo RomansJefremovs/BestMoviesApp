@@ -1,40 +1,68 @@
 import {Playlist} from "../../models/Playlist";
 import PlaylistLine from "./PlaylistLine";
 import * as React from "react";
-import {Button} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import NewPlaylist from "./NewPlaylist";
 import {useEffect, useState} from "react";
 import ErrorModal from "./ErrorModal";
 import PlaylistsDropdown from "./PlaylistsDropdown";
 import {checkIfMovieIsInList} from "../../middleware/PlaylistsMiddleware/checkIfMovieIsInList";
 import {getUserID} from "../../middleware/getUserID";
+import {getUserLists} from "../../middleware/PlaylistsMiddleware/getUserLists";
 
 interface MyPlaylistsProps {
-  playlists: Playlist[]
-    initialLoad:()=> Promise<void>
-    userId:string
+    userId:string,
+    open:boolean,
+    error:boolean,
+    handleClose:()=>void,
+    handleOpen:()=>void,
+    handleErrorClose:()=>void,
+    handleErrorOpen:()=>void,
 }
-const MyPlaylists = ({playlists,initialLoad, userId}:MyPlaylistsProps) => {
-    const [open, setOpen] = React.useState(false);
-    const [error, setError] = useState<boolean>(false)
-    const handleErrorOpen = ()=>setError(true)
-    const handleErrorClose = ()=>setError(false)
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    // const tryout= async ()=>{
-    //     console.log( await checkIfMovieIsInList(playlists,488))
-    // }
-    // useEffect(()=>{
-    //     tryout()
-    // })
+const MyPlaylists = ({userId,
+                         handleErrorOpen,
+                         handleErrorClose,
+                         handleOpen,
+                         handleClose,
+                         open,
+                         error}:MyPlaylistsProps) => {
+    const [playlists, setPlaylists] = useState<Playlist[]>([]);
+    const initialLoadLists = async () => {
+        const tempArr = await getUserLists(parseInt(getUserID()));
+        console.log(tempArr);
+        setPlaylists(tempArr);
+    };
+
+    useEffect(() => {
+        initialLoadLists();
+    },[]);
   return(
       <>
           <Button onClick={handleOpen}>Create Playlist</Button>
-          <NewPlaylist open={open} handleClose={handleClose} handleOpen={handleOpen} initialLoad={initialLoad} userId={userId} handleErrorOpen={handleErrorOpen}/>
+          <NewPlaylist open={open} handleClose={handleClose} handleOpen={handleOpen} initialLoad={initialLoadLists} userId={userId} handleErrorOpen={handleErrorOpen}/>
           <ErrorModal open={error} handleClose={handleErrorClose}/>
-        {playlists.map(playlist=>{
+        {playlists.length !== 0 ? playlists.map(playlist=>{
           return <PlaylistLine key={playlist.list_id} playlistName={playlist.list_name} playlistId={playlist.list_id}/>
-        })}
+        }):
+            <Typography
+                color="#fff"
+                className="reveal"
+                sx={{
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    margin: "auto",
+                    display: "flex",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    alignItems: "center",
+                }}
+            >
+                Oops! <br></br> Nothing's here.
+            </Typography>
+        }
           <PlaylistsDropdown playlists={playlists} movieId={488}/>
       </>
   )
