@@ -5,7 +5,6 @@ import {Button, Typography} from "@mui/material";
 import NewPlaylist from "./NewPlaylist";
 import {useEffect, useState} from "react";
 import ErrorModal from "./ErrorModal";
-import PlaylistsDropdown from "./PlaylistsDropdown";
 import {getUserID} from "../../middleware/getUserID";
 import {getUserLists} from "../../middleware/PlaylistsMiddleware/getUserLists";
 
@@ -62,7 +61,6 @@ const MyPlaylists = ({userId,
                 Oops! <br></br> Nothing's here.
             </Typography>
         }
-          <PlaylistsDropdown playlists={playlists} movieId={488}/>
       </>
   )
 }

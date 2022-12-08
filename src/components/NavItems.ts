@@ -1,5 +1,6 @@
 const navItems: any = [
   { title: "Home", url: "/" },
+  { title: "Global", url: "global" },
 ];
 
 const signedInNavItems: any = [{ title: "My Favorites", url: "/favorites" }, { title: "My Playlists", url: "playlists" }];

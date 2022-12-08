@@ -15,6 +15,7 @@ import Top00s from "../routes/Top00s";
 import ScrollToTop from "./ScrollToTop";
 import Playlists from "../routes/playlists";
 import Playlist from "./Playlists/Playlist";
+import GlobalPlaylists from "../routes/GlobalPlaylists";
 
 
 const AppRouter = () => {
@@ -37,6 +38,7 @@ const AppRouter = () => {
           <Route path="00s" element={<Top00s />} />
           <Route path="10s" element={<Top10s />} />
           <Route path="playlist" element={<Playlist />} />
+          <Route path="global" element={<GlobalPlaylists />} />
           <Route
             path="*"
             element={
