@@ -11,7 +11,11 @@ const NavLink = ({ url, title }: NavLinkProps) => {
       <ListItem key={title} disablePadding sx={{ width: "auto" }}>
         <ListItemButton>
           <a href={url} style={{ color: "#fff" }}>
-            <ListItemText primary={title} sx={{ marginTop: 0 }} />
+            <ListItemText
+              className="hover-underline-animation"
+              primary={title}
+              sx={{ marginTop: 0, paddingBottom: "5px" }}
+            />
           </a>
         </ListItemButton>
       </ListItem>

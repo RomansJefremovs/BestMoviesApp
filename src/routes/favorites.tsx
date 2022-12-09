@@ -87,7 +87,6 @@ function Favorites() {
           ) : (
             <Typography
               color="#fff"
-              className="reveal"
               sx={{
                 position: "absolute",
                 left: 0,
@@ -101,7 +100,7 @@ function Favorites() {
                 alignItems: "center",
               }}
             >
-              Oops! <br></br> Nothing's here.
+              Oops! Nothing's here.<br></br>Add some movies!
             </Typography>
           )}
         </Grid>

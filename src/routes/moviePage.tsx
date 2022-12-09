@@ -1,10 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "mui-image";
 import { useEffect, useState } from "react";
 import NotFound from "../assets/images/search.png";
@@ -17,17 +12,17 @@ import Loading from "../components/Loading";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { getUserID } from "../middleware/getUserID";
 import PlaylistsDropdown from "../components/Playlists/PlaylistsDropdown";
-import {Playlist} from "../models/Playlist";
-import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
+import { Playlist } from "../models/Playlist";
+import { getUserLists } from "../middleware/PlaylistsMiddleware/getUserLists";
 
 function MoviePage() {
   const [param] = useSearchParams();
-  const movieId = param.get("movieId") !== null ? param.get("movieId") : '';
+  const movieId = param.get("movieId") !== null ? param.get("movieId") : "";
   const [movie, setMovie] = useState<Movie>();
   const [crew, setCrew] = useState<Credits>();
   const [cast, setCast] = useState<Credits>();
   const [loading, setLoading] = useState(false);
-  const [playlistsM,setPlaylistsM] = useState<Playlist[]>([])
+  const [playlistsM, setPlaylistsM] = useState<Playlist[]>([]);
 
   const initLoad = async () => {
     setLoading(true);
@@ -222,13 +217,17 @@ function MoviePage() {
                   alignItems: "center",
                 }}
               >
-                {movieId !==null && playlistsM.length !==0 ?
-                   <>
-                     <PlaylistAddIcon sx={{ color: "#fff" }} />
-                     <PlaylistsDropdown playlists={playlistsM} movieId={parseInt(movieId)}/>
-                   </>
-                    :''
-                }
+                {movieId !== null && playlistsM.length !== 0 ? (
+                  <Box sx={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+                    <PlaylistAddIcon sx={{ color: "#fff" }} />
+                    <PlaylistsDropdown
+                      playlists={playlistsM}
+                      movieId={parseInt(movieId)}
+                    />
+                  </Box>
+                ) : (
+                  ""
+                )}
               </Box>
               <Grid
                 container

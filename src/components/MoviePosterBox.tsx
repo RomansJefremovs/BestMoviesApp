@@ -1,5 +1,13 @@
 import { Link as LinkRouter } from "react-router-dom";
-import { Box, Button, CardMedia, Grid, Typography } from "@mui/material";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Grid,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { MovieBox } from "../models/MovieBox";
 import StarIcon from "@mui/icons-material/Star";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -9,9 +17,9 @@ import { addToFavourites } from "../middleware/addToFavourites";
 import { removeFromFavourites } from "../middleware/removeFromFavourites";
 import NotFound from "../assets/images/NotFoundMovie.png";
 import { checkIfMovieIsFavourite } from "../middleware/checkIfMovieIsFavourite";
-import {checkIfMovieIsInList} from "../middleware/PlaylistsMiddleware/checkIfMovieIsInList";
-import {removeMovieFromList} from "../middleware/PlaylistsMiddleware/removeMovieFromList";
-import {getUserLists} from "../middleware/PlaylistsMiddleware/getUserLists";
+import { checkIfMovieIsInList } from "../middleware/PlaylistsMiddleware/checkIfMovieIsInList";
+import { removeMovieFromList } from "../middleware/PlaylistsMiddleware/removeMovieFromList";
+import { getUserLists } from "../middleware/PlaylistsMiddleware/getUserLists";
 
 const MoviePosterBox = (movie: MovieBox) => {
   const poster =
@@ -21,7 +29,7 @@ const MoviePosterBox = (movie: MovieBox) => {
   const userId = getUserID();
   const [display, setDisplay] = useState(false);
   const [fav, setFav] = useState<"+" | "-">("+");
-  const [isInPlaylist,setIsInPlaylist] = useState<boolean>()
+  const [isInPlaylist, setIsInPlaylist] = useState<boolean>();
   const handleFavourites = async () => {
     if (fav === "+" && userId !== "Not Found") {
       await addToFavourites(parseInt(userId), movie.id);
@@ -39,19 +47,19 @@ const MoviePosterBox = (movie: MovieBox) => {
   };
   const initFavState = async () => {
     const isPresent = await checkIfMovieIsFavourite(movie.id);
-    const userPlaylistsTemp = await getUserLists(parseInt(getUserID()))
-      let checkIfUserHasAccess = false
-      for (let i = 0; i < userPlaylistsTemp.length; i++) {
-            if (userPlaylistsTemp[i].list_id === movie.list_id){
-                checkIfUserHasAccess = true
-            }
+    const userPlaylistsTemp = await getUserLists(parseInt(getUserID()));
+    let checkIfUserHasAccess = false;
+    for (let i = 0; i < userPlaylistsTemp.length; i++) {
+      if (userPlaylistsTemp[i].list_id === movie.list_id) {
+        checkIfUserHasAccess = true;
       }
-    if (movie.list_id && checkIfUserHasAccess){
-        const tempCheck = await checkIfMovieIsInList(movie.list_id,movie.id)
-        console.log(tempCheck)
-        setIsInPlaylist(true)
-    }else{
-        setIsInPlaylist(false)
+    }
+    if (movie.list_id && checkIfUserHasAccess) {
+      const tempCheck = await checkIfMovieIsInList(movie.list_id, movie.id);
+      console.log(tempCheck);
+      setIsInPlaylist(true);
+    } else {
+      setIsInPlaylist(false);
     }
 
     if (isPresent) {
@@ -61,12 +69,12 @@ const MoviePosterBox = (movie: MovieBox) => {
     }
   };
 
-  const handleRemoveFromPlaylist = async()=>{
-      if (movie.list_id && movie.initialLoadLists){
-          await removeMovieFromList(movie.list_id,movie.id,userId)
-          await movie.initialLoadLists()
-      }
-  }
+  const handleRemoveFromPlaylist = async () => {
+    if (movie.list_id && movie.initialLoadLists) {
+      await removeMovieFromList(movie.list_id, movie.id, userId);
+      await movie.initialLoadLists();
+    }
+  };
   useEffect(() => {
     initFavState();
   });
@@ -168,57 +176,71 @@ const MoviePosterBox = (movie: MovieBox) => {
           gap={2}
           sx={{ margin: "10px 0 10px 0" }}
         >
-            { isInPlaylist
-                ?
-                <Button
-                    id="watch-now-button"
-                    sx={{ borderRadius: "30px" }}
-                    onClick={handleRemoveFromPlaylist}
-                >
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            fontSize: "15px",
-                            fontWeight: "600",
-                            padding: "5px 10px 5px 10px",
-                        }}
-                    >
-                        Remove From Playlist
-                    </Typography>
-                </Button>
-                :
-                <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
-                    <Button id="watch-now-button" sx={{ borderRadius: "30px" }}>
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontSize: "15px",
-                                fontWeight: "600",
-                                padding: "5px 10px 5px 10px",
-                            }}
-                        >
-                            Watch Now
-                        </Typography>
-                    </Button>
-                </LinkRouter>
-            }
-
-          <Button
-            id="favorites-button"
-            sx={{ borderRadius: "30px" }}
-            onClick={handleFavourites}
-          >
-            <Typography
-              variant="h5"
+          {isInPlaylist ? (
+            <Button
+              id="remove-button"
               sx={{
-                fontSize: "15px",
-                fontWeight: "600",
-                padding: "5px 10px 5px 10px",
+                transition: "all 0.5s",
+                "&:hover": {
+                  opacity: 1,
+                },
+                opacity: "60%",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                borderRadius: "30px",
+                display: "flex",
+                justifyContent: "space-between",
               }}
+              onClick={handleRemoveFromPlaylist}
             >
-              {`${fav} Favourites`}
-            </Typography>
-          </Button>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  padding: "5px 10px 5px 10px",
+                }}
+              >
+                Remove
+              </Typography>
+              <HighlightOffIcon sx={{ color: "#fff", opacity: "30%" }} />
+            </Button>
+          ) : (
+            <LinkRouter to={`/movie?movieId=${movie.id}`} key={movie.id}>
+              <Button id="watch-now-button" sx={{ borderRadius: "30px" }}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    padding: "5px 10px 5px 10px",
+                  }}
+                >
+                  Watch Now
+                </Typography>
+              </Button>
+            </LinkRouter>
+          )}
+          {isInPlaylist ? (
+            <></>
+          ) : (
+            <Button
+              id="favorites-button"
+              sx={{ borderRadius: "30px" }}
+              onClick={handleFavourites}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  padding: "5px 10px 5px 10px",
+                }}
+              >
+                {`${fav} Favourites`}
+              </Typography>
+            </Button>
+          )}
         </Grid>
       </Grid>
     </Box>
