@@ -54,7 +54,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
             justifyContent="flex-start"
             sx={{ padding: "1em 0 0 1em" }}
           >
-            <Grid item>
+            <Grid item sx={{ paddingTop: "0.2em" }}>
               <Logo />
             </Grid>
 
@@ -65,7 +65,11 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
                   aria-label="open drawer"
                   edge="start"
                   onClick={handleDrawerToggle}
-                  sx={{ display: { lg: "none" }, marginLeft: "0.5em" }}
+                  sx={{
+                    display: { lg: "none" },
+                    paddingTop: "0.5em",
+                    marginLeft: "0.5em",
+                  }}
                 >
                   <ArrowDropDownIcon />
                 </IconButton>
@@ -128,7 +132,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
             container
             justifyContent="flex-end"
             alignItems="center"
-            sx={{ marginTop: "-48px" }}
+            sx={{ marginTop: { xs: "-3em", lg: "-4em" } }}
           >
             <Grid
               item
@@ -162,7 +166,7 @@ const NavBar = ({ handleDrawerToggle, mobileOpen, userID }: NavBarProps) => {
               )}
             </Grid>
 
-            <Grid item justifyContent="center">
+            <Grid item justifyContent="center" sx={{ marginTop: "0.4em" }}>
               <Box sx={{ display: { xs: "none", lg: "block" } }}>
                 {userID == null ? (
                   <NavLink title={"Sign In"} url={"sign-in"} />

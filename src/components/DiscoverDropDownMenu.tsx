@@ -1,8 +1,4 @@
-import {
-  Button,
-  Menu,
-  List,
-} from "@mui/material";
+import { Button, Menu, List, Typography } from "@mui/material";
 import { useState } from "react";
 import NavLink from "./NavLink";
 import { getDiscoverItems } from "./NavItems";
@@ -24,14 +20,16 @@ const DiscoverDropdownMenu = () => {
     <>
       <Button
         sx={{
-          marginTop:"-3px",
+          marginTop: "-2px",
           transition: "none",
-          color: "#fff",
-          fontSize: "13.5px",
-          textTransform: "uppercase",
-          fontWeight: "600",
           "&:hover": {
             backgroundColor: "transparent",
+          },
+          "& .MuiTypography-root": {
+            paddingBottom: "5px",
+            fontSize: "13.5px",
+            textTransform: "uppercase",
+            fontWeight: "600",
           },
         }}
         id="positioned-button"
@@ -40,7 +38,12 @@ const DiscoverDropdownMenu = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        Discover
+        <Typography
+          className="hover-underline-animation"
+          sx={{ color: "#fff" }}
+        >
+          Discover
+        </Typography>
       </Button>
       <Menu
         sx={{
