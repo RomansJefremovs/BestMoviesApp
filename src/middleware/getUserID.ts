@@ -1,4 +1,4 @@
 export const getUserID = ():string => {
     const temp = localStorage.getItem("userID")
-    return temp != null ? temp : "Not Found"
+    return temp != null && temp !== '' ? temp : "Not Found"
 }
