@@ -10,7 +10,6 @@ export const removeMovieFromList = async (user_list_id:number,movie_id:number,us
         })
         return temp.text()
     }catch (e) {
-        console.log(e)
-        return "Error"
+        return `Error ${e}`
     }
 }

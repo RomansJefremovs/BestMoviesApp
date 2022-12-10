@@ -6,7 +6,6 @@ import {
   CardMedia,
   Grid,
   Typography,
-  IconButton,
 } from "@mui/material";
 import { MovieBox } from "../models/MovieBox";
 import StarIcon from "@mui/icons-material/Star";
@@ -35,7 +34,6 @@ const MoviePosterBox = (movie: MovieBox) => {
       await addToFavourites(parseInt(userId), movie.id);
       setFav("-");
     } else if (userId === "Not Found") {
-      // <LinkRouter to="sign-in" />
       window.location.href = "/sign-in";
     } else {
       await removeFromFavourites(parseInt(userId), movie.id);
@@ -55,8 +53,7 @@ const MoviePosterBox = (movie: MovieBox) => {
       }
     }
     if (movie.list_id && checkIfUserHasAccess) {
-      const tempCheck = await checkIfMovieIsInList(movie.list_id, movie.id);
-      console.log(tempCheck);
+      await checkIfMovieIsInList(movie.list_id, movie.id);
       setIsInPlaylist(true);
     } else {
       setIsInPlaylist(false);

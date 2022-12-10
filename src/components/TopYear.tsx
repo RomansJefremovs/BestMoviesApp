@@ -117,7 +117,7 @@ const TopYear = ({ year }: Year) => {
                 width="200em"
                 height="200em"
                 src={notFound}
-                alt="Not Found Image"
+                alt="NotFoundImage"
                 className="not-found-image"
               />
             </Box>

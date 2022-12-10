@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { pluralizeUnlessSingle } from "../assets/common/utils";
 import notFound from "../assets/images/search.png";
-import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
 
 function Search() {
@@ -24,22 +23,17 @@ function Search() {
   const pageNumber = searchTerm.get("page")
     const [result, setResult] = useState<(SMovie | SPerson | Tv)[]>( []);
   const [total, setTotal] = useState<number>(0);
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageNumber !== null ? pageNumber: "1"));
   const handleMultiSearch = useCallback(async () => {
-    setLoading(true);
     if (searchValue != null) {
       const temp = await multiSearch(searchValue,currentPage);
-      console.log(temp.results);
       if (temp.results.length !== 0) {
-        setLoading(false);
         setResult(
           temp.results.filter((obj) => {
             return obj.media_type !== "tv";
           })
         );
         setTotal(temp.total_pages);
-        console.log(temp.results.length);
       } else {
       }
     } else {
@@ -113,11 +107,7 @@ function Search() {
         </Grid>
 
         <Grid container sx={{ padding: "2em" }}>
-          {
-          // loading ? (
-          //   <Loading />
-          // ) : 
-          result.length !== 0 ? (
+          {result.length !== 0 ? (
             <>
               <Grid
                 container
@@ -192,7 +182,7 @@ function Search() {
                   width="200em"
                   height="200em"
                   src={notFound}
-                  alt="Not Found Image"
+                  alt="NotFoundImage"
                   className="not-found-image"
                 />
               </Box>

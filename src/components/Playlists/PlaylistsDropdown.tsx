@@ -6,7 +6,6 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { useState } from "react";
 import { Playlist } from "../../models/Playlist";
 import { addMovieToList } from "../../middleware/PlaylistsMiddleware/addMovieToList";
 import { getUserID } from "../../middleware/getUserID";
@@ -15,10 +14,11 @@ interface PlaylistsDropdownProps {
   movieId: number;
 }
 const PlaylistsDropdown = ({ playlists, movieId }: PlaylistsDropdownProps) => {
-  const [playlist, setPlaylist] = useState("");
   const handleChange = async (event: SelectChangeEvent) => {
     const listId = event.target.value;
-    await addMovieToList(listId, movieId, getUserID());
+    if (getUserID() !== 'Not Found'){
+        await addMovieToList(listId, movieId, getUserID());
+    }
   };
 
   return (
@@ -26,25 +26,11 @@ const PlaylistsDropdown = ({ playlists, movieId }: PlaylistsDropdownProps) => {
       <FormControl
         fullWidth
         sx={{
-          // "& .MuiInputBase-root": {
-          //   color: "#fff",
-          // },
-          // "& .MuiInputLabel-root": {
-          //   color: "#fff",
-          // },
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: "#fff",
             borderRadius: "10px",
             opacity: "20%",
           },
-          // "& .Mui:focused": {
-          //   borderColor: "#fff",
-          //   color: "#fff",
-          // },
-          // "& .Mui:hover": {
-          //   borderColor: "#fff",
-          //   color: "#fff",
-          // },
           "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
             {
               borderColor: "#fff",
@@ -66,11 +52,10 @@ const PlaylistsDropdown = ({ playlists, movieId }: PlaylistsDropdownProps) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={playlist}
           label="Playlists"
           onChange={handleChange}
         >
-          {playlists.map((playlist) => {
+          {playlists.length !== 0 ? playlists.map((playlist) => {
             return (
               <MenuItem
                 sx={{ backgroundColor: "#yellow" }}
@@ -79,7 +64,7 @@ const PlaylistsDropdown = ({ playlists, movieId }: PlaylistsDropdownProps) => {
                 {playlist.list_name}
               </MenuItem>
             );
-          })}
+          }):''}
         </Select>
       </FormControl>
     </Box>
