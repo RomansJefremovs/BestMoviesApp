@@ -1,7 +1,7 @@
 import { Playlist } from "../../models/Playlist";
 import PlaylistLine from "./PlaylistLine";
 import "../../App.css";
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import NewPlaylist from "./NewPlaylist";
 import { useEffect, useState } from "react";
 import ErrorModal from "./ErrorModal";
@@ -29,7 +29,6 @@ const MyPlaylists = ({
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const initialLoadLists = async () => {
     const tempArr = await getUserLists(parseInt(getUserID()));
-    console.log(tempArr);
     setPlaylists(tempArr);
   };
 

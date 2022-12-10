@@ -8,7 +8,7 @@ export const checkIfMovieIsInList = async (list_id:number,movieId:number) => {
             if (playlistContent[index] === movieId) {
                isInPlaylists = true
             }else{
-                console.log('nothing')
+
             }
         }
     return isInPlaylists

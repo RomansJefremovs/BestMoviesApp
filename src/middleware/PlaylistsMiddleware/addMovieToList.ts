@@ -10,7 +10,6 @@ export const addMovieToList = async (user_list_id:string,movie_id:number,userID:
         })
         return temp.text()
     }catch (e) {
-        console.log(e)
-        return "Error"
+        return `Error ${e}`
     }
 }

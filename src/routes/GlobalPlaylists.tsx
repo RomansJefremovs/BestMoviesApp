@@ -9,9 +9,8 @@ import { getAllPublicPlaylists } from "../middleware/PlaylistsMiddleware/getAllP
 const GlobalPlaylists = () => {
   const [global, setGlobal] = useState<Playlist[]>([]);
   const initialLoadGlobal = async () => {
-    const global = await getAllPublicPlaylists(parseInt(getUserID()));
-    console.log(global);
-    setGlobal(global);
+    const globalTemp = await getAllPublicPlaylists(parseInt(getUserID()));
+    setGlobal(globalTemp);
   };
 
   useEffect(() => {

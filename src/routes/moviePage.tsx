@@ -31,8 +31,10 @@ function MoviePage() {
       setMovie(await getMovieByID(parseInt(movieId)));
       setCrew(await getCredits(parseInt(movieId)));
       setCast(await getCredits(parseInt(movieId)));
-      const tempArr = await getUserLists(parseInt(getUserID()));
-      setPlaylistsM(tempArr);
+      if (getUserID() !== 'Not Found'){
+        const tempArr = await getUserLists(parseInt(getUserID()));
+        setPlaylistsM(tempArr);
+      }
     } else {
       setMovie(undefined);
       setCrew(undefined);
@@ -42,7 +44,7 @@ function MoviePage() {
 
   useEffect(() => {
     initLoad();
-  }, []);
+  },[]);
 
   const movieBackdrop =
     movie?.backdrop_path != null
@@ -217,7 +219,7 @@ function MoviePage() {
                   alignItems: "center",
                 }}
               >
-                {movieId !== null && playlistsM.length !== 0 ? (
+                {movieId !== null && playlistsM !== undefined && playlistsM.length !== 0 ? (
                   <Box sx={{display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
                     <PlaylistAddIcon sx={{ color: "#fff" }} />
                     <PlaylistsDropdown
@@ -274,9 +276,7 @@ function MoviePage() {
                       }}
                       gap={3}
                     >
-                      {/* <Carousel> */}
                       <PersonList prop={cast.cast} />
-                      {/* </Carousel> */}
                     </Grid>
                   </>
                 )}
@@ -316,9 +316,7 @@ function MoviePage() {
                       }}
                       gap={3}
                     >
-                      {/* <Carousel> */}
                       <PersonList prop={crew.crew} />
-                      {/* </Carousel> */}
                     </Grid>
                   </>
                 )}{" "}

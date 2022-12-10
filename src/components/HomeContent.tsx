@@ -119,7 +119,7 @@ const HomeContent = () => {
                 width="200em"
                 height="200em"
                 src={notFound}
-                alt="Not Found Image"
+                alt="Not_Found_Image"
                 className="not-found-image"
               />
             </Box>

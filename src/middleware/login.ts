@@ -1,4 +1,3 @@
-
 export const login = async (username:string, password:string) => {
     const url = `https://cloudcomputingapi.azurewebsites.net/User/login/${username}`
     try {

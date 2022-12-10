@@ -22,9 +22,8 @@ function SignUp() {
       } else {
         alert(registerCall);
       }
-      console.log(registerCall);
     } else {
-      console.log("oops");
+        return ()=>{}
     }
   };
   return (
