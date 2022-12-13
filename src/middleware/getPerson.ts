@@ -9,14 +9,28 @@ export const getPerson = async(person_id:number):Promise<Person> => {
         const personById: PersonByID = await getPersonByID(person_id)
         const personBySearch: SearchPerson = await searchPerson(personById.name)
         let result
-        if (personBySearch.total_results === 1) {
+        if (personBySearch.total_results === 1 && personBySearch.results[0].known_for) {
+            for (let i = 0; i < personBySearch.results[0].known_for.length; i++) {
+                if (personBySearch.results[0].known_for[i].media_type === "tv"){
+                    personBySearch.results[0].known_for?.splice(i,1)
+                }
+            }
             result = personBySearch.results[0].known_for
         }else {
             for (let i = 0; i < personBySearch.results.length; i++) {
                 if (person_id === personBySearch.results[i].id && personBySearch.results[i] !== undefined) {
                     result = personBySearch.results[i].known_for
-                }else result = null
+                    if (result !== null){
+                        for (let j = 0; j < result.length; j++) {
+                            if(result[j].media_type === "tv"){
+                                result.splice(j,1)
+                            }
+                        }
+                    }
+                }
+                else result = null
             }
+            result = null
         }
 
         return  { ...personById,known_for:result}

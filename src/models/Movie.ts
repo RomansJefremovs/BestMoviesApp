@@ -3,6 +3,7 @@ export interface Movie {
     adult: boolean
     overview: string
     release_date: string
+    media_type?:"movie"|"tv"
     genre_ids: number[]
     id:number
     original_title:string
