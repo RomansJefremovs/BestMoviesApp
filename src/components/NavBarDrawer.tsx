@@ -40,16 +40,16 @@ const NavBarDrawer = ({ handleDrawerToggle, mobileOpen, userID }: navBar) => {
         <Logo />
         <br></br>
         {navItems.map((navItem: { title: string; url: string }) => (
-          <NavLink title={navItem.title} url={navItem.url} />
+          <NavLink key={navItem.title} title={navItem.title} url={navItem.url} />
         ))}
 
         {discoverItems.map((navItem: { title: string; url: string }) => (
-          <NavLink title={navItem.title} url={navItem.url} />
+          <NavLink key={navItem.title} title={navItem.title} url={navItem.url} />
         ))}
 
         {userID !== null ? (
           signedInNavItems.map((navItem: { title: string; url: string }) => (
-            <NavLink title={navItem.title} url={navItem.url} />
+            <NavLink key={navItem.title} title={navItem.title} url={navItem.url} />
           ))
         ) : (
           <></>

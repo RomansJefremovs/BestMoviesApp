@@ -208,6 +208,7 @@ const PersonPage = () => {
               ? person.known_for.map((item) => {
                   return (
                     <MoviePosterBox
+                        key={item.id}
                       id={item.id}
                       poster_path={item.poster_path}
                       title={item.title}
